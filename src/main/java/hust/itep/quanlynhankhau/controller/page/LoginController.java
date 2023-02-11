@@ -13,6 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class LoginController {
@@ -40,30 +42,26 @@ public class LoginController {
             String password = passwordField.getText();
 
             AccountDao accountDao = new AccountDao();
-            /*
-            Optional<Account> account = accountDao.get(username);
-            if (!account.isPresent()) {
-                messageLabelError();
+            ArrayList<Account> accounts = new ArrayList<>(accountDao.getAll());
+
+            Account current = null;
+
+            for (Account account : accounts) {
+                if (account.getUsername().equals(username)
+                        && account.getPassword().equals(password)) {
+                    current = account;
+                }
+            }
+
+            if (current == null) {
                 return;
             }
 
-            if (!account.get().getPassword().equals(password)) {
-                messageLabelError();
-                return;
-            }
-
-            PageManager.setHeader(HeaderController.getKey(), new HeaderController(account.get().getRole()));
+            PageManager.setHeader(HeaderController.getKey(), new HeaderController(current.getRole()));
             PageManager.setPage(HomeController.getKey());
             PageManager.setFooter(FooterController.getKey(), new FooterController());
             PageManager.cacheAll();
-             */
 
         });
-    }
-
-    public void messageLabelError() {
-        messageLabel.setText("Wrong info");
-        messageLabel.setTextFill(Color.RED);
-        messageLabel.setVisible(true);
     }
 }

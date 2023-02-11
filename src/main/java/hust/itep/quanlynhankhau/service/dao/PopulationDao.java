@@ -1,13 +1,8 @@
 package hust.itep.quanlynhankhau.service.dao;
 
-import hust.itep.quanlynhankhau.database.DatabaseConnection;
 import hust.itep.quanlynhankhau.model.Population;
-import javafx.util.Pair;
 
-import java.sql.*;
 import java.util.*;
-
-import static java.util.Map.entry;
 
 public class PopulationDao implements Dao<Population> {
     @Override

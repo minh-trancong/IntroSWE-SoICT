@@ -45,31 +45,18 @@ public class HeaderController {
 
 
 
-    /*
-    private Account.Role role;
 
-    public HeaderController(Account.Role role) {
-        this.role = role;
+
+
+    public HeaderController() {
+
 
     }
-     */
+
 
 
     private void initializeMenuBar() {
-        /*
-        switch (role) {
-            case First: {
-                menuBar.getMenus().remove(covidMenu);
-                break;
-            }
-            case Second: {
-                menuBar.getMenus().remove(populationMenu);
-                menuBar.getMenus().remove(householdMenu);
-                break;
-            }
-            default: break;
-        }
-         */
+
 
     }
     private void initializeLogoutButton() {
