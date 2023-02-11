@@ -20,7 +20,14 @@ public class Population {
     private Date birthdate;
     private String phoneNumber;
     private String nationality;
-
+    private String ethnicity;
+    private String citizenId;
+    private String passport;
+    private String birthPlace;
+    private String nativePlace;
+    private String occupation;
+    private String permanentAddress;
+    private String currentAddress;
 
 
     @Id
@@ -61,6 +68,7 @@ public class Population {
         this.birthdate = birthdate;
     }
 
+    @Column(name = "phone")
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -69,11 +77,87 @@ public class Population {
         this.phoneNumber = phoneNumber;
     }
 
+    @Column(name = "nationality")
     public String getNationality() {
         return nationality;
     }
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
+    }
+
+    @Column(name = "ethnicity")
+    public String getEthnicity() {
+        return ethnicity;
+    }
+
+    public void setEthnicity(String ethnicity) {
+        this.ethnicity = ethnicity;
+    }
+
+
+    @Column(name= "citizen_id")
+    public String getCitizenId() {
+        return citizenId;
+    }
+
+    public void setCitizenId(String citizenId) {
+        this.citizenId = citizenId;
+    }
+
+    @Column(name = "passport")
+    public String getPassport() {
+        return passport;
+    }
+
+    public void setPassport(String passport) {
+        this.passport = passport;
+    }
+
+    @Column(name = "birth_place")
+    public String getBirthPlace() {
+        return birthPlace;
+    }
+
+    public void setBirthPlace(String birthPlace) {
+        this.birthPlace = birthPlace;
+    }
+
+    @Column(name = "native_place")
+    public String getNativePlace() {
+        return nativePlace;
+    }
+
+    public void setNativePlace(String nativePlace) {
+        this.nativePlace = nativePlace;
+    }
+
+
+    @Column(name = "occupation")
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+
+    @Column(name = "permanent_address")
+    public String getPermanentAddress() {
+        return permanentAddress;
+    }
+
+    public void setPermanentAddress(String permanentAddress) {
+        this.permanentAddress = permanentAddress;
+    }
+
+    @Column(name = "current_address")
+    public String getCurrentAddress() {
+        return currentAddress;
+    }
+
+    public void setCurrentAddress(String currentAddress) {
+        this.currentAddress = currentAddress;
     }
 }
