@@ -1,5 +1,6 @@
 package hust.itep.quanlynhankhau.controller.page;
 
+import hust.itep.quanlynhankhau.Main;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.layout.HeaderController;
 import hust.itep.quanlynhankhau.controller.layout.FooterController;
@@ -8,10 +9,14 @@ import hust.itep.quanlynhankhau.model.Account;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,33 +40,44 @@ public class LoginController {
         initializeButton();
     }
 
+    public static Account currentAccount = null;
 
     public void initializeButton() {
         loginButton.setOnMouseClicked(e -> {
             String username = usernameTextField.getText();
             String password = passwordField.getText();
 
-            AccountDao accountDao = new AccountDao();
-            ArrayList<Account> accounts = new ArrayList<>(accountDao.getAll());
+            Main.getStage().getScene().setCursor(Cursor.WAIT);
 
-            Account current = null;
+            new Thread(() -> {
+                AccountDao accountDao = new AccountDao();
+                ArrayList<Account> accounts = new ArrayList<>(accountDao.getAll(Account.class));
 
-            for (Account account : accounts) {
-                if (account.getUsername().equals(username)
-                        && account.getPassword().equals(password)) {
-                    current = account;
+                Account current = null;
+
+                for (Account account : accounts) {
+                    if (account.getUsername().equals(username)
+                            && account.getPassword().equals(password)) {
+                        current = account;
+                    }
                 }
-            }
 
-            if (current == null) {
-                return;
-            }
+                currentAccount = current;
 
-            PageManager.setHeader(HeaderController.getKey(), new HeaderController(current.getRole()));
-            PageManager.setPage(HomeController.getKey());
-            PageManager.setFooter(FooterController.getKey(), new FooterController());
-            PageManager.cacheAll();
+                Platform.runLater(() -> {
+                    Main.getStage().getScene().setCursor(Cursor.DEFAULT);
+                });
 
+                if (current == null) {
+                    return;
+                }
+
+                Platform.runLater(() -> {
+                    PageManager.setHeader(HeaderController.getKey(), new HeaderController());
+                    PageManager.setPage(HomeController.getKey());
+                    PageManager.setFooter(FooterController.getKey(), new FooterController());
+                });
+            }).start();
         });
     }
 }

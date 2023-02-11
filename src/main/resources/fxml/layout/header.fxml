@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="80.0" maxWidth="1.7976931348623157E308" minHeight="80.0" style="-fx-background-color: #34eb8f;" stylesheets="@../../css/layout/header.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="80.0" maxWidth="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" style="-fx-background-color: #34eb8f;" stylesheets="@../../css/layout/header.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <Label id="label" fx:id="label" text="Quản Lý Nhân Khẩu" BorderPane.alignment="CENTER">
          <font>

@@ -87,15 +87,4 @@ public class PageManager {
 
     }
 
-    public static void cacheAll() {
-        pageMap.forEach((key, value) -> {
-           FXMLLoader loader = new FXMLLoader(PageManager.class.getResource(key));
-           loader.setController(value);
-           try {
-                loader.load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-    }
 }

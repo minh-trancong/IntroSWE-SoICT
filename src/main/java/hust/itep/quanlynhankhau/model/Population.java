@@ -1,15 +1,9 @@
 package hust.itep.quanlynhankhau.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import java.time.LocalDate;
 import java.util.Date;
-
 
 @Entity
 @Table(name = "population")
@@ -18,7 +12,7 @@ public class Population {
     private String name;
     private String gender;
     private Date birthdate;
-    private String phoneNumber;
+    private String phone;
     private String nationality;
     private String ethnicity;
     private String citizenId;
@@ -28,7 +22,26 @@ public class Population {
     private String occupation;
     private String permanentAddress;
     private String currentAddress;
+    private Household household;
+    private String relationshipToHead;
 
+    @ManyToOne
+    @JoinColumn(name = "household_id")
+    public Household getHousehold() {
+        return household;
+    }
+    public void setHousehold(Household household) {
+        this.household = household;
+    }
+
+    @Column(name = "relationship_to_head")
+    public String getRelationshipToHead() {
+        return relationshipToHead;
+    }
+
+    public void setRelationshipToHead(String relationshipToHead) {
+        this.relationshipToHead = relationshipToHead;
+    }
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -69,12 +82,12 @@ public class Population {
     }
 
     @Column(name = "phone")
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Column(name = "nationality")
@@ -94,7 +107,6 @@ public class Population {
     public void setEthnicity(String ethnicity) {
         this.ethnicity = ethnicity;
     }
-
 
     @Column(name= "citizen_id")
     public String getCitizenId() {

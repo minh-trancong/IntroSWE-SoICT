@@ -1,4 +1,4 @@
-package hust.itep.quanlynhankhau.controller.utility;
+package hust.itep.quanlynhankhau.controller.component;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;

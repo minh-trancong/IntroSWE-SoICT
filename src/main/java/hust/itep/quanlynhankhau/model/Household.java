@@ -1,21 +1,41 @@
 package hust.itep.quanlynhankhau.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.sql.Date;
 
+@Entity
+@Table(name = "household")
 public class Household {
     private Long householdId;
-    private Long headOfHouseHoldId;
+    private Population headOfHouseHold;
     private String areaCode;
     private String address;
     private Date createdAt;
     private Date relocatedAt;
     private String relocationReason;
-    private Long executorID;
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "executor_id")
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "head_of_household_id")
+    public Population getHeadOfHouseHold() {
+        return headOfHouseHold;
+    }
+
+    public void setHeadOfHouseHold(Population headOfHouseHold) {
+        this.headOfHouseHold = headOfHouseHold;
+    }
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -27,15 +47,6 @@ public class Household {
     public void setHouseholdId(Long householdId) {
         this.householdId = householdId;
     }
-
-    public Long getHeadOfHouseHoldId() {
-        return headOfHouseHoldId;
-    }
-
-    public void setHeadOfHouseHoldId(Long headOfHouseHoldId) {
-        this.headOfHouseHoldId = headOfHouseHoldId;
-    }
-
     @Column(name = "area_code")
     public String getAreaCode() {
         return areaCode;
@@ -80,11 +91,5 @@ public class Household {
         this.relocationReason = relocationReason;
     }
 
-    public Long getExecutorID() {
-        return executorID;
-    }
 
-    public void setExecutorID(Long executorID) {
-        this.executorID = executorID;
-    }
 }

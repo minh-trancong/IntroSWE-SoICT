@@ -1,15 +1,17 @@
 package hust.itep.quanlynhankhau.controller.page.population;
 
-import hust.itep.quanlynhankhau.controller.utility.Form;
-import hust.itep.quanlynhankhau.controller.utility.ModelMapper;
+import hust.itep.quanlynhankhau.controller.component.Form;
+import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.PopulationDao;
 import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.utils.others.dates.DateStringConverter;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -22,7 +24,7 @@ public class AddPopulationController {
     @FXML
     MFXTextField nameTextField;
     @FXML
-    MFXTextField phoneNumberTextField;
+    MFXTextField phoneTextField;
     @FXML
     MFXComboBox genderComboBox;
     @FXML
@@ -34,17 +36,17 @@ public class AddPopulationController {
     @FXML
     MFXTextField citizenIdTextField;
     @FXML
-    MFXTextField passportNumberTextField;
+    MFXTextField passportTextField;
     @FXML
-    MFXTextField birthplaceTextField;
+    MFXTextField birthPlaceTextField;
     @FXML
     MFXTextField nativePlaceTextField;
     @FXML
-    MFXTextField occupationWorkplaceTextField;
+    MFXTextField occupationTextField;
     @FXML
     MFXTextField permanentAddressTextField;
     @FXML
-    MFXTextField addressTextField;
+    MFXTextField currentAddressTextField;
 
     public static String getKey() {
         return KEY;
@@ -73,39 +75,39 @@ public class AddPopulationController {
         Form form = new Form(submitButton, e -> submit());
 
         form.addTextField(nameTextField, Form.NonEmptyConstraint(nameTextField));
-        form.addTextField(phoneNumberTextField);
+        form.addTextField(phoneTextField);
         form.addTextField(genderComboBox, Form.NonEmptyConstraint(genderComboBox));
         form.addTextField(birthdateDatePicker, Form.NonEmptyConstraint(birthdateDatePicker));
         form.addTextField(nationalityTextField, Form.NonEmptyConstraint(nationalityTextField));
         form.addTextField(ethnicityTextField, Form.NonEmptyConstraint(ethnicityTextField));
         form.addTextField(citizenIdTextField);
-        form.addTextField(passportNumberTextField);
-        form.addTextField(birthplaceTextField, Form.NonEmptyConstraint(birthplaceTextField));
+        form.addTextField(passportTextField);
+        form.addTextField(birthPlaceTextField, Form.NonEmptyConstraint(birthPlaceTextField));
         form.addTextField(nativePlaceTextField, Form.NonEmptyConstraint(nativePlaceTextField));
-        form.addTextField(occupationWorkplaceTextField);
+        form.addTextField(occupationTextField);
         form.addTextField(permanentAddressTextField, Form.NonEmptyConstraint(permanentAddressTextField));
-        form.addTextField(addressTextField, Form.NonEmptyConstraint(addressTextField));
+        form.addTextField(currentAddressTextField, Form.NonEmptyConstraint(currentAddressTextField));
     }
 
     private void submit() {
-        ModelMapper modelMapper = new ModelMapper();
-
-        modelMapper.addField("name", nameTextField);
-        modelMapper.addField("phoneNumber", phoneNumberTextField);
-        modelMapper.addField("birthdate", birthdateDatePicker);
-        modelMapper.addField("gender", genderComboBox);
-        modelMapper.addField("nationality", nationalityTextField);
-        modelMapper.addField("ethnicity", ethnicityTextField);
-        modelMapper.addField("citizenId", citizenIdTextField);
-        modelMapper.addField("birthplace", birthplaceTextField);
-        modelMapper.addField("nativePlace", nativePlaceTextField);
-        modelMapper.addField("occupationWorkplace", occupationWorkplaceTextField);
-        modelMapper.addField("permanentAddress", permanentAddressTextField);
-        modelMapper.addField("address", addressTextField);
-
-        Population population = modelMapper.map(Population.class);
+        Population population = new Population();
+        population.setName(nameTextField.getText());
+        population.setGender(genderComboBox.getText());
+        population.setPhone(phoneTextField.getText());
+        population.setBirthdate(Date.valueOf(birthdateDatePicker.getValue()));
+        population.setEthnicity(ethnicityTextField.getText());
+        population.setPassport(passportTextField.getText());
+        population.setOccupation(occupationTextField.getText());
+        population.setNationality(nationalityTextField.getText());
+        population.setCitizenId(citizenIdTextField.getText());
+        population.setCurrentAddress(currentAddressTextField.getText());
+        population.setNativePlace(nativePlaceTextField.getText());
+        population.setBirthPlace(birthPlaceTextField.getText());
+        population.setPermanentAddress(permanentAddressTextField.getText());
 
         PopulationDao populationDao = new PopulationDao();
         populationDao.save(population);
+
+        Platform.runLater(() -> PageManager.setPage(AddPopulationController.getKey()));
     }
 }

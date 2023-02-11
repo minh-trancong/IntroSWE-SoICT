@@ -20,7 +20,7 @@
    <content>
       <BorderPane>
          <top>
-            <Label id="id" text="Thêm Nhân Khẩu" BorderPane.alignment="CENTER">
+            <Label id="id" text="Thêm Hộ Khẩu" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -73,13 +73,13 @@
                         <MFXTextField fx:id="nationalityTextField" floatMode="BORDER" floatingText="Quốc tịch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" />
                         <MFXComboBox id="id" fx:id="genderComboBox" allowEdit="true" floatMode="BORDER" floatingText="Giới tính" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" scrollOnOpen="true" selectable="true" styleClass="combo-box" GridPane.rowIndex="1" />
                         <MFXTextField fx:id="citizenIdTextField" floatMode="BORDER" floatingText="Chứng minh nhân dân" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="3" />
-                        <MFXTextField fx:id="birthplaceTextField" floatMode="BORDER" floatingText="Nơi sinh" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="4" />
+                        <MFXTextField fx:id="birthPlaceTextField" floatMode="BORDER" floatingText="Nơi sinh" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="4" />
                         <MFXTextField fx:id="nativePlaceTextField" floatMode="BORDER" floatingText="Nguyên quán" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <MFXTextField fx:id="passportNumberTextField" floatMode="BORDER" floatingText="Số hộ chiếu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <MFXTextField fx:id="phoneNumberTextField" floatMode="BORDER" floatingText="Số điện thoại liên hệ" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" GridPane.columnIndex="1" />
-                        <MFXTextField fx:id="occupationWorkplaceTextField" floatMode="BORDER" floatingText="Nghề nghiệp, nơi làm việc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                        <MFXTextField fx:id="passportTextField" floatMode="BORDER" floatingText="Số hộ chiếu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <MFXTextField fx:id="phoneTextField" floatMode="BORDER" floatingText="Số điện thoại liên hệ" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" GridPane.columnIndex="1" />
+                        <MFXTextField fx:id="occupationTextField" floatMode="BORDER" floatingText="Nghề nghiệp, nơi làm việc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.rowIndex="5" />
                         <MFXTextField fx:id="permanentAddressTextField" floatMode="BORDER" floatingText="Nơi thường trú" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-                        <MFXTextField fx:id="addressTextField" floatMode="BORDER" floatingText="Địa chỉ chỗ ở hiện nay" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+                        <MFXTextField fx:id="currentAddressTextField" floatMode="BORDER" floatingText="Địa chỉ chỗ ở hiện nay" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.rowIndex="7" />
                         <MFXTextField fx:id="ethnicityTextField" floatMode="BORDER" floatingText="Dân tộc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
