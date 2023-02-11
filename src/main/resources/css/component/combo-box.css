@@ -1,0 +1,15 @@
+.mfx-combo-box .caret .mfx-font-icon {
+    -mfx-color: -fx-primary-color;
+}
+
+.mfx-combo-box .caret {
+    -mfx-color: -fx-primary-color;
+}
+
+.mfx-combo-box .combo-popup .virtual-flow .mfx-combo-box-cell:hover {
+	-fx-background-color: derive(green, 130%);
+}
+
+.mfx-combo-box .combo-popup .virtual-flow .mfx-combo-box-cell:selected {
+    -fx-background-color: derive(green, 130%);
+}

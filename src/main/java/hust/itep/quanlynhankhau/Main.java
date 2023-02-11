@@ -1,18 +1,14 @@
 package hust.itep.quanlynhankhau;
 
-import hust.itep.quanlynhankhau.database.DatabaseConnection;
+import hust.itep.quanlynhankhau.controller.MainController;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Driver;
-import java.util.Properties;
 
 public class Main extends Application {
 
@@ -24,6 +20,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        loader.setController(new MainController());
+        Parent parent = null;
+        try {
+            parent = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
+        primaryStage.setScene(new Scene(parent));
+        primaryStage.setTitle("Quản Lý Nhân Khẩu");
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/main-icon.png")));
+        primaryStage.setMaximized(true);
+        primaryStage.show();
     }
 }
