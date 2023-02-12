@@ -20,7 +20,7 @@
    <content>
       <BorderPane>
          <top>
-            <Label id="id" text="Thêm Hộ Khẩu" BorderPane.alignment="CENTER">
+            <Label id="id" text="Thêm Nhân Khẩu" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
