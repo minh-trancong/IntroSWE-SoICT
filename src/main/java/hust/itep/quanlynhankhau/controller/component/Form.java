@@ -26,7 +26,7 @@ public class Form {
         for (MFXTextField textField : textFields) {
             if (!textField.getValidator().validProperty().get()) {
                 ret = false;
-                System.out.println(textField.getText());
+                System.out.println("Fail");
                 textField.requestFocus();
             }
         }

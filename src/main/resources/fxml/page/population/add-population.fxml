@@ -68,71 +68,19 @@
                         <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
                      </rowConstraints>
                      <children>
-                        <VBox>
-                           <children>
-                              <MFXTextField fx:id="nameTextField" floatMode="BORDER" floatingText="Họ và tên" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <children>
-                              <MFXDatePicker fx:id="birthdateDatePicker" allowEdit="false" floatMode="BORDER" floatingText="Ngày, tháng, năm sinh" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.rowIndex="2">
-                           <children>
-                              <MFXTextField fx:id="nationalityTextField" floatMode="BORDER" floatingText="Quốc tịch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.rowIndex="1">
-                           <children>
-                              <MFXComboBox id="id" fx:id="genderComboBox" floatMode="BORDER" floatingText="Giới tính" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" scrollOnOpen="true" selectable="true" styleClass="combo-box" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.rowIndex="3">
-                           <children>
-                              <MFXTextField fx:id="citizenIdTextField" floatMode="BORDER" floatingText="Chứng minh nhân dân" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.rowIndex="4">
-                           <children>
-                              <MFXTextField fx:id="birthPlaceTextField" floatMode="BORDER" floatingText="Nơi sinh" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <children>
-                              <MFXTextField fx:id="nativePlaceTextField" floatMode="BORDER" floatingText="Nguyên quán" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <children>
-                              <MFXTextField fx:id="passportTextField" floatMode="BORDER" floatingText="Số hộ chiếu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.columnIndex="1">
-                           <children>
-                              <MFXTextField fx:id="phoneTextField" floatMode="BORDER" floatingText="Số điện thoại liên hệ" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.columnSpan="2" GridPane.rowIndex="5">
-                           <children>
-                              <MFXTextField fx:id="occupationTextField" floatMode="BORDER" floatingText="Nghề nghiệp, nơi làm việc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.columnSpan="2" GridPane.rowIndex="6">
-                           <children>
-                              <MFXTextField fx:id="permanentAddressTextField" floatMode="BORDER" floatingText="Nơi thường trú" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.columnSpan="2" GridPane.rowIndex="7">
-                           <children>
-                              <MFXTextField fx:id="currentAddressTextField" floatMode="BORDER" floatingText="Địa chỉ chỗ ở hiện nay" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                           </children>
-                        </VBox>
-                        <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <children>
-                              <MFXTextField fx:id="ethnicityTextField" floatMode="BORDER" floatingText="Dân tộc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                           </children>
-                        </VBox>
+                        <MFXTextField fx:id="nameTextField" floatMode="BORDER" floatingText="Họ và tên" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" />
+                        <MFXDatePicker fx:id="birthdateDatePicker" floatMode="BORDER" floatingText="Ngày, tháng, năm sinh" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <MFXTextField fx:id="nationalityTextField" floatMode="BORDER" floatingText="Quốc tịch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" />
+                        <MFXComboBox id="id" fx:id="genderComboBox" floatMode="BORDER" floatingText="Giới tính" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" scrollOnOpen="true" selectable="true" styleClass="combo-box" GridPane.rowIndex="1" />
+                        <MFXTextField fx:id="citizenIdTextField" floatMode="BORDER" floatingText="Chứng minh nhân dân" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="3" />
+                        <MFXTextField fx:id="birthPlaceTextField" floatMode="BORDER" floatingText="Nơi sinh" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="4" />
+                        <MFXTextField fx:id="nativePlaceTextField" floatMode="BORDER" floatingText="Nguyên quán" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <MFXTextField fx:id="passportTextField" floatMode="BORDER" floatingText="Số hộ chiếu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <MFXTextField fx:id="phoneTextField" floatMode="BORDER" floatingText="Số điện thoại liên hệ" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" GridPane.columnIndex="1" />
+                        <MFXTextField fx:id="occupationTextField" floatMode="BORDER" floatingText="Nghề nghiệp, nơi làm việc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                        <MFXTextField fx:id="permanentAddressTextField" floatMode="BORDER" floatingText="Nơi thường trú" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+                        <MFXTextField fx:id="currentAddressTextField" floatMode="BORDER" floatingText="Địa chỉ chỗ ở hiện nay" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+                        <MFXTextField fx:id="ethnicityTextField" floatMode="BORDER" floatingText="Dân tộc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>
