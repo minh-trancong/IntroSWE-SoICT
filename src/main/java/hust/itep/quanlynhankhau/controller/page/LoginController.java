@@ -2,7 +2,6 @@ package hust.itep.quanlynhankhau.controller.page;
 
 import hust.itep.quanlynhankhau.Main;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
-import hust.itep.quanlynhankhau.controller.layout.HeaderController;
 import hust.itep.quanlynhankhau.controller.layout.FooterController;
 import hust.itep.quanlynhankhau.service.dao.AccountDao;
 import hust.itep.quanlynhankhau.model.Account;
@@ -12,15 +11,9 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 public class LoginController {
     private static final String KEY = "/fxml/page/login.fxml";
