@@ -1,0 +1,44 @@
+.button:hover {
+    -fx-cursor: hand;
+    -fx-text-fill: black;
+}
+
+.menu-bar {
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-halignment: center;
+    -fx-valignment: center;
+}
+
+.menu {
+    -fx-padding: 0 0 0 20;
+    -fx-margin: 0;
+}
+
+.homeLabel:hover {
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+}
+
+.menu-bar .label {
+    -fx-font-size: 14.0 pt;
+    -fx-text-fill: black;
+}
+
+.menu-button {
+    -fx-background-color: transparent;
+}
+
+.menu-button:hover {
+    -fx-cursor: hand;
+}
+
+.menu-button:hover > .label {
+    -fx-text-fill: white;
+
+}
+
+.menu-button:showing > .label {
+    -fx-text-fill: white;
+}

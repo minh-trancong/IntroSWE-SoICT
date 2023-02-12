@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="border" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-radius: 30;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="250.0" prefWidth="350.0" spacing="40.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Đăng Nhập">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0">
+                     <children>
+                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../img/user.png" />
+                                 </image>
+                              </ImageView>
+                              <MFXTextField fx:id="usernameTextField" floatMode="BORDER" floatingText="Tên Đăng Nhập" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </MFXTextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../img/lock.png" />
+                                 </image>
+                              </ImageView>
+                              <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText="Mật Khẩu" floatingTextGap="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="messageLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Message" visible="false">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <MFXButton fx:id="loginButton" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" rippleAnimateBackground="false" rippleColor="#1fb766" rippleRadius="10.0" text="Đăng Nhập" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="40.0" left="20.0" right="20.0" top="40.0" />
+               </padding>
+            </VBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets right="80.0" />
+         </BorderPane.margin>
+      </VBox>
+   </right>
+   <left>
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Quản Lý " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="80.0" />
+               </font>
+            </Label>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Nhân Khẩu" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="80.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="80.0" />
+         </padding>
+      </VBox>
+   </left>
+   <stylesheets>
+      <URL value="@../../css/base.css" />
+      <URL value="@../../css/page/login.css" />
+      <URL value="@../../css/component/text-field.css" />
+   </stylesheets>
+</BorderPane>

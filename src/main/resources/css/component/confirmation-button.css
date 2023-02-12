@@ -1,0 +1,20 @@
+.mfx-button {
+    -fx-background-color: -fx-primary-color-light;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+}
+
+.mfx-button:hover {
+    -fx-cursor: hand;
+    -fx-text-fill: -fx-secondary-color-light;
+}
+
+.mfx-button .text {
+    -fx-font-size: 20;
+}
+
+.mfx-button .mfx-ripple-generator {
+	-mfx-ripple-radius: 40;
+	-mfx-ripple-color: -fx-primary-color-dark;
+	-mfx-auto-clip: true;
+}

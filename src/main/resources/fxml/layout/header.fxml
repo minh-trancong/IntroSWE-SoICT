@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="80.0" maxWidth="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" style="-fx-background-color: #34eb8f;" stylesheets="@../../css/layout/header.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <Label id="label" fx:id="label" text="Quản Lý Nhân Khẩu" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </left>
+   <right>
+      <HBox fx:id="userHBox" alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="69.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/user-login-2.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="logoutButton" mnemonicParsing="false" style="-fx-background-color: #db6565;" text="Đăng Xuất" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </right>
+   <center>
+      <HBox fx:id="menuHBox" alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="homeLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="homeLabel" text="Trang Chủ">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <MenuBar fx:id="menuBar">
+              <menus>
+                  <Menu fx:id="populationMenu" mnemonicParsing="false" text="Nhân Khẩu">
+                    <items>
+                      <MenuItem fx:id="addPopulationMenuItem" mnemonicParsing="false" text="Thêm Nhân Khẩu" />
+                        <MenuItem fx:id="registerTemporaryResidenceMenuItem" mnemonicParsing="false" text="Đăng Kí Tạm Trú" />
+                        <MenuItem fx:id="registerTemporaryAbsenceMenuItem" mnemonicParsing="false" text="Đăng kí Tạm Vắng" />
+                        <MenuItem fx:id="deathDeclarationMenuItem" mnemonicParsing="false" text="Khai báo tử vong" />
+                    </items>
+                  </Menu>
+                  <Menu fx:id="householdMenu" mnemonicParsing="false" text="Hộ Khẩu">
+                    <items>
+                      <MenuItem fx:id="addHouseholdMenuItem" mnemonicParsing="false" text="Thêm Hộ Khẩu" />
+                    </items>
+                  </Menu>
+                <Menu fx:id="covidMenu" mnemonicParsing="false" text="Thông Tin Phòng Tránh Covid">
+                  <items>
+                    <MenuItem fx:id="declareMedicalMenuItem" mnemonicParsing="false" text="Khai Báo Y Tế" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </HBox>
+   </center>
+   <padding>
+      <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+   </padding>
+</BorderPane>

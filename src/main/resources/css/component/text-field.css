@@ -1,0 +1,21 @@
+.mfx-text-field {
+    -fx-border-color: -fx-secondary-color-light;
+    -fx-font-size: 16;
+}
+
+.mfx-text-field .floating-text {
+    -fx-font-size: 16;
+    -fx-text-fill: -fx-secondary-color-dark;
+}
+
+.mfx-text-field:invalid {
+    -fx-border-color: -mfx-red;
+}
+
+.mfx-text-field:invalid .floating-text {
+    -fx-text-fill: -mfx-red;
+}
+
+.mfx-text-field:invalid .mfx-font-icon {
+    -mfx-color: -mfx-red;
+}
