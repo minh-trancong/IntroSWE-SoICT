@@ -1,7 +1,6 @@
-package hust.itep.quanlynhankhau.service.dao.population;
+package hust.itep.quanlynhankhau.service.dao;
 
 import hust.itep.quanlynhankhau.model.Population;
-import hust.itep.quanlynhankhau.service.dao.Dao;
 import hust.itep.quanlynhankhau.service.database.EntityManagerUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;

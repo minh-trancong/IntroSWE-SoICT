@@ -108,7 +108,7 @@ public class Population {
         this.ethnicity = ethnicity;
     }
 
-    @Column(name = "citizen_id", unique = true)
+    @Column(name= "citizen_id")
     public String getCitizenId() {
         return citizenId;
     }
