@@ -1,13 +1,12 @@
 package hust.itep.quanlynhankhau.controller.page.population;
 
-import hust.itep.quanlynhankhau.controller.component.DatePickerHelper;
 import hust.itep.quanlynhankhau.controller.component.Form;
 import hust.itep.quanlynhankhau.controller.component.ValidationHelper;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.model.TemporaryResidence;
-import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
-import hust.itep.quanlynhankhau.service.dao.population.TemporaryResidenceDao;
+import hust.itep.quanlynhankhau.service.dao.PopulationDao;
+import hust.itep.quanlynhankhau.service.dao.TemporaryResidenceDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -45,8 +44,6 @@ public class RegisterTemporaryResidenceController {
 
     @FXML
     public void initialize() {
-        DatePickerHelper.setVietnamese(fromDateTextField);
-        DatePickerHelper.setVietnamese(toDateTextField);
         initializeTextField();
         initializeForm();
     }
@@ -64,7 +61,6 @@ public class RegisterTemporaryResidenceController {
         nonEmptyTextFields.add(paperIdTextField);
         nonEmptyTextFields.add(fromDateTextField);
         nonEmptyTextFields.add(toDateTextField);
-        nonEmptyTextFields.add(reasonTextField);
 
         citizenIdTextField.getValidator().constraint(
                 ValidationHelper.constraintBuild(citizenIdTextField,"Chứng minh thư không hợp lệ",
