@@ -67,10 +67,15 @@ public class HomeController {
         TemporaryAbsenceDao temporaryAbsenceDao = new TemporaryAbsenceDao();
         ArrayList<TemporaryAbsence> temporaryAbsences = new ArrayList<>(temporaryAbsenceDao.getAll(TemporaryAbsence.class));
 
+        System.out.println(temporaryAbsences.size());
+
         temporaryAbsences.removeIf(temporaryAbsence -> {
            Date now = Date.valueOf(LocalDate.now());
            return now.before(temporaryAbsence.getFromDate()) || now.after(temporaryAbsence.getToDate());
         });
+
+        System.out.println(temporaryAbsences.size());
+
         temporaryAbsceneCountLabel.setText(String.valueOf(temporaryAbsences.size()));
     }
 
