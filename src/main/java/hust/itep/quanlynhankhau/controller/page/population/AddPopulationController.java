@@ -2,19 +2,19 @@ package hust.itep.quanlynhankhau.controller.page.population;
 
 import hust.itep.quanlynhankhau.controller.component.DatePickerHelper;
 import hust.itep.quanlynhankhau.controller.component.Form;
+import hust.itep.quanlynhankhau.controller.component.ValidationHelper;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.model.Population;
-import hust.itep.quanlynhankhau.service.dao.PopulationDao;
+import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.*;
-import io.github.palexdev.materialfx.utils.others.dates.DateStringConverter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
 
 public class AddPopulationController {
     private static final String KEY = "/fxml/page/population/add-population.fxml";
@@ -49,12 +49,15 @@ public class AddPopulationController {
     @FXML
     MFXTextField currentAddressTextField;
 
+    private ArrayList<MFXTextField> nonEmptyTextFields = new ArrayList<>();
+
     public static String getKey() {
         return KEY;
     }
 
     @FXML
     public void initialize() {
+        initializeTextField();
         initializeComboBox();
         initializeDatePicker();
         initializeForm();
@@ -71,23 +74,32 @@ public class AddPopulationController {
         genderComboBox.setOnMouseClicked(e -> genderComboBox.show());
     }
 
+    public void initializeTextField() {
+        nonEmptyTextFields.add(nameTextField);
+        nonEmptyTextFields.add(genderComboBox);
+        nonEmptyTextFields.add(birthdateDatePicker);
+        nonEmptyTextFields.add(nationalityTextField);
+        nonEmptyTextFields.add(ethnicityTextField);
+        nonEmptyTextFields.add(birthPlaceTextField);
+        nonEmptyTextFields.add(nativePlaceTextField);
+        nonEmptyTextFields.add(occupationTextField);
+        nonEmptyTextFields.add(permanentAddressTextField);
+        nonEmptyTextFields.add(currentAddressTextField);
+
+        for (MFXTextField textField : nonEmptyTextFields) {
+            textField.getValidator().constraint(
+                    ValidationHelper.constraintBuild(textField, "Thông tin này là bắt buộc",
+                            () -> !textField.getText().isBlank())
+            );
+            ValidationHelper.setValidatorListener(textField);
+        }
+    }
+
     public void initializeForm() {
         Form form = new Form(submitButton);
         form.setOnSubmit(e -> submit());
 
-        form.addTextField(nameTextField);
-        form.addTextField(phoneTextField);
-        form.addTextField(genderComboBox);
-        form.addTextField(birthdateDatePicker);
-        form.addTextField(nationalityTextField);
-        form.addTextField(ethnicityTextField);
-        form.addTextField(citizenIdTextField);
-        form.addTextField(passportTextField);
-        form.addTextField(birthPlaceTextField);
-        form.addTextField(nativePlaceTextField);
-        form.addTextField(occupationTextField);
-        form.addTextField(permanentAddressTextField);
-        form.addTextField(currentAddressTextField);
+        form.getTextFields().addAll(nonEmptyTextFields);
     }
 
     private void submit() {

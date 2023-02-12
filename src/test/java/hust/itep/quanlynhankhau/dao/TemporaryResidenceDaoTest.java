@@ -1,7 +1,7 @@
 package hust.itep.quanlynhankhau.dao;
 
 import hust.itep.quanlynhankhau.model.TemporaryResidence;
-import hust.itep.quanlynhankhau.service.dao.TemporaryResidenceDao;
+import hust.itep.quanlynhankhau.service.dao.population.TemporaryResidenceDao;
 
 public class TemporaryResidenceDaoTest {
     public static void main(String[] args) {

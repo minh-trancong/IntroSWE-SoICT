@@ -1,6 +1,7 @@
 package hust.itep.quanlynhankhau.controller.layout;
 
 import hust.itep.quanlynhankhau.Main;
+import hust.itep.quanlynhankhau.controller.page.population.DeathDeclarationController;
 import hust.itep.quanlynhankhau.controller.page.population.RegisterTemporaryAbsenceController;
 import hust.itep.quanlynhankhau.controller.page.population.RegisterTemporaryResidenceController;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
@@ -54,6 +55,9 @@ public class HeaderController {
     private MenuItem registerTemporaryAbsenceMenuItem;
 
     @FXML
+    private MenuItem deathDeclarationMenuItem;
+
+    @FXML
     private Button logoutButton;
 
 
@@ -100,6 +104,16 @@ public class HeaderController {
             new Thread(() -> {
                 Platform.runLater(() -> {
                     PageManager.setPage(RegisterTemporaryAbsenceController.getKey());
+                    Main.getStage().getScene().setCursor(Cursor.DEFAULT);
+                });
+            }).start();
+        });
+
+        deathDeclarationMenuItem.setOnAction(e -> {
+            Main.getStage().getScene().setCursor(Cursor.WAIT);
+            new Thread(() -> {
+                Platform.runLater(() -> {
+                    PageManager.setPage(DeathDeclarationController.getKey());
                     Main.getStage().getScene().setCursor(Cursor.DEFAULT);
                 });
             }).start();

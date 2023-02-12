@@ -5,14 +5,11 @@ import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.model.Household;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
-import hust.itep.quanlynhankhau.service.dao.PopulationDao;
+import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.*;
-import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,7 +18,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class AddHouseholdController {
     private static final String KEY = "/fxml/page/household/add-household.fxml";

@@ -19,6 +19,7 @@
         <class>hust.itep.quanlynhankhau.model.Population</class>
         <class>hust.itep.quanlynhankhau.model.TemporaryResidence</class>
         <class>hust.itep.quanlynhankhau.model.TemporaryAbsence</class>
+        <class>hust.itep.quanlynhankhau.model.DeathDeclaration</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
