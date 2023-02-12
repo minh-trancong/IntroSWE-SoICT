@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<MFXScrollPane fx:id="root" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <VBox alignment="CENTER" GridPane.rowIndex="2">
+            <children>
+                <Label id="id" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Danh sách nhân khẩu" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                    <BorderPane.margin>
+                        <Insets />
+                    </BorderPane.margin>
+                    <padding>
+                        <Insets bottom="30.0" top="20.0" />
+                    </padding>
+                </Label>
+                <ScrollPane>
+
+                    <TableView fx:id="tbPopulation" minHeight="-Infinity" minWidth="900.0" prefHeight="616.0" prefWidth="2457.0">
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                    </TableView>
+                </ScrollPane>
+
+            </children>
+            <padding>
+                <Insets left="40.0" right="40.0" />
+            </padding>
+        </VBox>
+    </content>
+    <stylesheets>
+        <URL value="@../../../css/base.css" />
+        <URL value="@../../../css/page/household/add-household.css" />
+    </stylesheets>
+</MFXScrollPane>

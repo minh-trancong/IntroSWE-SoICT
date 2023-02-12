@@ -1,14 +1,11 @@
 package hust.itep.quanlynhankhau.controller.layout;
 
 import hust.itep.quanlynhankhau.Main;
-import hust.itep.quanlynhankhau.controller.page.population.DeathDeclarationController;
-import hust.itep.quanlynhankhau.controller.page.population.RegisterTemporaryAbsenceController;
-import hust.itep.quanlynhankhau.controller.page.population.RegisterTemporaryResidenceController;
+import hust.itep.quanlynhankhau.controller.page.population.*;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.page.HomeController;
 import hust.itep.quanlynhankhau.controller.page.LoginController;
 import hust.itep.quanlynhankhau.controller.page.household.AddHouseholdController;
-import hust.itep.quanlynhankhau.controller.page.population.AddPopulationController;
 import hust.itep.quanlynhankhau.model.Account;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -57,6 +54,8 @@ public class HeaderController {
     @FXML
     private MenuItem deathDeclarationMenuItem;
 
+    @FXML
+    private MenuItem viewPopulation;
     @FXML
     private Button logoutButton;
 
@@ -118,7 +117,17 @@ public class HeaderController {
                 });
             }).start();
         });
+
+        viewPopulation.setOnAction(e -> {
+            Main.getStage().getScene().setCursor(Cursor.WAIT);
+            new Thread(() -> {
+               Platform.runLater(() -> {
+                   PageManager.setPage(ViewPopulationController.getKey());
+                   Main.getStage().getScene().setCursor(Cursor.DEFAULT);                });
+            }).start();
+        });
     }
+
 
     private void initializeHouseholdMenu() {
 
