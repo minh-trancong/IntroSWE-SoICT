@@ -1,8 +1,5 @@
 package hust.itep.quanlynhankhau.model;
 
-//import org.hibernate.annotations.Entity;
-
-
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 

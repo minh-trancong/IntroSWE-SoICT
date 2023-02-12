@@ -72,21 +72,22 @@ public class AddPopulationController {
     }
 
     public void initializeForm() {
-        Form form = new Form(submitButton, e -> submit());
+        Form form = new Form(submitButton);
+        form.setOnSubmit(e -> submit());
 
-        form.addTextField(nameTextField, Form.NonEmptyConstraint(nameTextField));
+        form.addTextField(nameTextField);
         form.addTextField(phoneTextField);
-        form.addTextField(genderComboBox, Form.NonEmptyConstraint(genderComboBox));
-        form.addTextField(birthdateDatePicker, Form.NonEmptyConstraint(birthdateDatePicker));
-        form.addTextField(nationalityTextField, Form.NonEmptyConstraint(nationalityTextField));
-        form.addTextField(ethnicityTextField, Form.NonEmptyConstraint(ethnicityTextField));
+        form.addTextField(genderComboBox);
+        form.addTextField(birthdateDatePicker);
+        form.addTextField(nationalityTextField);
+        form.addTextField(ethnicityTextField);
         form.addTextField(citizenIdTextField);
         form.addTextField(passportTextField);
-        form.addTextField(birthPlaceTextField, Form.NonEmptyConstraint(birthPlaceTextField));
-        form.addTextField(nativePlaceTextField, Form.NonEmptyConstraint(nativePlaceTextField));
+        form.addTextField(birthPlaceTextField);
+        form.addTextField(nativePlaceTextField);
         form.addTextField(occupationTextField);
-        form.addTextField(permanentAddressTextField, Form.NonEmptyConstraint(permanentAddressTextField));
-        form.addTextField(currentAddressTextField, Form.NonEmptyConstraint(currentAddressTextField));
+        form.addTextField(permanentAddressTextField);
+        form.addTextField(currentAddressTextField);
     }
 
     private void submit() {

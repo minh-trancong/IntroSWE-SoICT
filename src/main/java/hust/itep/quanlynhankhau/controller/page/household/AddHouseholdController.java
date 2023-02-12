@@ -1,6 +1,7 @@
 package hust.itep.quanlynhankhau.controller.page.household;
 
 import hust.itep.quanlynhankhau.controller.page.LoginController;
+import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.model.Household;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
@@ -15,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -38,7 +40,6 @@ public class AddHouseholdController {
     private TableView<Population> populationTable;
     @FXML
     private TableView<Population> addPopulationTable;
-
     @FXML
     private MFXButton householdHeadButton;
     @FXML
@@ -47,12 +48,14 @@ public class AddHouseholdController {
     private MFXButton submitButton;
     @FXML
     private MFXButton removePopulationButton;
-    private ObservableList<Population> items = FXCollections.observableArrayList(new PopulationDao().getAll(Population.class));
-    private ObservableList<Population> addedItems = FXCollections.observableArrayList();
+    private ObservableList<Population> items;
+    private ObservableList<Population> addedItems;
     private Population headPopulation = null;
 
     @FXML
     public void initialize() {
+        addedItems = FXCollections.observableArrayList();
+        items = FXCollections.observableArrayList(new PopulationDao().getAll(Population.class));
         items.removeIf(p -> p.getHousehold() != null);
         initializeTable();
         initializeAddTable();
@@ -80,12 +83,23 @@ public class AddHouseholdController {
 
             headPopulation.setHousehold(household);
             populationDao.update(headPopulation);
+            PageManager.setPage(AddHouseholdController.getKey());
         });
     }
 
     private void initializeAddTable() {
         TableColumn<Population, Long> idColumn = new TableColumn<>("ID");
         TableColumn<Population, String> nameColumn = new TableColumn<>("Họ và tên");
+        TableColumn<Population, String> relationToHeadColumn = new TableColumn<>("Quan hệ với chủ hộ");
+        addPopulationTable.setEditable(true);
+        relationToHeadColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        relationToHeadColumn.setOnEditCommit(t -> {
+            t.getTableView().getItems().get(t.getTablePosition().getRow()).setRelationshipToHead(t.getNewValue());
+        });
+        relationToHeadColumn.setEditable(true);
+        relationToHeadColumn.setCellValueFactory(
+                new PropertyValueFactory<Population, String>("relationshipToHead")
+        );
 
         idColumn.setCellValueFactory(
             new PropertyValueFactory<Population, Long>("id"));
@@ -95,6 +109,7 @@ public class AddHouseholdController {
         ArrayList<TableColumn<Population, ? extends Object>> columns = new ArrayList<>();
         columns.add(idColumn);
         columns.add(nameColumn);
+        columns.add(relationToHeadColumn);
 
         for (TableColumn<Population, ? extends Object> column : columns) {
             column.prefWidthProperty().bind(addPopulationTable.widthProperty().multiply(1d / columns.size()));
@@ -128,6 +143,7 @@ public class AddHouseholdController {
             if (newValue != null) {
                 householdHeadButton.setOnMouseClicked(e -> {
                     addedItems.remove(newValue);
+                    newValue.setRelationshipToHead(null);
                     headOfHouseholdTextField.setText(newValue.getName());
                     headPopulation = newValue;
                 });
@@ -144,6 +160,7 @@ public class AddHouseholdController {
 
                 removePopulationButton.setOnMouseClicked(e -> {
                     addedItems.remove(newValue);
+                    newValue.setRelationshipToHead(null);
                 });
             }
         });

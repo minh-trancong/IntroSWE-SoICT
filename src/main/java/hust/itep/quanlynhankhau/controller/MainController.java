@@ -4,6 +4,7 @@ import hust.itep.quanlynhankhau.controller.page.HomeController;
 import hust.itep.quanlynhankhau.controller.page.LoginController;
 import hust.itep.quanlynhankhau.controller.page.household.AddHouseholdController;
 import hust.itep.quanlynhankhau.controller.page.population.AddPopulationController;
+import hust.itep.quanlynhankhau.controller.page.population.RegisterTemporaryResidenceController;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
@@ -20,6 +21,7 @@ public class MainController {
         PageManager.addPage(HomeController.getKey(), new HomeController());
         PageManager.addPage(AddHouseholdController.getKey(), new AddHouseholdController());
         PageManager.addPage(AddPopulationController.getKey(), new AddPopulationController());
+        PageManager.addPage(RegisterTemporaryResidenceController.getKey(), new RegisterTemporaryResidenceController());
 
         PageManager.setPage(LoginController.getKey());
     }
