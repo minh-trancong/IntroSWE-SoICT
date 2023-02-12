@@ -1,5 +1,6 @@
 package hust.itep.quanlynhankhau.controller.page.population;
 
+import hust.itep.quanlynhankhau.controller.component.DatePickerHelper;
 import hust.itep.quanlynhankhau.controller.component.Form;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.model.Population;
@@ -61,14 +62,13 @@ public class AddPopulationController {
 
 
     public void initializeDatePicker() {
-        birthdateDatePicker.setLocale(Locale.of("vi", "VN"));
-        birthdateDatePicker.setConverterSupplier(() ->
-                new DateStringConverter("dd/MM/yyyy", birthdateDatePicker.getLocale())
-        );
+        DatePickerHelper.setVietnamese(birthdateDatePicker);
     }
 
     public void initializeComboBox() {
         genderComboBox.setItems(GENDERS);
+
+        genderComboBox.setOnMouseClicked(e -> genderComboBox.show());
     }
 
     public void initializeForm() {

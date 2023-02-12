@@ -2,12 +2,13 @@ package hust.itep.quanlynhankhau.controller.page;
 
 import hust.itep.quanlynhankhau.model.Household;
 import hust.itep.quanlynhankhau.model.Population;
+import hust.itep.quanlynhankhau.model.TemporaryAbsence;
 import hust.itep.quanlynhankhau.model.TemporaryResidence;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
 import hust.itep.quanlynhankhau.service.dao.PopulationDao;
+import hust.itep.quanlynhankhau.service.dao.TemporaryAbsenceDao;
 import hust.itep.quanlynhankhau.service.dao.TemporaryResidenceDao;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -62,6 +63,15 @@ public class HomeController {
             return now.after(temporaryResidence.getToDate()) || now.before(temporaryResidence.getFromDate());
         });
         temporaryResidenceCountLabel.setText(String.valueOf(temporaryResidences.size()));
+
+        TemporaryAbsenceDao temporaryAbsenceDao = new TemporaryAbsenceDao();
+        ArrayList<TemporaryAbsence> temporaryAbsences = new ArrayList<>(temporaryAbsenceDao.getAll(TemporaryAbsence.class));
+
+        temporaryAbsences.removeIf(temporaryAbsence -> {
+           Date now = Date.valueOf(LocalDate.now());
+           return now.before(temporaryAbsence.getFromDate()) || now.after(temporaryAbsence.getToDate());
+        });
+        temporaryAbsceneCountLabel.setText(String.valueOf(temporaryAbsences.size()));
     }
 
 }

@@ -4,8 +4,9 @@ import hust.itep.quanlynhankhau.controller.component.Form;
 import hust.itep.quanlynhankhau.controller.component.ValidationHelper;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.model.Population;
-import hust.itep.quanlynhankhau.model.TemporaryResidence;
+import hust.itep.quanlynhankhau.model.TemporaryAbsence;
 import hust.itep.quanlynhankhau.service.dao.PopulationDao;
+import hust.itep.quanlynhankhau.service.dao.TemporaryAbsenceDao;
 import hust.itep.quanlynhankhau.service.dao.TemporaryResidenceDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
@@ -15,9 +16,8 @@ import javafx.fxml.FXML;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class RegisterTemporaryResidenceController {
-    private static final String KEY = "/fxml/page/population/register-temporary-residence.fxml";
-
+public class RegisterTemporaryAbsenceController {
+    private static final String KEY = "/fxml/page/population/register-temporary-absence.fxml";
     public static String getKey() {
         return KEY;
     }
@@ -36,6 +36,9 @@ public class RegisterTemporaryResidenceController {
 
     @FXML
     private MFXTextField reasonTextField;
+
+    @FXML
+    private MFXTextField locationTextField;
 
     @FXML
     private MFXButton submitButton;
@@ -61,6 +64,7 @@ public class RegisterTemporaryResidenceController {
         nonEmptyTextFields.add(paperIdTextField);
         nonEmptyTextFields.add(fromDateTextField);
         nonEmptyTextFields.add(toDateTextField);
+        nonEmptyTextFields.add(locationTextField);
 
         citizenIdTextField.getValidator().constraint(
                 ValidationHelper.constraintBuild(citizenIdTextField,"Chứng minh thư không hợp lệ",
@@ -83,15 +87,15 @@ public class RegisterTemporaryResidenceController {
         PopulationDao populationDao = new PopulationDao();
         Population population = populationDao.getByCitizenId(citizenIdTextField.getId());
 
-        TemporaryResidence temporaryResidence = new TemporaryResidence();
-        temporaryResidence.setPaperCode(paperIdTextField.getText());
-        temporaryResidence.setFromDate(Date.valueOf(fromDateTextField.getValue()));
-        temporaryResidence.setToDate(Date.valueOf(toDateTextField.getValue()));
-        temporaryResidence.setReason(reasonTextField.getText());
-        temporaryResidence.setPopulation(population);
+        TemporaryAbsence temporaryAbsence = new TemporaryAbsence();
+        temporaryAbsence.setPaperCode(paperIdTextField.getText());
+        temporaryAbsence.setFromDate(Date.valueOf(fromDateTextField.getValue()));
+        temporaryAbsence.setToDate(Date.valueOf(toDateTextField.getValue()));
+        temporaryAbsence.setReason(reasonTextField.getText());
+        temporaryAbsence.setPopulation(population);
 
-        TemporaryResidenceDao temporaryResidenceDao = new TemporaryResidenceDao();
-        temporaryResidenceDao.save(temporaryResidence);
-        PageManager.setPage(RegisterTemporaryResidenceController.getKey());
+        TemporaryAbsenceDao temporaryAbsenceDao = new TemporaryAbsenceDao();
+        temporaryAbsenceDao.save(temporaryAbsence);
+        PageManager.setPage(RegisterTemporaryAbsenceController.getKey());
     }
 }

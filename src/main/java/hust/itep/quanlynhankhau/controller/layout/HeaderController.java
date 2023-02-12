@@ -1,6 +1,7 @@
 package hust.itep.quanlynhankhau.controller.layout;
 
 import hust.itep.quanlynhankhau.Main;
+import hust.itep.quanlynhankhau.controller.page.population.RegisterTemporaryAbsenceController;
 import hust.itep.quanlynhankhau.controller.page.population.RegisterTemporaryResidenceController;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.page.HomeController;
@@ -50,6 +51,9 @@ public class HeaderController {
     private MenuItem declareMedicalMenuItem;
 
     @FXML
+    private MenuItem registerTemporaryAbsenceMenuItem;
+
+    @FXML
     private Button logoutButton;
 
 
@@ -57,8 +61,6 @@ public class HeaderController {
 
 
     }
-
-
 
     private void initializeMenuBar() {
 
@@ -88,6 +90,16 @@ public class HeaderController {
             new Thread(() -> {
                 Platform.runLater(() -> {
                     PageManager.setPage(RegisterTemporaryResidenceController.getKey());
+                    Main.getStage().getScene().setCursor(Cursor.DEFAULT);
+                });
+            }).start();
+        });
+
+        registerTemporaryAbsenceMenuItem.setOnAction(e -> {
+            Main.getStage().getScene().setCursor(Cursor.WAIT);
+            new Thread(() -> {
+                Platform.runLater(() -> {
+                    PageManager.setPage(RegisterTemporaryAbsenceController.getKey());
                     Main.getStage().getScene().setCursor(Cursor.DEFAULT);
                 });
             }).start();

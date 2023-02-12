@@ -1,10 +1,7 @@
 package hust.itep.quanlynhankhau;
 
 import hust.itep.quanlynhankhau.controller.MainController;
-import hust.itep.quanlynhankhau.model.Account;
 import hust.itep.quanlynhankhau.model.TemporaryResidence;
-import hust.itep.quanlynhankhau.service.dao.AccountDao;
-import hust.itep.quanlynhankhau.service.dao.TemporaryResidenceDao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
