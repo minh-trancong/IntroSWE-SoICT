@@ -76,7 +76,7 @@ public class AddHouseholdController {
                 population.setHousehold(household);
                 populationDao.update(population);
             }
-
+            headPopulation.setRelationshipToHead("Là chủ hộ");
             headPopulation.setHousehold(household);
             populationDao.update(headPopulation);
             PageManager.setPage(AddHouseholdController.getKey());

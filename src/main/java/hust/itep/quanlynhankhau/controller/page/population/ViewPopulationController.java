@@ -1,7 +1,12 @@
 package hust.itep.quanlynhankhau.controller.page.population;
 
+import hust.itep.quanlynhankhau.model.Household;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableStringValue;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,10 +14,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.util.Callback;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.PropertyResourceBundle;
 
 public class ViewPopulationController {
     private static final String KEY = "/fxml/page/population/view-population.fxml";
@@ -43,7 +49,7 @@ public class ViewPopulationController {
         TableColumn<Population, String> permanentAddressColumn = new TableColumn<>("Địa chỉ thường trú");
         TableColumn<Population, String> phoneColumn = new TableColumn<>("Số điện thoại");
         TableColumn<Population, String> relationshipToHeadColumn = new TableColumn<>("Quan hệ với chủ hộ");
-        TableColumn<Population, Long> householdIdColumn = new TableColumn<>("Mã hộ khẩu");
+        
 
         idColumn.setCellValueFactory(
                 new PropertyValueFactory<Population, Long>("id"));
@@ -92,8 +98,19 @@ public class ViewPopulationController {
                 new PropertyValueFactory<Population, String>("phone"));
         relationshipToHeadColumn.setCellValueFactory(
                 new PropertyValueFactory<Population, String>("relationshipToHead"));
-        householdIdColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, Long>("household"));
+        TableColumn<Population, String> householdIdColumn = new TableColumn<>("Mã hộ khẩu");
+
+        householdIdColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Population, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Population, String> param) {
+                if (param.getValue().getHousehold() == null) {
+                    return new SimpleStringProperty("");
+                }
+                return new SimpleStringProperty(param.getValue().getHousehold().getHouseholdId().toString());
+            }
+        });
+
+
         ArrayList<TableColumn<Population, ? extends Object>> columns = new ArrayList<>();
         columns.add(idColumn);
         columns.add(nameColumn);
