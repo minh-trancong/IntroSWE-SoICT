@@ -15,14 +15,14 @@
       <URL value="@../../css/base.css" />
    </stylesheets>
    <left>
-      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="© MIT ĐẠI CỒ VIỆT - 2023" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Group 3 (MinhTC, KhanhTV, LamNT, PhuocNX)© 2023" BorderPane.alignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
    </left>
    <right>
-      <Label text="Địa chỉ: 58 P. Lê Thanh Nghị, Bách Khoa, Hai Bà Trưng, Hà Nội" BorderPane.alignment="CENTER">
+      <Label text="Địa chỉ: B1, Đại học Bách khoa Hà Nội" BorderPane.alignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
