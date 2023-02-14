@@ -1,5 +1,6 @@
 package hust.itep.quanlynhankhau.controller.layout;
 
+import hust.itep.quanlynhankhau.controller.page.household.HouseholdController;
 import hust.itep.quanlynhankhau.controller.page.population.*;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.page.HomeController;
@@ -56,6 +57,9 @@ public class HeaderController {
     @FXML
     private MenuItem populationMenuItem;
 
+    @FXML
+    private MenuItem householdMenuItem;
+
     public HeaderController() {
 
 
@@ -103,6 +107,10 @@ public class HeaderController {
     private void initializeHouseholdMenu() {
         addHouseholdMenuItem.setOnAction(e -> {
             PageManager.setPageConcurrent(AddHouseholdController.getKey());
+        });
+
+        householdMenuItem.setOnAction(e -> {
+            PageManager.setPageConcurrent(HouseholdController.getKey());
         });
     }
 

@@ -18,27 +18,17 @@
 <MFXScrollPane fx:id="root" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-         <top>
-            <Label id="id" text="Thêm Hộ Khẩu" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-               <padding>
-                  <Insets bottom="20.0" top="20.0" />
-               </padding>
-            </Label>
-         </top>
          <bottom>
             <HBox alignment="CENTER" BorderPane.alignment="CENTER">
-               <padding>
-                  <Insets bottom="20.0" top="20.0" />
-               </padding>
                <children>
-                  <MFXButton fx:id="submitButton" stylesheets="@../../../css/component/confirmation-button.css" text="Gửi thông tin" />
+                  <MFXButton fx:id="submitButton" stylesheets="@../../../css/component/confirmation-button.css" text="Gửi thông tin">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></MFXButton>
                </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
             </HBox>
          </bottom>
          <stylesheets>
@@ -61,7 +51,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
               </rowConstraints>
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="3">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="3">
                      <children>
                         <MFXButton id="add-button" fx:id="addPopulationButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="140.0" prefWidth="140.0" styleClass="table-button" text="Thêm nhân khẩu" />
                         <MFXButton id="delete-population-button" fx:id="removePopulationButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="140.0" prefWidth="140.0" text="Xóa nhân khẩu">
@@ -110,8 +100,14 @@
                      </children>
                   </VBox>
                </children>
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
             </GridPane>
          </center>
+         <padding>
+            <Insets bottom="40.0" left="80.0" right="80.0" />
+         </padding>
       </BorderPane>
    </content>
    <stylesheets>

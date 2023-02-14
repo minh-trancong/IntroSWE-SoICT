@@ -3,9 +3,11 @@ package hust.itep.quanlynhankhau.controller;
 import hust.itep.quanlynhankhau.controller.page.HomeController;
 import hust.itep.quanlynhankhau.controller.page.LoginController;
 import hust.itep.quanlynhankhau.controller.page.household.AddHouseholdController;
+import hust.itep.quanlynhankhau.controller.page.household.HouseholdController;
 import hust.itep.quanlynhankhau.controller.page.population.*;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
 public class MainController {
@@ -25,7 +27,7 @@ public class MainController {
         PageManager.addPage(DeathDeclarationController.getKey(), new DeathDeclarationController());
         PageManager.addPage(ViewPopulationController.getKey(), new ViewPopulationController());
         PageManager.addPage(PopulationController.getKey(), new PopulationController());
-
+        PageManager.addPage(HouseholdController.getKey(), new HouseholdController());
 
         PageManager.setPage(LoginController.getKey());
     }

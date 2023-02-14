@@ -59,6 +59,7 @@
                   <Menu fx:id="householdMenu" mnemonicParsing="false" text="Hộ Khẩu">
                     <items>
                       <MenuItem fx:id="addHouseholdMenuItem" mnemonicParsing="false" text="Thêm Hộ Khẩu" />
+                        <MenuItem fx:id="householdMenuItem" mnemonicParsing="false" text="Hộ khẩu" />
                     </items>
                   </Menu>
                 <Menu fx:id="covidMenu" mnemonicParsing="false" text="Thông Tin Phòng Tránh Covid">

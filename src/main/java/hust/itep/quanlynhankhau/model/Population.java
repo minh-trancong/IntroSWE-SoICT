@@ -8,6 +8,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "population")
+@EntityListeners(UpdateAddressListener.class)
 public class Population {
     private Long id;
     private String name;
