@@ -3,11 +3,10 @@ package hust.itep.quanlynhankhau.controller.page.population;
 import hust.itep.quanlynhankhau.controller.component.DatePickerHelper;
 import hust.itep.quanlynhankhau.controller.component.Form;
 import hust.itep.quanlynhankhau.controller.component.ValidationHelper;
-import hust.itep.quanlynhankhau.controller.utility.PageManager;
+import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.*;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -118,5 +117,6 @@ public class AddPopulationController {
 
         PopulationDao populationDao = new PopulationDao();
         populationDao.save(population);
+        PopupManager.refreshCurrentStage();
     }
 }

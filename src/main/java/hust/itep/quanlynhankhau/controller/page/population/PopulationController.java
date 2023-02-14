@@ -3,6 +3,7 @@ package hust.itep.quanlynhankhau.controller.page.population;
 import hust.itep.quanlynhankhau.context.Context;
 import hust.itep.quanlynhankhau.controller.component.ConfirmBox;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
+import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -11,10 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -63,18 +61,22 @@ public class PopulationController {
             stage.setResizable(false);
             stage.getIcons().add(Context.ICON);
             stage.initModality(Modality.APPLICATION_MODAL);
-            PageManager.setPageDialog(AddPopulationController.getKey(), stage);
+            PopupManager.setPopup(AddPopulationController.getKey(), new AddPopulationController(), stage);
+            // Refresh page to do
         });
 
-
-
         deletePopulationButton.setOnAction(e -> {
+            Population selectedPopulation = populationTableView.getSelectionModel().getSelectedItem();
+            if (selectedPopulation == null) {
+                return;
+            }
+
             boolean confirmation = ConfirmBox.display("Xóa nhân khẩu", "Bạn có chắc không ?");
 
             if (confirmation) {
-                System.out.println("Agree");
-            } else {
-                System.out.println("NONONON");
+                PopulationDao populationDao = new PopulationDao();
+                populationDao.delete(selectedPopulation);
+                PageManager.refreshCurrentPage();
             }
         });
 
@@ -90,8 +92,9 @@ public class PopulationController {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.getIcons().add(Context.ICON);
-            PageManager.setPageDialog(AddPopulationController.getKey(),
-                    new UpdatePopulationController(selectedPopulation), stage);
+
+            PopupManager.setPopup(AddPopulationController.getKey(), new UpdatePopulationController(selectedPopulation),
+                    stage);
         });
     }
 
@@ -128,7 +131,8 @@ public class PopulationController {
         TableColumn<Population, String> genderColumn = new TableColumn<>("Giới tính");
         TableColumn<Population, String> birthdateColumn = new TableColumn<>("Ngày sinh");
         TableColumn<Population, String> citizenIdColumn = new TableColumn<>("CCCD");
-        TableColumn<Population, String> addressColumn = new TableColumn<>("Địa chỉ");
+        TableColumn<Population, String> addressColumn = new TableColumn<>("Nơi ở hiện tại");
+        TableColumn<Population, String> permanentAddressColumn = new TableColumn<>("Nơi thường chú");
 
         idColumn.setCellValueFactory(new PropertyValueFactory<Population, Long>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Population, String>("name"));
@@ -143,6 +147,7 @@ public class PopulationController {
         });
         citizenIdColumn.setCellValueFactory(new PropertyValueFactory("citizenId"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("currentAddress"));
+        permanentAddressColumn.setCellValueFactory(new PropertyValueFactory<>("permanentAddress"));
 
         ArrayList<TableColumn<Population, ? extends Object>> columns = new ArrayList<>();
 
@@ -152,6 +157,7 @@ public class PopulationController {
         columns.add(birthdateColumn);
         columns.add(citizenIdColumn);
         columns.add(addressColumn);
+        columns.add(permanentAddressColumn);
 
         populationTableView.getColumns().addAll(columns);
         populationTableView.setItems(populations);
@@ -162,6 +168,17 @@ public class PopulationController {
             column.prefWidthProperty().bind(populationTableView.prefWidthProperty().divide(count));
             column.setEditable(false);
             column.setReorderable(false);
+        });
+
+        populationTableView.setRowFactory(value -> {
+            TableRow<Population> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Population rowData = row.getItem();
+                    System.out.println(rowData.getPopulationAddressModificationsList().size());
+                }
+            });
+            return row;
         });
     }
 }

@@ -1,13 +1,8 @@
 package hust.itep.quanlynhankhau.controller;
 
-import hust.itep.quanlynhankhau.controller.page.HomeController;
 import hust.itep.quanlynhankhau.controller.page.LoginController;
-import hust.itep.quanlynhankhau.controller.page.household.AddHouseholdController;
-import hust.itep.quanlynhankhau.controller.page.household.HouseholdController;
-import hust.itep.quanlynhankhau.controller.page.population.*;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
 public class MainController {
@@ -17,6 +12,7 @@ public class MainController {
 
     @FXML
     public void initialize() {
+        /*
         PageManager.setMainContainer(borderPane);
         PageManager.addPage(LoginController.getKey(), new LoginController());
         PageManager.addPage(HomeController.getKey(), new HomeController());
@@ -28,8 +24,12 @@ public class MainController {
         PageManager.addPage(ViewPopulationController.getKey(), new ViewPopulationController());
         PageManager.addPage(PopulationController.getKey(), new PopulationController());
         PageManager.addPage(HouseholdController.getKey(), new HouseholdController());
+         */
 
-        PageManager.setPage(LoginController.getKey());
+
+
+        PageManager.setMainContainer(borderPane);
+        PageManager.setPageCurrentThread(LoginController.getKey(), new LoginController());
     }
 
 

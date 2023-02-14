@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.sql.Date;
+import java.util.List;
 
 
 @Entity
@@ -27,8 +28,19 @@ public class Population {
     private Household household;
     private String relationshipToHead;
 
+    private List<PopulationAddressModification> populationAddressModificationsList;
+
+    @OneToMany(mappedBy = "population", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<PopulationAddressModification> getPopulationAddressModificationsList() {
+        return populationAddressModificationsList;
+    }
+
+    public void setPopulationAddressModificationsList(List<PopulationAddressModification> populationAddressModificationsList) {
+        this.populationAddressModificationsList = populationAddressModificationsList;
+    }
+
     @ManyToOne
-    @JoinColumn(name = "household_id")
+    @JoinColumn(name = "household_id", nullable = true)
     public Household getHousehold() {
         return household;
     }

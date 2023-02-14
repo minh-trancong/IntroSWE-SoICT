@@ -1,8 +1,8 @@
 package hust.itep.quanlynhankhau.controller.page;
 
-import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.layout.HeaderController;
 import hust.itep.quanlynhankhau.controller.layout.FooterController;
+import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.service.dao.AccountDao;
 import hust.itep.quanlynhankhau.model.Account;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -47,9 +47,16 @@ public class LoginController {
                 return;
             }
 
+            PageManager.setPage(HomeController.getKey(), new HomeController());
+            PageManager.setHeader(HeaderController.getKey(), new HeaderController());
+            PageManager.setFooter(FooterController.getKey(), new FooterController());
+
+            /*
             PageManager.setPageConcurrent(HomeController.getKey());
             PageManager.setHeaderConcurrent(HeaderController.getKey(), new HeaderController());
             PageManager.setFooterConcurrent(FooterController.getKey(), new FooterController());
+             */
+
         });
     }
 }

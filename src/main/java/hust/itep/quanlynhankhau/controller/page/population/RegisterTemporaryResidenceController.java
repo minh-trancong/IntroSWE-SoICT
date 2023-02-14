@@ -96,6 +96,6 @@ public class RegisterTemporaryResidenceController {
 
         TemporaryResidenceDao temporaryResidenceDao = new TemporaryResidenceDao();
         temporaryResidenceDao.save(temporaryResidence);
-        PageManager.setPage(RegisterTemporaryResidenceController.getKey());
+        PageManager.refreshCurrentPage();
     }
 }

@@ -99,6 +99,6 @@ public class RegisterTemporaryAbsenceController {
 
         TemporaryAbsenceDao temporaryAbsenceDao = new TemporaryAbsenceDao();
         temporaryAbsenceDao.save(temporaryAbsence);
-        PageManager.setPage(RegisterTemporaryAbsenceController.getKey());
+        PageManager.refreshCurrentPage();
     }
 }

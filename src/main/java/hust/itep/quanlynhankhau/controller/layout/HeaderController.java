@@ -2,10 +2,9 @@ package hust.itep.quanlynhankhau.controller.layout;
 
 import hust.itep.quanlynhankhau.controller.page.household.HouseholdController;
 import hust.itep.quanlynhankhau.controller.page.population.*;
-import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.page.HomeController;
 import hust.itep.quanlynhankhau.controller.page.LoginController;
-import hust.itep.quanlynhankhau.controller.page.household.AddHouseholdController;
+import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -73,44 +72,36 @@ public class HeaderController {
         logoutButton.setOnMouseClicked(e -> {
             PageManager.clearHeader();
             PageManager.clearFooter();
-            PageManager.setPage(LoginController.getKey());
+            PageManager.setPage(LoginController.getKey(), new LoginController());
         });
     }
 
     private void initializePopulationMenu() {
-        addPopulationMenuItem.setOnAction(e -> {
-            PageManager.setPageConcurrent(AddPopulationController.getKey());
-        });
-
         registerTemporaryResidenceMenuItem.setOnAction(e -> {
-            PageManager.setPageConcurrent(RegisterTemporaryAbsenceController.getKey());
+            PageManager.setPage(RegisterTemporaryResidenceController.getKey(), new RegisterTemporaryResidenceController());
         });
 
         registerTemporaryAbsenceMenuItem.setOnAction(e -> {
-            PageManager.setPageConcurrent(RegisterTemporaryAbsenceController.getKey());
+            PageManager.setPage(RegisterTemporaryAbsenceController.getKey(), new RegisterTemporaryAbsenceController());
         });
 
         deathDeclarationMenuItem.setOnAction(e -> {
-            PageManager.setPageConcurrent(DeathDeclarationController.getKey());
+            PageManager.setPage(DeathDeclarationController.getKey(), new DeathDeclarationController());
         });
 
         viewPopulation.setOnAction(e -> {
-            PageManager.setPageConcurrent(ViewPopulationController.getKey());
+            PageManager.setPage(ViewPopulationController.getKey(), new ViewPopulationController());
         });
 
         populationMenuItem.setOnAction(e -> {
-            PageManager.setPageConcurrent(PopulationController.getKey());
+            PageManager.setPage(PopulationController.getKey(), new PopulationController());
         });
     }
 
 
     private void initializeHouseholdMenu() {
-        addHouseholdMenuItem.setOnAction(e -> {
-            PageManager.setPageConcurrent(AddHouseholdController.getKey());
-        });
-
         householdMenuItem.setOnAction(e -> {
-            PageManager.setPageConcurrent(HouseholdController.getKey());
+            PageManager.setPage(HouseholdController.getKey(), new HouseholdController());
         });
     }
 
@@ -123,7 +114,7 @@ public class HeaderController {
     @FXML
     public void initialize() {
         homeLabel.setOnMouseClicked(e -> {
-            PageManager.setPage(HomeController.getKey());
+            PageManager.setPage(HomeController.getKey(), new HomeController());
         });
 
         initializeMenuBar();

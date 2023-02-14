@@ -2,7 +2,7 @@ package hust.itep.quanlynhankhau.controller.page.household;
 
 import hust.itep.quanlynhankhau.context.Context;
 import hust.itep.quanlynhankhau.controller.page.population.AddPopulationController;
-import hust.itep.quanlynhankhau.controller.utility.PageManager;
+import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.Household;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -69,7 +69,7 @@ public class HouseholdController {
             stage.setResizable(false);
             stage.getIcons().add(Context.ICON);
             stage.initModality(Modality.APPLICATION_MODAL);
-            PageManager.setPageDialog(AddHouseholdController.getKey(), stage);
+            PopupManager.setPopup(AddHouseholdController.getKey(), new AddPopulationController(), stage);
         });
     }
 

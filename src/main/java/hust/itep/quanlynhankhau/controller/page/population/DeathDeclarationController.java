@@ -5,7 +5,6 @@ import hust.itep.quanlynhankhau.controller.component.Form;
 import hust.itep.quanlynhankhau.controller.component.ValidationHelper;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.model.DeathDeclaration;
-import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.population.DeathDeclarationDao;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -14,7 +13,6 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DeathDeclarationController {
@@ -70,7 +68,7 @@ public class DeathDeclarationController {
 
         DeathDeclarationDao deathDeclarationDao = new DeathDeclarationDao();
         deathDeclarationDao.save(deathDeclaration);
-        PageManager.setPage(DeathDeclarationController.getKey());
+        PageManager.setPage(DeathDeclarationController.getKey(), new DeathDeclarationController());
     }
 
     public void initializeTextField() {

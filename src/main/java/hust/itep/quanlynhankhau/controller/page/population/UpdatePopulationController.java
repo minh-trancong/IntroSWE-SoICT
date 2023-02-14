@@ -3,14 +3,13 @@ package hust.itep.quanlynhankhau.controller.page.population;
 import hust.itep.quanlynhankhau.controller.component.DatePickerHelper;
 import hust.itep.quanlynhankhau.controller.component.Form;
 import hust.itep.quanlynhankhau.controller.component.ValidationHelper;
-import hust.itep.quanlynhankhau.controller.utility.PageManager;
+import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,7 +19,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UpdatePopulationController {
-    private static final String KEY = "/fxml/page/population/view-population.fxml";
+    private static final String KEY = "/fxml/page/population/add-population.fxml";
+
+    public static String getKey() {
+        return KEY;
+    }
     private final static ObservableList<String> GENDERS = FXCollections
             .observableList(Arrays.asList("Nam", "Nữ", "Khác"));
     @FXML
@@ -145,6 +148,6 @@ public class UpdatePopulationController {
         PopulationDao populationDao = new PopulationDao();
 
         populationDao.update(population);
-        PageManager.setPageConcurrent(PopulationController.getKey());
+        PopupManager.closeCurrentStage();
     }
 }

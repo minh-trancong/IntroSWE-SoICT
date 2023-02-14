@@ -25,7 +25,7 @@ public class TemporaryResidence {
         this.paperCode = paperCode;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "population_id")
     public Population getPopulation() {
         return population;

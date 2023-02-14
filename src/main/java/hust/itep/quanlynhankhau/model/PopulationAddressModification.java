@@ -55,7 +55,7 @@ public class PopulationAddressModification {
         this.changeDate = changeDate;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "population_id")
     public Population getPopulation() {
         return population;

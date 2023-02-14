@@ -50,7 +50,6 @@
                     <items>
                         <MenuItem fx:id="populationMenuItem" mnemonicParsing="false" text="Nhân khẩu" />
                         <MenuItem fx:id="viewPopulation" mnemonicParsing="false" text="Xem thông tin nhân khẩu" />
-                        <MenuItem fx:id="addPopulationMenuItem" mnemonicParsing="false" text="Thêm Nhân Khẩu" />
                         <MenuItem fx:id="registerTemporaryResidenceMenuItem" mnemonicParsing="false" text="Đăng Kí Tạm Trú" />
                         <MenuItem fx:id="registerTemporaryAbsenceMenuItem" mnemonicParsing="false" text="Đăng kí Tạm Vắng" />
                         <MenuItem fx:id="deathDeclarationMenuItem" mnemonicParsing="false" text="Khai báo tử vong" />
@@ -58,7 +57,6 @@
                   </Menu>
                   <Menu fx:id="householdMenu" mnemonicParsing="false" text="Hộ Khẩu">
                     <items>
-                      <MenuItem fx:id="addHouseholdMenuItem" mnemonicParsing="false" text="Thêm Hộ Khẩu" />
                         <MenuItem fx:id="householdMenuItem" mnemonicParsing="false" text="Hộ khẩu" />
                     </items>
                   </Menu>

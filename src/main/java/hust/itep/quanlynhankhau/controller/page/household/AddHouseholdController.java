@@ -1,7 +1,6 @@
 package hust.itep.quanlynhankhau.controller.page.household;
 
 import hust.itep.quanlynhankhau.controller.page.LoginController;
-import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.model.Household;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
@@ -79,7 +78,6 @@ public class AddHouseholdController {
             headPopulation.setRelationshipToHead("Là chủ hộ");
             headPopulation.setHousehold(household);
             populationDao.update(headPopulation);
-            PageManager.setPage(AddHouseholdController.getKey());
         });
     }
 
