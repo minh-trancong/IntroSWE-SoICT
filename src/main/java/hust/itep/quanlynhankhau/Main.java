@@ -1,7 +1,10 @@
 package hust.itep.quanlynhankhau;
 
+import hust.itep.quanlynhankhau.context.Context;
 import hust.itep.quanlynhankhau.controller.MainController;
+import hust.itep.quanlynhankhau.model.Account;
 import hust.itep.quanlynhankhau.model.TemporaryResidence;
+import hust.itep.quanlynhankhau.service.dao.AccountDao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,12 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
-    private static Stage stage;
-    public static Stage getStage() {
-        return stage;
-    }
-
     public static void main(String[] args) {
+        new AccountDao().get(Account.class, 1l);
         launch(args);
     }
 
@@ -31,10 +30,10 @@ public class Main extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        stage = primaryStage;
+        Context.setMainStage(primaryStage);
         primaryStage.setScene(new Scene(parent));
         primaryStage.setTitle("Quản Lý Nhân Khẩu");
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/main-icon.png")));
+        primaryStage.getIcons().add(Context.ICON);
         primaryStage.setMaximized(true);
         primaryStage.show();
     }

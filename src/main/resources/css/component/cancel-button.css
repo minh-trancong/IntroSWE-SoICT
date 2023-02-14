@@ -1,6 +1,6 @@
 .mfx-button {
     -fx-background-color: #bf4141;
-    -fx-background-radius: 20;
+    -fx-background-radius: 5;
     -fx-text-fill: white;
 }
 

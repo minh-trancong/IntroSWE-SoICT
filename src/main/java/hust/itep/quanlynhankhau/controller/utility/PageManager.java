@@ -1,9 +1,13 @@
 package hust.itep.quanlynhankhau.controller.utility;
 
+import hust.itep.quanlynhankhau.context.Context;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -37,6 +41,68 @@ public class PageManager {
         pageMap.remove(key);
     }
 
+
+    public static void setPageDialog(String key, Object controller, Stage stage) {
+        Task<Parent> loadTask = new Task<Parent>() {
+            @Override
+            protected Parent call() throws Exception {
+                Context.setLoadingCursor();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(key));
+                loader.setController(controller);
+                return loader.load();
+            }
+        };
+
+        loadTask.setOnSucceeded(e -> {
+            Context.setDefaultCursor();
+            Parent root = loadTask.getValue();
+            stage.setScene(new Scene(root));
+            stage.show();
+        });
+
+        new Thread(loadTask).start();
+    }
+
+    public static void setPageDialog(String key, Stage stage) {
+        Task<Parent> loadTask = new Task<Parent>() {
+            @Override
+            protected Parent call() throws Exception {
+                Context.setLoadingCursor();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(key));
+                loader.setController(pageMap.get(key));
+                return loader.load();
+            }
+        };
+
+        loadTask.setOnSucceeded(e -> {
+            Context.setDefaultCursor();
+            Parent root = loadTask.getValue();
+            stage.setScene(new Scene(root));
+            stage.show();
+        });
+
+        new Thread(loadTask).start();
+    }
+
+    public static void setPageConcurrent(String key) {
+        Task<Parent> loadTask = new Task<Parent>() {
+            @Override
+            protected Parent call() throws Exception {
+                Context.setLoadingCursor();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(key));
+                loader.setController(pageMap.get(key));
+                return loader.load();
+            }
+        };
+
+        loadTask.setOnSucceeded(e -> {
+            Context.setDefaultCursor();
+            mainContainer.setCenter(loadTask.getValue());
+        });
+
+        new Thread(loadTask).start();
+    }
+
     public static void setPage(String key) {
         if (mainContainer == null) {
             System.out.println("Main container is null");
@@ -63,6 +129,45 @@ public class PageManager {
 
     public static void clearFooter() {
         mainContainer.setBottom(null);
+    }
+
+
+    public static void setHeaderConcurrent(String url, Object controller) {
+        Task<Parent> loadTask = new Task<Parent>() {
+            @Override
+            protected Parent call() throws Exception {
+                Context.setLoadingCursor();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
+                loader.setController(controller);
+                return loader.load();
+            }
+        };
+
+        loadTask.setOnSucceeded(e -> {
+            Context.setDefaultCursor();
+            mainContainer.setTop(loadTask.getValue());
+        });
+
+        new Thread(loadTask).start();
+    }
+
+    public static void setFooterConcurrent(String url, Object controller) {
+        Task<Parent> loadTask = new Task<Parent>() {
+            @Override
+            protected Parent call() throws Exception {
+                Context.setLoadingCursor();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
+                loader.setController(controller);
+                return loader.load();
+            }
+        };
+
+        loadTask.setOnSucceeded(e -> {
+            Context.setDefaultCursor();
+            mainContainer.setBottom(loadTask.getValue());
+        });
+
+        new Thread(loadTask).start();
     }
 
     public static void setHeader(String url, Object controller) {

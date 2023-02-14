@@ -3,7 +3,8 @@ package hust.itep.quanlynhankhau.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 @Entity
 @Table(name = "population")

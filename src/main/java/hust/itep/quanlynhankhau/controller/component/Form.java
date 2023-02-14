@@ -3,6 +3,7 @@ package hust.itep.quanlynhankhau.controller.component;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXTooltip;
 import io.github.palexdev.materialfx.validation.Constraint;
 import io.github.palexdev.materialfx.validation.Severity;
 import javafx.event.Event;
@@ -22,6 +23,7 @@ public class Form {
     private ArrayList<MFXTextField> textFields = new ArrayList<>();
 
     private boolean validate() {
+
         boolean ret = true;
         for (MFXTextField textField : textFields) {
             if (!textField.getValidator().validProperty().get()) {

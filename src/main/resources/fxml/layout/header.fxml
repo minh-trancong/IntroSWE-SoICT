@@ -48,6 +48,7 @@
               <menus>
                   <Menu fx:id="populationMenu" mnemonicParsing="false" text="Nhân Khẩu">
                     <items>
+                        <MenuItem fx:id="populationMenuItem" mnemonicParsing="false" text="Nhân khẩu" />
                         <MenuItem fx:id="viewPopulation" mnemonicParsing="false" text="Xem thông tin nhân khẩu" />
                         <MenuItem fx:id="addPopulationMenuItem" mnemonicParsing="false" text="Thêm Nhân Khẩu" />
                         <MenuItem fx:id="registerTemporaryResidenceMenuItem" mnemonicParsing="false" text="Đăng Kí Tạm Trú" />

@@ -24,6 +24,8 @@ public class MainController {
         PageManager.addPage(RegisterTemporaryAbsenceController.getKey(), new RegisterTemporaryAbsenceController());
         PageManager.addPage(DeathDeclarationController.getKey(), new DeathDeclarationController());
         PageManager.addPage(ViewPopulationController.getKey(), new ViewPopulationController());
+        PageManager.addPage(PopulationController.getKey(), new PopulationController());
+
 
         PageManager.setPage(LoginController.getKey());
     }

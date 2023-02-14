@@ -3,6 +3,7 @@ package hust.itep.quanlynhankhau.controller.page.population;
 import hust.itep.quanlynhankhau.model.Household;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
+import jakarta.persistence.Table;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableStringValue;
@@ -128,6 +129,20 @@ public class ViewPopulationController {
         columns.add(phoneColumn);
         columns.add(relationshipToHeadColumn);
         columns.add(householdIdColumn);
+
+        ArrayList<TableColumn<Population, ? extends Object>> centerColumns = new ArrayList<>();
+        centerColumns.add(idColumn);
+        centerColumns.add(birthColumn);
+        centerColumns.add(genderColumn);
+        centerColumns.add(householdIdColumn);
+
+        for (TableColumn column : columns) {
+            column.setReorderable(false);
+        }
+
+        for (TableColumn tableColumn : centerColumns) {
+            tableColumn.setStyle("-fx-alignment: CENTER;");
+        }
 
         tbPopulation.getColumns().addAll(columns);
         tbPopulation.setItems(items);

@@ -28,11 +28,10 @@
                 </Label>
                 <ScrollPane>
 
-                    <TableView fx:id="tbPopulation" minHeight="-Infinity" minWidth="900.0" prefHeight="616.0" prefWidth="2457.0">
-                        <columnResizePolicy>
-                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                        </columnResizePolicy>
-                    </TableView>
+                    <TableView fx:id="tbPopulation" minHeight="-Infinity" minWidth="900.0" prefHeight="600.0" prefWidth="2600.0">
+                  <columnResizePolicy>
+                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                  </columnResizePolicy></TableView>
                 </ScrollPane>
 
             </children>

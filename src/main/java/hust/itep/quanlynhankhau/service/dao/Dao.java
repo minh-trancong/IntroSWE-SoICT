@@ -16,6 +16,7 @@ public abstract class Dao<T> {
         criteriaQuery.from(classObject);
         List<T> entities = entityManager.createQuery(criteriaQuery).getResultList();
         entityManager.getTransaction().commit();
+        entityManager.close();
         return entities;
     }
     public T get(Class<T> classObject, Long id) {
@@ -23,6 +24,7 @@ public abstract class Dao<T> {
         entityManager.getTransaction().begin();
         T entity = entityManager.find(classObject, id);
         entityManager.getTransaction().commit();
+        entityManager.close();
         return entity;
     }
     public void save(T t) {
@@ -30,6 +32,7 @@ public abstract class Dao<T> {
         entityManager.getTransaction().begin();
         entityManager.persist(t);
         entityManager.getTransaction().commit();
+        entityManager.close();
     }
     public void delete(T t) {
         EntityManager entityManager = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
@@ -37,12 +40,15 @@ public abstract class Dao<T> {
         T toDelete = entityManager.merge(t);
         entityManager.remove(toDelete);
         entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public void update(T t) {
         EntityManager entityManager = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+
         entityManager.getTransaction().begin();
         entityManager.merge(t);
         entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

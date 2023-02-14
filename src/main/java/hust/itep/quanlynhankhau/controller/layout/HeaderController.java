@@ -1,18 +1,12 @@
 package hust.itep.quanlynhankhau.controller.layout;
 
-import hust.itep.quanlynhankhau.Main;
 import hust.itep.quanlynhankhau.controller.page.population.*;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.page.HomeController;
 import hust.itep.quanlynhankhau.controller.page.LoginController;
 import hust.itep.quanlynhankhau.controller.page.household.AddHouseholdController;
-import hust.itep.quanlynhankhau.model.Account;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 public class HeaderController {
     private static final String KEY = "/fxml/layout/header.fxml";
@@ -59,6 +53,8 @@ public class HeaderController {
     @FXML
     private Button logoutButton;
 
+    @FXML
+    private MenuItem populationMenuItem;
 
     public HeaderController() {
 
@@ -79,67 +75,34 @@ public class HeaderController {
 
     private void initializePopulationMenu() {
         addPopulationMenuItem.setOnAction(e -> {
-            Main.getStage().getScene().setCursor(Cursor.WAIT);
-            new Thread(() -> {
-                Platform.runLater(() -> {
-                    PageManager.setPage(AddPopulationController.getKey());
-                    Main.getStage().getScene().setCursor(Cursor.DEFAULT);
-                });
-            }).start();
+            PageManager.setPageConcurrent(AddPopulationController.getKey());
         });
 
         registerTemporaryResidenceMenuItem.setOnAction(e -> {
-            Main.getStage().getScene().setCursor(Cursor.WAIT);
-            new Thread(() -> {
-                Platform.runLater(() -> {
-                    PageManager.setPage(RegisterTemporaryResidenceController.getKey());
-                    Main.getStage().getScene().setCursor(Cursor.DEFAULT);
-                });
-            }).start();
+            PageManager.setPageConcurrent(RegisterTemporaryAbsenceController.getKey());
         });
 
         registerTemporaryAbsenceMenuItem.setOnAction(e -> {
-            Main.getStage().getScene().setCursor(Cursor.WAIT);
-            new Thread(() -> {
-                Platform.runLater(() -> {
-                    PageManager.setPage(RegisterTemporaryAbsenceController.getKey());
-                    Main.getStage().getScene().setCursor(Cursor.DEFAULT);
-                });
-            }).start();
+            PageManager.setPageConcurrent(RegisterTemporaryAbsenceController.getKey());
         });
 
         deathDeclarationMenuItem.setOnAction(e -> {
-            Main.getStage().getScene().setCursor(Cursor.WAIT);
-            new Thread(() -> {
-                Platform.runLater(() -> {
-                    PageManager.setPage(DeathDeclarationController.getKey());
-                    Main.getStage().getScene().setCursor(Cursor.DEFAULT);
-                });
-            }).start();
+            PageManager.setPageConcurrent(DeathDeclarationController.getKey());
         });
 
         viewPopulation.setOnAction(e -> {
-            Main.getStage().getScene().setCursor(Cursor.WAIT);
-            new Thread(() -> {
-               Platform.runLater(() -> {
-                   PageManager.setPage(ViewPopulationController.getKey());
-                   Main.getStage().getScene().setCursor(Cursor.DEFAULT);                });
-            }).start();
+            PageManager.setPageConcurrent(ViewPopulationController.getKey());
+        });
+
+        populationMenuItem.setOnAction(e -> {
+            PageManager.setPageConcurrent(PopulationController.getKey());
         });
     }
 
 
     private void initializeHouseholdMenu() {
-
-
         addHouseholdMenuItem.setOnAction(e -> {
-            Main.getStage().getScene().setCursor(Cursor.WAIT);
-            new Thread(() -> {
-                Platform.runLater(() -> {
-                    PageManager.setPage(AddHouseholdController.getKey());
-                    Main.getStage().getScene().setCursor(Cursor.DEFAULT);
-                });
-            }).start();
+            PageManager.setPageConcurrent(AddHouseholdController.getKey());
         });
     }
 
