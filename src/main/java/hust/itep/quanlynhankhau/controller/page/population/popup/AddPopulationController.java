@@ -1,15 +1,12 @@
-package hust.itep.quanlynhankhau.controller.page.population;
+package hust.itep.quanlynhankhau.controller.page.population.popup;
 
-import hust.itep.quanlynhankhau.controller.component.DatePickerHelper;
+import hust.itep.quanlynhankhau.controller.component.modifier.DatePickerHelper;
 import hust.itep.quanlynhankhau.controller.component.Form;
-import hust.itep.quanlynhankhau.controller.component.ValidationHelper;
+import hust.itep.quanlynhankhau.controller.component.modifier.ValidationHelper;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
-import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,12 +15,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class UpdatePopulationController {
-    private static final String KEY = "/fxml/page/population/add-population.fxml";
-
-    public static String getKey() {
-        return KEY;
-    }
+public class AddPopulationController {
+    private static final String KEY = "/fxml/page/population/popup/add-population.fxml";
     private final static ObservableList<String> GENDERS = FXCollections
             .observableList(Arrays.asList("Nam", "Nữ", "Khác"));
     @FXML
@@ -57,41 +50,18 @@ public class UpdatePopulationController {
 
     private ArrayList<MFXTextField> nonEmptyTextFields = new ArrayList<>();
 
-    private Population population;
-
-    public UpdatePopulationController(Population population) {
-        this.population = population;
+    public static String getKey() {
+        return KEY;
     }
-
-
 
     @FXML
     public void initialize() {
-        initializeDatePicker();
-        initializeComboBox();
-        initializeInfo();
         initializeTextField();
+        initializeComboBox();
+        initializeDatePicker();
         initializeForm();
     }
 
-
-    @FXML
-    public void initializeInfo() {
-        nameTextField.setText(population.getName());
-        genderComboBox.setText(population.getGender());
-        phoneTextField.setText(population.getPhone());
-        birthdateDatePicker.setValue(population.getBirthdate().toLocalDate());
-        citizenIdTextField.setText(population.getCitizenId());
-        ethnicityTextField.setText(population.getEthnicity());
-        nationalityTextField.setText(population.getNationality());
-        passportTextField.setText(population.getNationality());
-        birthPlaceTextField.setText(population.getBirthPlace());
-        nativePlaceTextField.setText(population.getNativePlace());
-        occupationTextField.setText(population.getOccupation());
-        currentAddressTextField.setText(population.getCurrentAddress());
-        permanentAddressTextField.setText(population.getPermanentAddress());
-
-    }
 
     public void initializeDatePicker() {
         DatePickerHelper.setVietnamese(birthdateDatePicker);
@@ -130,7 +100,7 @@ public class UpdatePopulationController {
     }
 
     private void submit() {
-
+        Population population = new Population();
         population.setName(nameTextField.getText());
         population.setGender(genderComboBox.getText());
         population.setPhone(phoneTextField.getText());
@@ -139,15 +109,14 @@ public class UpdatePopulationController {
         population.setPassport(passportTextField.getText());
         population.setOccupation(occupationTextField.getText());
         population.setNationality(nationalityTextField.getText());
-        population.setCitizenId(citizenIdTextField.getText());
+        population.setCitizenId(citizenIdTextField.getText().isBlank() ? null : citizenIdTextField.getText());
         population.setCurrentAddress(currentAddressTextField.getText());
         population.setNativePlace(nativePlaceTextField.getText());
         population.setBirthPlace(birthPlaceTextField.getText());
         population.setPermanentAddress(permanentAddressTextField.getText());
 
         PopulationDao populationDao = new PopulationDao();
-
-        populationDao.update(population);
-        PopupManager.closeCurrentStage();
+        populationDao.save(population);
+        PopupManager.refreshCurrentStage();
     }
 }

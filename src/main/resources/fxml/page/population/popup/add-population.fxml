@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<MFXScrollPane fx:id="root" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../css/base.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<MFXScrollPane fx:id="root" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../../css/base.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <BorderPane>
          <top>
@@ -38,16 +38,16 @@
                   <Insets bottom="20.0" top="20.0" />
                </padding>
                <children>
-                  <MFXButton fx:id="submitButton" stylesheets="@../../../css/component/confirmation-button.css" text="Gửi thông tin" />
+                  <MFXButton fx:id="submitButton" stylesheets="@../../../../css/component/confirmation-button.css" text="Gửi thông tin" />
                </children>
             </HBox>
          </bottom>
          <stylesheets>
-            <URL value="@../../../css/base.css" />
-            <URL value="@../../../css/page/population/add-population.css" />
-            <URL value="@../../../css/component/text-field.css" />
-            <URL value="@../../../css/component/date-picker.css" />
-            <URL value="@../../../css/component/combo-box.css" />
+            <URL value="@../../../../css/base.css" />
+            <URL value="@../../../../css/page/population/add-population.css" />
+            <URL value="@../../../../css/component/text-field.css" />
+            <URL value="@../../../../css/component/date-picker.css" />
+            <URL value="@../../../../css/component/combo-box.css" />
          </stylesheets>
          <center>
             <VBox alignment="CENTER" BorderPane.alignment="CENTER">

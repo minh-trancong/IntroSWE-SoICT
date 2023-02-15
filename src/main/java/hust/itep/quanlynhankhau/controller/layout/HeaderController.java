@@ -48,8 +48,7 @@ public class HeaderController {
     @FXML
     private MenuItem deathDeclarationMenuItem;
 
-    @FXML
-    private MenuItem viewPopulation;
+
     @FXML
     private Button logoutButton;
 
@@ -87,10 +86,6 @@ public class HeaderController {
 
         deathDeclarationMenuItem.setOnAction(e -> {
             PageManager.setPage(DeathDeclarationController.getKey(), new DeathDeclarationController());
-        });
-
-        viewPopulation.setOnAction(e -> {
-            PageManager.setPage(ViewPopulationController.getKey(), new ViewPopulationController());
         });
 
         populationMenuItem.setOnAction(e -> {

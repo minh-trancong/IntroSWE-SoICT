@@ -1,4 +1,4 @@
-package hust.itep.quanlynhankhau.controller.component;
+package hust.itep.quanlynhankhau.controller.component.modifier;
 
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.validation.Constraint;

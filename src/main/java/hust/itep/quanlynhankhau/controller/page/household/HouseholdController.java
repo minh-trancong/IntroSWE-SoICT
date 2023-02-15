@@ -1,7 +1,6 @@
 package hust.itep.quanlynhankhau.controller.page.household;
 
 import hust.itep.quanlynhankhau.context.Context;
-import hust.itep.quanlynhankhau.controller.page.population.AddPopulationController;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.Household;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
@@ -11,10 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,7 +23,6 @@ public class HouseholdController {
     public static String getKey() {
         return KEY;
     }
-
 
     @FXML
     RadioButton headNameRadioButton;
@@ -69,7 +64,8 @@ public class HouseholdController {
             stage.setResizable(false);
             stage.getIcons().add(Context.ICON);
             stage.initModality(Modality.APPLICATION_MODAL);
-            PopupManager.setPopup(AddHouseholdController.getKey(), new AddPopulationController(), stage);
+
+            PopupManager.setPopup(AddHouseholdController.getKey(), new AddHouseholdController(), stage);
         });
     }
 

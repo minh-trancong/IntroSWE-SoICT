@@ -25,4 +25,8 @@ module com.quanlynhankhau.hust.quanlynhankhau {
     exports hust.itep.quanlynhankhau.model;
     opens hust.itep.quanlynhankhau.controller.utility to javafx.fxml;
     opens hust.itep.quanlynhankhau.controller.component to javafx.fxml;
+    opens hust.itep.quanlynhankhau.controller.page.population.popup to javafx.fxml;
+    opens hust.itep.quanlynhankhau.controller.component.popup to javafx.fxml;
+    opens hust.itep.quanlynhankhau.controller.component.modifier to javafx.fxml;
+    opens hust.itep.quanlynhankhau.controller.component.factory to javafx.fxml;
 }

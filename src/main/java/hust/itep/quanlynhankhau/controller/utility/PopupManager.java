@@ -30,7 +30,14 @@ public class PopupManager {
                 Context.setLoadingCursor();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(currentFXML));
                 loader.setController(controller);
-                return loader.load();
+                Parent parent = null;
+                try {
+                    parent = loader.load();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                return parent;
             }
         };
 

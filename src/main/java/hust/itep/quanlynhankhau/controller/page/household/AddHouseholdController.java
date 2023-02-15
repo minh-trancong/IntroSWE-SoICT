@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AddHouseholdController {
-    private static final String KEY = "/fxml/page/household/add-household.fxml";
+    private static final String KEY = "/fxml/page/household/popup/add-household.fxml";
 
     public static String getKey() {
         return KEY;

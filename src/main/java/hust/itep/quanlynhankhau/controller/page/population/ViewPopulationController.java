@@ -2,7 +2,11 @@ package hust.itep.quanlynhankhau.controller.page.population;
 
 import hust.itep.quanlynhankhau.model.Household;
 import hust.itep.quanlynhankhau.model.Population;
+import hust.itep.quanlynhankhau.model.PopulationAddressModification;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import jakarta.persistence.Table;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,140 +15,128 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+
+import java.lang.reflect.Field;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
+import java.util.HashMap;
 import java.util.PropertyResourceBundle;
 
 public class ViewPopulationController {
-    private static final String KEY = "/fxml/page/population/view-population.fxml";
+    private static final String KEY = "/fxml/page/population/popup/view-population.fxml";
     public static String getKey() {
         return KEY;
     }
 
     @FXML
-    private TableView<Population> tbPopulation;
-    private ObservableList<Population> items;
+    MFXTextField nameTextField;
+    @FXML
+    MFXTextField phoneTextField;
+    @FXML
+    MFXComboBox genderComboBox;
+    @FXML
+    MFXDatePicker birthdateDatePicker;
+    @FXML
+    MFXTextField nationalityTextField;
+    @FXML
+    MFXTextField ethnicityTextField;
+    @FXML
+    MFXTextField citizenIdTextField;
+    @FXML
+    MFXTextField passportTextField;
+    @FXML
+    MFXTextField birthPlaceTextField;
+    @FXML
+    MFXTextField nativePlaceTextField;
+    @FXML
+    MFXTextField occupationTextField;
+    @FXML
+    MFXTextField permanentAddressTextField;
+    @FXML
+    MFXTextField currentAddressTextField;
 
+    @FXML
+    TableView<PopulationAddressModification> addressHistoryTableView;
 
+    private Population population;
+
+    public ViewPopulationController(Population population) {
+        this.population = population;
+    }
+
+    @FXML
     public void initialize() {
-        items = FXCollections.observableArrayList(new PopulationDao().getAll(Population.class));
+        initializeTextField();
+        initializeTableView();
+    }
 
-        TableColumn<Population, Long> idColumn = new TableColumn<>("ID");
-        TableColumn<Population, String> nameColumn = new TableColumn<>("Họ và tên");
-        TableColumn<Population, Date> birthColumn = new TableColumn<>("Ngày sinh");
-        TableColumn<Population, String> birthPlaceColumn = new TableColumn<>("Nơi sinh");
-        TableColumn<Population, String> citizenIdColumn = new TableColumn<>("CCCD");
-        TableColumn<Population, String> currentAddressColumn = new TableColumn<>("Địa chỉ hiện tại");
-        TableColumn<Population, String> ethnicityColumn = new TableColumn<>("Dân tộc");
-        TableColumn<Population, String> genderColumn = new TableColumn<>("Giới tính");
-        TableColumn<Population, String> nationalityColumn = new TableColumn<>("Quốc tịch");
-        TableColumn<Population, String> nativePlaceColumn = new TableColumn<>("Nguyên quán");
-        TableColumn<Population, String> occupationColumn = new TableColumn<>("Nghề nghiệp");
-        TableColumn<Population, String> passportColumn = new TableColumn<>("Hộ chiếu");
-        TableColumn<Population, String> permanentAddressColumn = new TableColumn<>("Địa chỉ thường trú");
-        TableColumn<Population, String> phoneColumn = new TableColumn<>("Số điện thoại");
-        TableColumn<Population, String> relationshipToHeadColumn = new TableColumn<>("Quan hệ với chủ hộ");
-        
+    public void initializeTableView() {
+        TableColumn<PopulationAddressModification, String> oldAddressColumn = new TableColumn<>("Địa chỉ cũ");
+        TableColumn<PopulationAddressModification, String> newAddressColumn = new TableColumn<>("Địa chỉ mới");
+        TableColumn<PopulationAddressModification, Date> changedDateColumn = new TableColumn<>("Ngày thay đổi");
 
-        idColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, Long>("id"));
-        nameColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("name"));
-        birthColumn.setCellValueFactory(new PropertyValueFactory<Population, Date>("birthdate"));
+        oldAddressColumn.setCellValueFactory(new PropertyValueFactory<>("oldAddress"));
+        newAddressColumn.setCellValueFactory(new PropertyValueFactory<>("newAddress"));
+        changedDateColumn.setCellValueFactory(new PropertyValueFactory<>("changeDate"));
 
-        birthColumn.setCellFactory(column -> {
-            TableCell<Population, Date> cell = new TableCell<Population, Date>() {
-                private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        addressHistoryTableView.getColumns().add(oldAddressColumn);
+        addressHistoryTableView.getColumns().add(newAddressColumn);
+        addressHistoryTableView.getColumns().add(changedDateColumn);
 
-                @Override
-                protected void updateItem(Date item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setText(null);
-                    } else {
-                        setText(format.format(item));
-                    }
-                }
-            };
-
-            return cell;
+        addressHistoryTableView.getColumns().forEach(e -> {
+            e.prefWidthProperty().bind(addressHistoryTableView.prefWidthProperty()
+                    .divide(addressHistoryTableView.getColumns().size()));
         });
-        birthPlaceColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("birthPlace"));
-        citizenIdColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("citizenId"));
-        currentAddressColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("currentAddress"));
-        ethnicityColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("ethnicity"));
-        genderColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("gender"));
-        nationalityColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("nationality"));
-        nativePlaceColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("nativePlace"));
-        occupationColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("occupation"));
-        passportColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("passport"));
-        permanentAddressColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("permanentAddress"));
-        phoneColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("phone"));
-        relationshipToHeadColumn.setCellValueFactory(
-                new PropertyValueFactory<Population, String>("relationshipToHead"));
-        TableColumn<Population, String> householdIdColumn = new TableColumn<>("Mã hộ khẩu");
 
-        householdIdColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Population, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Population, String> param) {
-                if (param.getValue().getHousehold() == null) {
-                    return new SimpleStringProperty("");
+        addressHistoryTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        addressHistoryTableView.setItems(FXCollections.observableList(population.getPopulationAddressModificationsList()));
+    }
+
+    public void initializeTextField() {
+        HashMap<String, MFXTextField> textFieldHashMap = new HashMap<>();
+        textFieldHashMap.put("name", nameTextField);
+        textFieldHashMap.put("phone", phoneTextField);
+        textFieldHashMap.put("gender", genderComboBox);
+        textFieldHashMap.put("birthdate", birthdateDatePicker);
+        textFieldHashMap.put("nationality", nationalityTextField);
+        textFieldHashMap.put("ethnicity", ethnicityTextField);
+        textFieldHashMap.put("citizenId", citizenIdTextField);
+        textFieldHashMap.put("passport", passportTextField);
+        textFieldHashMap.put("birthPlace", birthPlaceTextField);
+        textFieldHashMap.put("nativePlace", nativePlaceTextField);
+        textFieldHashMap.put("occupation", occupationTextField);
+        textFieldHashMap.put("permanentAddress", permanentAddressTextField);
+        textFieldHashMap.put("currentAddress", currentAddressTextField);
+
+        textFieldHashMap.forEach((key, value) -> {
+            value.setDisable(true);
+
+            Field field = null;
+            try {
+                field = population.getClass().getDeclaredField(key);
+            } catch (NoSuchFieldException e) {
+                throw new RuntimeException(e);
+            }
+            field.setAccessible(true);
+
+            try {
+                if (field.get(population) != null) {
+                    value.setText(field.get(population).toString());
+                } else {
+                    value.setText("");
                 }
-                return new SimpleStringProperty(param.getValue().getHousehold().getHouseholdId().toString());
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
         });
 
-
-        ArrayList<TableColumn<Population, ? extends Object>> columns = new ArrayList<>();
-        columns.add(idColumn);
-        columns.add(nameColumn);
-        columns.add(birthColumn);
-        columns.add(birthPlaceColumn);
-        columns.add(citizenIdColumn);
-        columns.add(currentAddressColumn);
-        columns.add(ethnicityColumn);
-        columns.add(genderColumn);
-        columns.add(nationalityColumn);
-        columns.add(nativePlaceColumn);
-        columns.add(occupationColumn);
-        columns.add(passportColumn);
-        columns.add(permanentAddressColumn);
-        columns.add(phoneColumn);
-        columns.add(relationshipToHeadColumn);
-        columns.add(householdIdColumn);
-
-        ArrayList<TableColumn<Population, ? extends Object>> centerColumns = new ArrayList<>();
-        centerColumns.add(idColumn);
-        centerColumns.add(birthColumn);
-        centerColumns.add(genderColumn);
-        centerColumns.add(householdIdColumn);
-
-        for (TableColumn column : columns) {
-            column.setReorderable(false);
-        }
-
-        for (TableColumn tableColumn : centerColumns) {
-            tableColumn.setStyle("-fx-alignment: CENTER;");
-        }
-
-        tbPopulation.getColumns().addAll(columns);
-        tbPopulation.setItems(items);
     }
 }

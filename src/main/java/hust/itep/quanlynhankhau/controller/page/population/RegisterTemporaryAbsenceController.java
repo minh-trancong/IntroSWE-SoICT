@@ -1,8 +1,8 @@
 package hust.itep.quanlynhankhau.controller.page.population;
 
-import hust.itep.quanlynhankhau.controller.component.DatePickerHelper;
+import hust.itep.quanlynhankhau.controller.component.modifier.DatePickerHelper;
 import hust.itep.quanlynhankhau.controller.component.Form;
-import hust.itep.quanlynhankhau.controller.component.ValidationHelper;
+import hust.itep.quanlynhankhau.controller.component.modifier.ValidationHelper;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.model.TemporaryAbsence;

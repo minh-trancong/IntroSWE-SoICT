@@ -1,23 +1,22 @@
 package hust.itep.quanlynhankhau.controller.page.population;
 
-import hust.itep.quanlynhankhau.context.Context;
-import hust.itep.quanlynhankhau.controller.component.ConfirmBox;
+import hust.itep.quanlynhankhau.controller.component.popup.ConfirmBox;
+import hust.itep.quanlynhankhau.controller.component.factory.StageFactory;
+import hust.itep.quanlynhankhau.controller.component.modifier.TableViewHelper;
+import hust.itep.quanlynhankhau.controller.component.popup.InformativeBox;
+import hust.itep.quanlynhankhau.controller.page.population.popup.AddPopulationController;
+import hust.itep.quanlynhankhau.controller.page.population.popup.UpdatePopulationController;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class PopulationController {
     private static final String KEY = "/fxml/page/population/population.fxml";
@@ -56,45 +55,50 @@ public class PopulationController {
     private void initializeButton() {
 
         addPopulationButton.setOnAction(e -> {
-            Stage stage = new Stage();
-            stage.setTitle(addPopulationButton.getText());
-            stage.setResizable(false);
-            stage.getIcons().add(Context.ICON);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            PopupManager.setPopup(AddPopulationController.getKey(), new AddPopulationController(), stage);
+            PopupManager.setPopup(AddPopulationController.getKey(),
+                    new AddPopulationController(),
+                    StageFactory.buildStage(addPopulationButton.getText()));
             // Refresh page to do
         });
 
+
+        // Only delete if list contains no house hold head
         deletePopulationButton.setOnAction(e -> {
-            Population selectedPopulation = populationTableView.getSelectionModel().getSelectedItem();
-            if (selectedPopulation == null) {
+            ObservableList<Population> populationObservableList = populationTableView.getSelectionModel().getSelectedItems();
+
+            if (populationObservableList.isEmpty()) {
                 return;
             }
 
             boolean confirmation = ConfirmBox.display("Xóa nhân khẩu", "Bạn có chắc không ?");
 
             if (confirmation) {
+                for (Population population : populationObservableList) {
+                    if (population.getRelationshipToHead() != null && population.getRelationshipToHead().equals("Là chủ hộ")) {
+
+                        InformativeBox.display("Thất bại", "Không thể xóa chủ hộ");
+                        return;
+                    }
+                }
+
                 PopulationDao populationDao = new PopulationDao();
-                populationDao.delete(selectedPopulation);
+
+                populationObservableList.forEach(population -> populationDao.delete(population));
+                InformativeBox.display("Thành công", "Xóa nhân khẩu thành công");
                 PageManager.refreshCurrentPage();
             }
         });
 
         updatePopulationButton.setOnAction(e -> {
-            Population selectedPopulation = populationTableView.getSelectionModel().getSelectedItem();
+            ObservableList<Population> populationObservableList = populationTableView.getSelectionModel().getSelectedItems();
 
-            if (selectedPopulation == null) {
+            if (populationObservableList.size() > 1 || populationObservableList.size() == 0) {
                 return;
             }
 
-            Stage stage = new Stage();
-            stage.setTitle(updatePopulationButton.getText());
-            stage.setResizable(false);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.getIcons().add(Context.ICON);
-
-            PopupManager.setPopup(AddPopulationController.getKey(), new UpdatePopulationController(selectedPopulation),
-                    stage);
+            PopupManager.setPopup(UpdatePopulationController.getKey(),
+                    new UpdatePopulationController(populationObservableList.get(0)),
+                    StageFactory.buildStage(updatePopulationButton.getText()));
         });
     }
 
@@ -125,60 +129,6 @@ public class PopulationController {
 
     private void initializeTableView() {
         populations = new FilteredList<>(FXCollections.observableList(new PopulationDao().getAll(Population.class)));
-
-        TableColumn<Population, Long> idColumn = new TableColumn<>("ID");
-        TableColumn<Population, String> nameColumn = new TableColumn<>("Tên");
-        TableColumn<Population, String> genderColumn = new TableColumn<>("Giới tính");
-        TableColumn<Population, String> birthdateColumn = new TableColumn<>("Ngày sinh");
-        TableColumn<Population, String> citizenIdColumn = new TableColumn<>("CCCD");
-        TableColumn<Population, String> addressColumn = new TableColumn<>("Nơi ở hiện tại");
-        TableColumn<Population, String> permanentAddressColumn = new TableColumn<>("Nơi thường chú");
-
-        idColumn.setCellValueFactory(new PropertyValueFactory<Population, Long>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Population, String>("name"));
-        genderColumn.setCellValueFactory(new PropertyValueFactory<Population, String>("gender"));
-        birthdateColumn.setCellValueFactory(e -> {
-            if (e.getValue() != null) {
-                if (e.getValue().getBirthdate() != null) {
-                    return new SimpleStringProperty(e.getValue().getBirthdate().toString());
-                }
-            }
-            return new SimpleStringProperty("");
-        });
-        citizenIdColumn.setCellValueFactory(new PropertyValueFactory("citizenId"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<>("currentAddress"));
-        permanentAddressColumn.setCellValueFactory(new PropertyValueFactory<>("permanentAddress"));
-
-        ArrayList<TableColumn<Population, ? extends Object>> columns = new ArrayList<>();
-
-        columns.add(idColumn);
-        columns.add(nameColumn);
-        columns.add(genderColumn);
-        columns.add(birthdateColumn);
-        columns.add(citizenIdColumn);
-        columns.add(addressColumn);
-        columns.add(permanentAddressColumn);
-
-        populationTableView.getColumns().addAll(columns);
-        populationTableView.setItems(populations);
-
-        int count = populationTableView.getColumns().size();
-
-        populationTableView.getColumns().forEach(column -> {
-            column.prefWidthProperty().bind(populationTableView.prefWidthProperty().divide(count));
-            column.setEditable(false);
-            column.setReorderable(false);
-        });
-
-        populationTableView.setRowFactory(value -> {
-            TableRow<Population> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    Population rowData = row.getItem();
-                    System.out.println(rowData.getPopulationAddressModificationsList().size());
-                }
-            });
-            return row;
-        });
+        TableViewHelper.initializePopulationTableView(populationTableView, populations);
     }
 }

@@ -21,7 +21,7 @@
          <bottom>
             <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
-                  <MFXButton fx:id="submitButton" stylesheets="@../../../css/component/confirmation-button.css" text="Gửi thông tin">
+                  <MFXButton fx:id="submitButton" stylesheets="@../../../../css/component/confirmation-button.css" text="Gửi thông tin">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></MFXButton>
@@ -32,11 +32,11 @@
             </HBox>
          </bottom>
          <stylesheets>
-            <URL value="@../../../css/base.css" />
-            <URL value="@../../../css/page/population/add-population.css" />
-            <URL value="@../../../css/component/text-field.css" />
-            <URL value="@../../../css/component/date-picker.css" />
-            <URL value="@../../../css/component/combo-box.css" />
+            <URL value="@../../../../css/base.css" />
+            <URL value="@../../../../css/page/population/add-population.css" />
+            <URL value="@../../../../css/component/text-field.css" />
+            <URL value="@../../../../css/component/date-picker.css" />
+            <URL value="@../../../../css/component/combo-box.css" />
          </stylesheets>
          <center>
             <GridPane alignment="CENTER" hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="20.0" BorderPane.alignment="CENTER">
@@ -111,7 +111,7 @@
       </BorderPane>
    </content>
    <stylesheets>
-      <URL value="@../../../css/base.css" />
-      <URL value="@../../../css/page/household/add-household.css" />
+      <URL value="@../../../../css/base.css" />
+      <URL value="@../../../../css/page/household/add-household.css" />
    </stylesheets>
 </MFXScrollPane>
