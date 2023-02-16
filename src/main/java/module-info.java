@@ -32,4 +32,6 @@ module com.quanlynhankhau.hust.quanlynhankhau {
     opens hust.itep.quanlynhankhau.controller.page.household.popup to javafx.fxml;
     exports hust.itep.quanlynhankhau.model.population;
     opens hust.itep.quanlynhankhau.model.population to org.hibernate.orm.core;
+    exports hust.itep.quanlynhankhau.model.household;
+    opens hust.itep.quanlynhankhau.model.household to org.hibernate.orm.core;
 }

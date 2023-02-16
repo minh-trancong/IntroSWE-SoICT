@@ -1,5 +1,6 @@
-package hust.itep.quanlynhankhau.model;
+package hust.itep.quanlynhankhau.model.household;
 
+import hust.itep.quanlynhankhau.model.Account;
 import hust.itep.quanlynhankhau.model.population.Population;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;

@@ -4,7 +4,7 @@ import hust.itep.quanlynhankhau.controller.component.modifier.TableViewHelper;
 import hust.itep.quanlynhankhau.controller.component.popup.InformativeBox;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
-import hust.itep.quanlynhankhau.model.Household;
+import hust.itep.quanlynhankhau.model.household.Household;
 import hust.itep.quanlynhankhau.model.population.Population;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
@@ -12,13 +12,10 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Filter;
 
 public class SplitHouseholdController {
     private static String KEY = "/fxml/page/household/popup/split-household.fxml";
@@ -98,8 +95,8 @@ public class SplitHouseholdController {
 
            List<Population> populations = newPopulationTable.getSelectionModel().getSelectedItems();
 
-           newPopulations.removeAll(populations);
            oldPopulations.addAll(populations);
+           newPopulations.removeAll(populations);
         });
 
         setHeadButton.setOnAction(e -> {
@@ -162,6 +159,7 @@ public class SplitHouseholdController {
             });
 
             newHead.setHousehold(newHousehold);
+            newHead.setRelationshipToHead("Là chủ hộ");
             populationDao.update(newHead);
 
             PopupManager.closeCurrentStage();

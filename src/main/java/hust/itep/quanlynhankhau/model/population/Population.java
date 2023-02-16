@@ -1,6 +1,6 @@
 package hust.itep.quanlynhankhau.model.population;
 
-import hust.itep.quanlynhankhau.model.Household;
+import hust.itep.quanlynhankhau.model.household.Household;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 

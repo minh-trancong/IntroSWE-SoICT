@@ -5,21 +5,18 @@ import hust.itep.quanlynhankhau.controller.component.factory.StageFactory;
 import hust.itep.quanlynhankhau.controller.component.modifier.TableViewHelper;
 import hust.itep.quanlynhankhau.controller.page.household.popup.AddHouseholdController;
 import hust.itep.quanlynhankhau.controller.page.household.popup.SplitHouseholdController;
+import hust.itep.quanlynhankhau.controller.page.household.popup.UpdateHouseholdController;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
-import hust.itep.quanlynhankhau.model.Household;
+import hust.itep.quanlynhankhau.model.household.Household;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class HouseholdController {
     private static final String KEY = "/fxml/page/household/household.fxml";
@@ -47,7 +44,7 @@ public class HouseholdController {
     @FXML
     MFXButton splitHouseholdButton;
     @FXML
-    MFXButton moveHouseholdButton;
+    MFXButton updateHouseholdButton;
 
     @FXML
     ToggleGroup searchByToggleGroup;
@@ -81,6 +78,17 @@ public class HouseholdController {
             PopupManager.setPopup(SplitHouseholdController.getKey(),
                     new SplitHouseholdController(householdTableView.getSelectionModel().getSelectedItem()),
                     StageFactory.buildStage(splitHouseholdButton.getText()));
+        });
+
+        updateHouseholdButton.setOnAction(e -> {
+            int size = householdTableView.getSelectionModel().getSelectedItems().size();
+            if (size != 1) {
+                return;
+            }
+
+            PopupManager.setPopup(UpdateHouseholdController.getKey(),
+                    new UpdateHouseholdController(householdTableView.getSelectionModel().getSelectedItem()),
+                    StageFactory.buildStage(updateHouseholdButton.getText()));
         });
     }
 

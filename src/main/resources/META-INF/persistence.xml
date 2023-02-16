@@ -15,7 +15,7 @@
         </description>
 
         <class>hust.itep.quanlynhankhau.model.Account</class>
-        <class>hust.itep.quanlynhankhau.model.Household</class>
+        <class>hust.itep.quanlynhankhau.model.household.Household</class>
         <class>hust.itep.quanlynhankhau.model.population.Population</class>
         <class>hust.itep.quanlynhankhau.model.population.TemporaryResidence</class>
         <class>hust.itep.quanlynhankhau.model.population.TemporaryAbsence</class>

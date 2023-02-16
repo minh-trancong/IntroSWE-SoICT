@@ -1,9 +1,10 @@
 package hust.itep.quanlynhankhau.controller.component.modifier;
 
 import hust.itep.quanlynhankhau.controller.component.factory.StageFactory;
+import hust.itep.quanlynhankhau.controller.page.household.popup.ViewHouseholdController;
 import hust.itep.quanlynhankhau.controller.page.population.ViewPopulationController;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
-import hust.itep.quanlynhankhau.model.Household;
+import hust.itep.quanlynhankhau.model.household.Household;
 import hust.itep.quanlynhankhau.model.population.Population;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
@@ -117,6 +118,20 @@ public class TableViewHelper {
         columns.add(headIdColumn);
         columns.add(addressColumn);
         columns.add(areaCodeColumn);
+
+        householdTableView.setRowFactory(e -> {
+            TableRow<Household> row = new TableRow<>();
+
+            row.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Household household = row.getItem();
+                    PopupManager.setPopup(ViewHouseholdController.getKey(), new ViewHouseholdController(household),
+                            StageFactory.buildStage("Thông tin hộ khẩu"));
+                }
+            });
+            return row;
+        });
+
 
         householdTableView.getColumns().addAll(columns);
         householdTableView.setItems(households);

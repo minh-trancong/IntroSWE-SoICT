@@ -8,7 +8,8 @@ import hust.itep.quanlynhankhau.model.household.Household;
 import hust.itep.quanlynhankhau.model.population.Population;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
-import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,8 +18,9 @@ import javafx.scene.control.TableView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddHouseholdController {
-    private static final String KEY = "/fxml/page/household/popup/add-household.fxml";
+public class UpdateHouseholdController {
+
+    private static final String KEY = "/fxml/page/household/popup/update-household.fxml";
 
     public static String getKey() {
         return KEY;
@@ -39,7 +41,6 @@ public class AddHouseholdController {
     private TableView<Population> addPopulationTable;
     @FXML
     private MFXButton setHeadButton;
-
     @FXML
     private MFXButton clearHeadButton;
     @FXML
@@ -49,13 +50,27 @@ public class AddHouseholdController {
     @FXML
     private MFXButton removePopulationButton;
     private ObservableList<Population> items;
-    private ObservableList<Population> addedItems = FXCollections.observableArrayList();
+    private ObservableList<Population> addedItems;
     private Population headPopulation = null;
+
+    private Household household;
+
+    public UpdateHouseholdController(Household household) {
+        this.household = household;
+        headPopulation = household.getHeadOfHouseHold();
+    }
 
     @FXML
     public void initialize() {
+        initializeTextField();
         initializeTable();
         initializeButton();
+    }
+
+    public void initializeTextField() {
+        headTextField.setText(headPopulation.getName());
+        addressTextField.setText(household.getAddress());
+        areaCodeTextField.setText(household.getAreaCode());
     }
 
     public void initializeButton() {
@@ -76,6 +91,8 @@ public class AddHouseholdController {
             }
 
             List<Population> populations = addPopulationTable.getSelectionModel().getSelectedItems();
+
+            populations.forEach(population -> System.out.println(population.getName()));
 
             items.addAll(populations);
             addedItems.removeAll(populations);
@@ -109,10 +126,10 @@ public class AddHouseholdController {
         });
 
         submitButton.setOnAction(e -> {
-           if (headPopulation == null) {
-               InformativeBox.display("Thất bại", "Chủ hộ chưa được đặt");
-               return;
-           }
+            if (headPopulation == null) {
+                InformativeBox.display("Thất bại", "Chủ hộ chưa được đặt");
+                return;
+            }
 
             if (addressTextField.getText().isBlank()) {
                 InformativeBox.display("Thất bại", "Địa chỉ mới không được để trống");
@@ -124,12 +141,13 @@ public class AddHouseholdController {
                 return;
             }
 
+
             HouseholdDao householdDao = new HouseholdDao();
-            Household household = new Household();
+
             household.setAddress(addressTextField.getText());
             household.setAreaCode(areaCodeTextField.getText());
             household.setHeadOfHouseHold(headPopulation);
-            householdDao.save(household);
+            householdDao.update(household);
 
             PopulationDao populationDao = new PopulationDao();
 
@@ -153,8 +171,12 @@ public class AddHouseholdController {
 
         items = FXCollections.observableArrayList(populations);
 
+        ArrayList<Population> addedPopulations = new ArrayList<>(household.getPopulationList());
+        addedPopulations.removeIf(population -> population.getId().equals(headPopulation.getId()));
+
+        addedItems = FXCollections.observableArrayList(addedPopulations);
+
         TableViewHelper.initializeHouseholdPopulationTableView(populationTable, items);
         TableViewHelper.initializeNewHouseholdPopulationTableView(addPopulationTable, addedItems);
     }
-
 }

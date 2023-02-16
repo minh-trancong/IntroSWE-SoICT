@@ -1,6 +1,6 @@
 package hust.itep.quanlynhankhau.controller.page;
 
-import hust.itep.quanlynhankhau.model.Household;
+import hust.itep.quanlynhankhau.model.household.Household;
 import hust.itep.quanlynhankhau.model.population.Population;
 import hust.itep.quanlynhankhau.model.population.TemporaryAbsence;
 import hust.itep.quanlynhankhau.model.population.TemporaryResidence;
