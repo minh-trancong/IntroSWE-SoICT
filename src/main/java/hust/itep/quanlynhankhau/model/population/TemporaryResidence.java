@@ -1,4 +1,5 @@
-package hust.itep.quanlynhankhau.model;
+package hust.itep.quanlynhankhau.model.population;
+
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -6,24 +7,14 @@ import org.hibernate.annotations.GenericGenerator;
 import java.sql.Date;
 
 @Entity
-@Table(name = "temporary_absence")
-public class TemporaryAbsence {
+@Table(name = "temporary_residence")
+public class TemporaryResidence {
     private Long id;
     private Date fromDate;
     private Date toDate;
     private String reason;
     private Population population;
     private String paperCode;
-    private String place;
-
-    @Column(name = "place")
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
 
     @Column(name = "paper_code")
     public String getPaperCode() {

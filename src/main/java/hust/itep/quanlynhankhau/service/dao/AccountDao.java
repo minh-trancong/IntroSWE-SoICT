@@ -1,7 +1,6 @@
 package hust.itep.quanlynhankhau.service.dao;
 
 import hust.itep.quanlynhankhau.model.Account;
-import hust.itep.quanlynhankhau.model.Population;
 import hust.itep.quanlynhankhau.service.database.EntityManagerUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;

@@ -16,10 +16,10 @@
 
         <class>hust.itep.quanlynhankhau.model.Account</class>
         <class>hust.itep.quanlynhankhau.model.Household</class>
-        <class>hust.itep.quanlynhankhau.model.Population</class>
-        <class>hust.itep.quanlynhankhau.model.TemporaryResidence</class>
-        <class>hust.itep.quanlynhankhau.model.TemporaryAbsence</class>
-        <class>hust.itep.quanlynhankhau.model.DeathDeclaration</class>
+        <class>hust.itep.quanlynhankhau.model.population.Population</class>
+        <class>hust.itep.quanlynhankhau.model.population.TemporaryResidence</class>
+        <class>hust.itep.quanlynhankhau.model.population.TemporaryAbsence</class>
+        <class>hust.itep.quanlynhankhau.model.population.DeathDeclaration</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />

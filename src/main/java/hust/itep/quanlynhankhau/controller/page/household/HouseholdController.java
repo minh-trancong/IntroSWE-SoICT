@@ -1,6 +1,10 @@
 package hust.itep.quanlynhankhau.controller.page.household;
 
 import hust.itep.quanlynhankhau.context.Context;
+import hust.itep.quanlynhankhau.controller.component.factory.StageFactory;
+import hust.itep.quanlynhankhau.controller.component.modifier.TableViewHelper;
+import hust.itep.quanlynhankhau.controller.page.household.popup.AddHouseholdController;
+import hust.itep.quanlynhankhau.controller.page.household.popup.SplitHouseholdController;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.Household;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
@@ -67,6 +71,17 @@ public class HouseholdController {
 
             PopupManager.setPopup(AddHouseholdController.getKey(), new AddHouseholdController(), stage);
         });
+
+        splitHouseholdButton.setOnAction(e -> {
+            int size = householdTableView.getSelectionModel().getSelectedItems().size();
+            if (size != 1) {
+                return;
+            }
+
+            PopupManager.setPopup(SplitHouseholdController.getKey(),
+                    new SplitHouseholdController(householdTableView.getSelectionModel().getSelectedItem()),
+                    StageFactory.buildStage(splitHouseholdButton.getText()));
+        });
     }
 
     private void initializeTextField() {
@@ -95,49 +110,7 @@ public class HouseholdController {
     private void initializeTableView() {
         households = new FilteredList<>(FXCollections.observableList(new HouseholdDao().getAll(Household.class)));
 
-        TableColumn<Household, Long> idColumn = new TableColumn<>("Mã hộ khẩu");
-        TableColumn<Household, String> headNameColumn = new TableColumn<>("Tên chủ hộ");
-        TableColumn<Household, String> headIdColumn = new TableColumn<>("CCCD chủ hộ");
-        TableColumn<Household, String> addressColumn = new TableColumn<>("Địa chỉ");
-        TableColumn<Household, String> areaCodeColumn = new TableColumn<>("Mã khu vực");
-
-        idColumn.setCellValueFactory(new PropertyValueFactory<Household, Long>("householdId"));
-        headNameColumn.setCellValueFactory(e -> {
-            if (e.getValue() != null) {
-                return new SimpleStringProperty(e.getValue().getHeadOfHouseHold().getName().toString());
-            }
-            return null;
-        });
-        headIdColumn.setCellValueFactory(e -> {
-            if (e.getValue() != null) {
-                return new SimpleStringProperty(e.getValue().getHeadOfHouseHold().getCitizenId());
-            }
-            return null;
-        });
-
-        addressColumn.setCellValueFactory(new PropertyValueFactory<Household, String>("address"));
-        areaCodeColumn.setCellValueFactory(new PropertyValueFactory<Household, String>("areaCode"));
-
-        ArrayList<TableColumn<Household, ? extends Object>> columns = new ArrayList<>();
-
-        columns.add(idColumn);
-        columns.add(headNameColumn);
-        columns.add(headIdColumn);
-        columns.add(addressColumn);
-        columns.add(areaCodeColumn);
-
-        householdTableView.getColumns().addAll(columns);
-        householdTableView.setItems(households);
-
-        int count = householdTableView.getColumns().size();
-
-        householdTableView.getColumns().forEach(column -> {
-            column.prefWidthProperty().bind(householdTableView.prefWidthProperty().divide(count));
-            column.setEditable(false);
-            column.setReorderable(false);
-        });
+        TableViewHelper.initializeHouseholdTableView(householdTableView, households);
     }
-
-
 
 }

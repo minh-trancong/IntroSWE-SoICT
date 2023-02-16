@@ -1,9 +1,9 @@
 package hust.itep.quanlynhankhau.controller.page;
 
 import hust.itep.quanlynhankhau.model.Household;
-import hust.itep.quanlynhankhau.model.Population;
-import hust.itep.quanlynhankhau.model.TemporaryAbsence;
-import hust.itep.quanlynhankhau.model.TemporaryResidence;
+import hust.itep.quanlynhankhau.model.population.Population;
+import hust.itep.quanlynhankhau.model.population.TemporaryAbsence;
+import hust.itep.quanlynhankhau.model.population.TemporaryResidence;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import hust.itep.quanlynhankhau.service.dao.population.TemporaryAbsenceDao;

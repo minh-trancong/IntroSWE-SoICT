@@ -3,8 +3,9 @@ package hust.itep.quanlynhankhau.controller.page.population.popup;
 import hust.itep.quanlynhankhau.controller.component.modifier.DatePickerHelper;
 import hust.itep.quanlynhankhau.controller.component.Form;
 import hust.itep.quanlynhankhau.controller.component.modifier.ValidationHelper;
+import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
-import hust.itep.quanlynhankhau.model.Population;
+import hust.itep.quanlynhankhau.model.population.Population;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -149,5 +150,6 @@ public class UpdatePopulationController {
 
         populationDao.update(population);
         PopupManager.closeCurrentStage();
+        PageManager.refreshCurrentPage();
     }
 }

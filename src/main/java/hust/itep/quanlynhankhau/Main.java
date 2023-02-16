@@ -3,13 +3,11 @@ package hust.itep.quanlynhankhau;
 import hust.itep.quanlynhankhau.context.Context;
 import hust.itep.quanlynhankhau.controller.MainController;
 import hust.itep.quanlynhankhau.model.Account;
-import hust.itep.quanlynhankhau.model.TemporaryResidence;
 import hust.itep.quanlynhankhau.service.dao.AccountDao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;

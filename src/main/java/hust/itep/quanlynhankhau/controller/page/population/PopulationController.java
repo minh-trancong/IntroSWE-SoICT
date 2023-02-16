@@ -8,7 +8,7 @@ import hust.itep.quanlynhankhau.controller.page.population.popup.AddPopulationCo
 import hust.itep.quanlynhankhau.controller.page.population.popup.UpdatePopulationController;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
-import hust.itep.quanlynhankhau.model.Population;
+import hust.itep.quanlynhankhau.model.population.Population;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;

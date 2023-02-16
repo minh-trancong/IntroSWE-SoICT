@@ -1,4 +1,4 @@
-package hust.itep.quanlynhankhau.model;
+package hust.itep.quanlynhankhau.model.population;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;

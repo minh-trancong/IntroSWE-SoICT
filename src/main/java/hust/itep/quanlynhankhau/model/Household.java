@@ -1,9 +1,11 @@
 package hust.itep.quanlynhankhau.model;
 
+import hust.itep.quanlynhankhau.model.population.Population;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "household")
@@ -16,6 +18,17 @@ public class Household {
     private Date relocatedAt;
     private String relocationReason;
     private Account account;
+
+    private List<Population> populationList;
+
+    @OneToMany(mappedBy = "household", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<Population> getPopulationList() {
+        return populationList;
+    }
+
+    public void setPopulationList(List<Population> populationList) {
+        this.populationList = populationList;
+    }
 
     @ManyToOne
     @JoinColumn(name = "executor_id")

@@ -1,8 +1,8 @@
-package hust.itep.quanlynhankhau.controller.page.household;
+package hust.itep.quanlynhankhau.controller.page.household.popup;
 
 import hust.itep.quanlynhankhau.controller.page.LoginController;
 import hust.itep.quanlynhankhau.model.Household;
-import hust.itep.quanlynhankhau.model.Population;
+import hust.itep.quanlynhankhau.model.population.Population;
 import hust.itep.quanlynhankhau.service.dao.HouseholdDao;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.*;

@@ -1,5 +1,6 @@
-package hust.itep.quanlynhankhau.model;
+package hust.itep.quanlynhankhau.model.population;
 
+import hust.itep.quanlynhankhau.model.Household;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -39,7 +40,7 @@ public class Population {
         this.populationAddressModificationsList = populationAddressModificationsList;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "household_id", nullable = true)
     public Household getHousehold() {
         return household;

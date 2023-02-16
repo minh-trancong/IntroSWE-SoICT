@@ -1,17 +1,12 @@
 package hust.itep.quanlynhankhau.service.dao.population;
 
-import hust.itep.quanlynhankhau.model.Population;
+import hust.itep.quanlynhankhau.model.population.Population;
 import hust.itep.quanlynhankhau.service.dao.Dao;
 import hust.itep.quanlynhankhau.service.database.EntityManagerUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-
-import java.lang.reflect.Field;
 
 public class PopulationDao extends Dao<Population> {
     public Population getByCitizenId(String citizenId) {

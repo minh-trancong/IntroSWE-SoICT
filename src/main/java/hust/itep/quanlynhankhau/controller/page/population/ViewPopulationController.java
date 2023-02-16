@@ -1,34 +1,21 @@
 package hust.itep.quanlynhankhau.controller.page.population;
 
-import hust.itep.quanlynhankhau.model.Household;
-import hust.itep.quanlynhankhau.model.Population;
-import hust.itep.quanlynhankhau.model.PopulationAddressModification;
-import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
+import hust.itep.quanlynhankhau.model.population.Population;
+import hust.itep.quanlynhankhau.model.population.PopulationAddressModification;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import jakarta.persistence.Table;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableStringValue;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 import java.lang.reflect.Field;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 import java.util.HashMap;
-import java.util.PropertyResourceBundle;
 
 public class ViewPopulationController {
     private static final String KEY = "/fxml/page/population/popup/view-population.fxml";
