@@ -25,9 +25,6 @@ public class HeaderController {
     private Menu populationMenu;
 
     @FXML
-    private MenuItem addPopulationMenuItem;
-
-    @FXML
     private MenuItem registerTemporaryResidenceMenuItem;
 
     @FXML
@@ -38,13 +35,6 @@ public class HeaderController {
 
     @FXML
     private Menu covidMenu;
-
-    @FXML
-    private MenuItem declareMedicalMenuItem;
-
-    @FXML
-    private MenuItem deathDeclarationMenuItem;
-
 
     @FXML
     private Button logoutButton;
