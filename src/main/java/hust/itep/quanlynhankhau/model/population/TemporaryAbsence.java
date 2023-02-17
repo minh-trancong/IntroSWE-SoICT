@@ -25,15 +25,6 @@ public class TemporaryAbsence {
         this.place = place;
     }
 
-    @Column(name = "paper_code")
-    public String getPaperCode() {
-        return paperCode;
-    }
-
-    public void setPaperCode(String paperCode) {
-        this.paperCode = paperCode;
-    }
-
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "population_id")
     public Population getPopulation() {
@@ -82,4 +73,6 @@ public class TemporaryAbsence {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+
 }

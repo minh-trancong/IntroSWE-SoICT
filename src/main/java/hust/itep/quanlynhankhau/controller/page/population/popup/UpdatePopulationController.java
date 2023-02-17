@@ -1,8 +1,7 @@
 package hust.itep.quanlynhankhau.controller.page.population.popup;
 
 import hust.itep.quanlynhankhau.controller.component.modifier.DatePickerHelper;
-import hust.itep.quanlynhankhau.controller.component.Form;
-import hust.itep.quanlynhankhau.controller.component.modifier.ValidationHelper;
+import hust.itep.quanlynhankhau.controller.component.popup.InformativeBox;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.population.Population;
@@ -72,7 +71,7 @@ public class UpdatePopulationController {
         initializeComboBox();
         initializeInfo();
         initializeTextField();
-        initializeForm();
+        initializeButton();
     }
 
 
@@ -91,7 +90,6 @@ public class UpdatePopulationController {
         occupationTextField.setText(population.getOccupation());
         currentAddressTextField.setText(population.getCurrentAddress());
         permanentAddressTextField.setText(population.getPermanentAddress());
-
     }
 
     public void initializeDatePicker() {
@@ -113,43 +111,36 @@ public class UpdatePopulationController {
         nonEmptyTextFields.add(occupationTextField);
         nonEmptyTextFields.add(permanentAddressTextField);
         nonEmptyTextFields.add(currentAddressTextField);
-
-        for (MFXTextField textField : nonEmptyTextFields) {
-            textField.getValidator().constraint(
-                    ValidationHelper.constraintBuild(textField, "Thông tin này là bắt buộc",
-                            () -> !textField.getText().isBlank())
-            );
-            ValidationHelper.setValidatorListener(textField);
-        }
     }
 
-    public void initializeForm() {
-        Form form = new Form(submitButton);
-        form.setOnSubmit(e -> submit());
+    public void initializeButton() {
+        submitButton.setOnAction(e -> {
+            for (MFXTextField textField : nonEmptyTextFields) {
+                if (textField.getText().isBlank()) {
+                    InformativeBox.display("Thất bại", textField.getFloatingText() + " không được để trống");
+                    return;
+                }
+            }
 
-        form.getTextFields().addAll(nonEmptyTextFields);
-    }
+            population.setName(nameTextField.getText());
+            population.setGender(genderComboBox.getText());
+            population.setPhone(phoneTextField.getText());
+            population.setBirthdate(Date.valueOf(birthdateDatePicker.getValue()));
+            population.setEthnicity(ethnicityTextField.getText());
+            population.setPassport(passportTextField.getText());
+            population.setOccupation(occupationTextField.getText());
+            population.setNationality(nationalityTextField.getText());
+            population.setCitizenId(citizenIdTextField.getText());
+            population.setCurrentAddress(currentAddressTextField.getText());
+            population.setNativePlace(nativePlaceTextField.getText());
+            population.setBirthPlace(birthPlaceTextField.getText());
+            population.setPermanentAddress(permanentAddressTextField.getText());
 
-    private void submit() {
+            PopulationDao populationDao = new PopulationDao();
 
-        population.setName(nameTextField.getText());
-        population.setGender(genderComboBox.getText());
-        population.setPhone(phoneTextField.getText());
-        population.setBirthdate(Date.valueOf(birthdateDatePicker.getValue()));
-        population.setEthnicity(ethnicityTextField.getText());
-        population.setPassport(passportTextField.getText());
-        population.setOccupation(occupationTextField.getText());
-        population.setNationality(nationalityTextField.getText());
-        population.setCitizenId(citizenIdTextField.getText());
-        population.setCurrentAddress(currentAddressTextField.getText());
-        population.setNativePlace(nativePlaceTextField.getText());
-        population.setBirthPlace(birthPlaceTextField.getText());
-        population.setPermanentAddress(permanentAddressTextField.getText());
-
-        PopulationDao populationDao = new PopulationDao();
-
-        populationDao.update(population);
-        PopupManager.closeCurrentStage();
-        PageManager.refreshCurrentPage();
+            populationDao.update(population);
+            PopupManager.closeCurrentStage();
+            PageManager.refreshCurrentPage();
+        });
     }
 }

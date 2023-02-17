@@ -61,23 +61,18 @@
                                 <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
                                 <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
                                 <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
-                                <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
                         <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
                             </rowConstraints>
                             <children>
                                 <VBox spacing="5.0" GridPane.columnSpan="2">
                                     <children>
-                                        <MFXTextField fx:id="citizenIdTextField" floatMode="BORDER" floatingText="Chứng minh nhân dân" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" />
+                                        <MFXTextField fx:id="nameTextField" allowEdit="false" floatMode="BORDER" floatingText="Họ và tên" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" />
                                     </children>
                                 </VBox>
                                 <VBox GridPane.rowIndex="3">
                                     <children>
                                         <MFXDatePicker fx:id="fromDateTextField" floatMode="BORDER" floatingText="Từ ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                                    </children>
-                                </VBox>
-                                <VBox GridPane.columnSpan="2" GridPane.rowIndex="1">
-                                    <children>
-                                        <MFXTextField fx:id="paperIdTextField" floatMode="BORDER" floatingText="Mã giấy tạm vắng" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                                     </children>
                                 </VBox>
                                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -102,6 +97,7 @@
                               <MFXTextField fx:id="locationTextField" floatMode="BORDER" floatingText="Nơi tạm trú" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                            </children>
                         </VBox>
+                        <MFXTextField fx:id="citizenIdTextField" allowEdit="false" floatMode="BORDER" floatingText="Chứng minh nhân dân" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                             </children>
                         </GridPane>
                     </children>
@@ -112,4 +108,7 @@
             </padding>
         </BorderPane>
     </content>
+   <padding>
+      <Insets left="40.0" right="40.0" />
+   </padding>
 </MFXScrollPane>

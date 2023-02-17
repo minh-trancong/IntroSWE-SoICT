@@ -15,7 +15,7 @@ public class UpdateAddressListener {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Population old = entityManager.find(Population.class, population.getId());
 
-        if (old.getCurrentAddress() != population.getCurrentAddress()) {
+        if (!old.getCurrentAddress().equals(population.getCurrentAddress())) {
             PopulationAddressModification populationAddressModification = new PopulationAddressModification();
             populationAddressModification.setNewAddress(population.getCurrentAddress());
             populationAddressModification.setOldAddress(old.getCurrentAddress());

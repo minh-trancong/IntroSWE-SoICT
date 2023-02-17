@@ -156,6 +156,11 @@ public class UpdateHouseholdController {
                 populationDao.update(population);
             });
 
+            items.forEach(population -> {
+                population.setHousehold(null);
+                populationDao.update(population);
+            });
+
             headPopulation.setHousehold(household);
             headPopulation.setRelationshipToHead("Là chủ hộ");
             populationDao.update(headPopulation);

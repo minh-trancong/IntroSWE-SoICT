@@ -52,6 +52,7 @@
                         <MenuItem fx:id="registerTemporaryResidenceMenuItem" mnemonicParsing="false" text="Đăng Kí Tạm Trú" />
                         <MenuItem fx:id="registerTemporaryAbsenceMenuItem" mnemonicParsing="false" text="Đăng kí Tạm Vắng" />
                         <MenuItem fx:id="deathDeclarationMenuItem" mnemonicParsing="false" text="Khai báo tử vong" />
+                        <MenuItem fx:id="populationStatisticsMenuItem" mnemonicParsing="false" text=" Thống kê" />
                     </items>
                   </Menu>
                   <Menu fx:id="householdMenu" mnemonicParsing="false" text="Hộ Khẩu">

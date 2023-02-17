@@ -43,9 +43,6 @@ public class HeaderController {
     private MenuItem declareMedicalMenuItem;
 
     @FXML
-    private MenuItem registerTemporaryAbsenceMenuItem;
-
-    @FXML
     private MenuItem deathDeclarationMenuItem;
 
 
@@ -57,6 +54,9 @@ public class HeaderController {
 
     @FXML
     private MenuItem householdMenuItem;
+
+    @FXML
+    private MenuItem populationStatisticsMenuItem;
 
     public HeaderController() {
 
@@ -76,20 +76,14 @@ public class HeaderController {
     }
 
     private void initializePopulationMenu() {
-        registerTemporaryResidenceMenuItem.setOnAction(e -> {
-            PageManager.setPage(RegisterTemporaryResidenceController.getKey(), new RegisterTemporaryResidenceController());
-        });
-
-        registerTemporaryAbsenceMenuItem.setOnAction(e -> {
-            PageManager.setPage(RegisterTemporaryAbsenceController.getKey(), new RegisterTemporaryAbsenceController());
-        });
-
-        deathDeclarationMenuItem.setOnAction(e -> {
-            PageManager.setPage(DeathDeclarationController.getKey(), new DeathDeclarationController());
-        });
 
         populationMenuItem.setOnAction(e -> {
             PageManager.setPage(PopulationController.getKey(), new PopulationController());
+        });
+
+
+        populationStatisticsMenuItem.setOnAction(e -> {
+            PageManager.setPage(PopulationStatisticsController.getKey(), new PopulationStatisticsController());
         });
     }
 

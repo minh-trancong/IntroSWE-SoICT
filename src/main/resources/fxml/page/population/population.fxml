@@ -53,8 +53,10 @@
                   <HBox spacing="20.0">
                      <children>
                         <MFXButton fx:id="addPopulationButton" text="Thêm nhân khẩu" />
-                        <MFXButton fx:id="deletePopulationButton" text="Xóa nhân khẩu" />
-                        <MFXButton fx:id="updatePopulationButton" text="Chỉnh sửa thông tin nhân khẩu" />
+                        <MFXButton fx:id="updatePopulationButton" text="Thay đổi thông tin" />
+                        <MFXButton fx:id="absenceButton" text="Khai báo tạm vắng" />
+                        <MFXButton fx:id="residenceButton" text="Khai báo tạm trú" />
+                        <MFXButton fx:id="deathButton" text="Khai tử" />
                      </children>
                   </HBox>
                </children>
