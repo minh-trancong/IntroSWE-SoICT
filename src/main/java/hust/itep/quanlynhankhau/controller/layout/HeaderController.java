@@ -46,6 +46,9 @@ public class HeaderController {
     private MenuItem householdMenuItem;
 
     @FXML
+    private MenuItem declareMedicalMenuItem;
+
+    @FXML
     private MenuItem populationStatisticsMenuItem;
 
     public HeaderController() {
@@ -102,8 +105,4 @@ public class HeaderController {
         initializeHouseholdMenu();
         initializeCovidMenu();
     }
-
-
-
-
 }
