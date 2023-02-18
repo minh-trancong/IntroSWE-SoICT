@@ -1,5 +1,6 @@
 package hust.itep.quanlynhankhau.controller.layout;
 
+import hust.itep.quanlynhankhau.controller.page.covid.CovidStatisticsController;
 import hust.itep.quanlynhankhau.controller.page.covid.CovidTestController;
 import hust.itep.quanlynhankhau.controller.page.covid.DeclareMovementController;
 import hust.itep.quanlynhankhau.controller.page.covid.QuarantineInformationController;
@@ -113,7 +114,7 @@ public class HeaderController {
         });
 
         covidStatisticsMenuItem.setOnAction(e -> {
-
+            PageManager.setPage(CovidStatisticsController.getKey(), new CovidStatisticsController());
         });
     }
 

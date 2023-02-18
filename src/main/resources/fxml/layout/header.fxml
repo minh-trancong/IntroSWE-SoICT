@@ -56,7 +56,7 @@
                   </Menu>
                 <Menu fx:id="covidMenu" mnemonicParsing="false" text="Thông Tin Phòng Tránh Covid">
                   <items>
-                    <MenuItem fx:id="declareMovementMenuItem" mnemonicParsing="false" text="Khai Báo Dịch Tễ" />
+                        <MenuItem fx:id="declareMovementMenuItem" mnemonicParsing="false" text="Khai Báo Dịch Tễ" />
                         <MenuItem fx:id="declareCovidTestMenuItem" mnemonicParsing="false" text="Khai Báo Test Covid" />
                         <MenuItem fx:id="declareQuarantineMenuItem" mnemonicParsing="false" text="Khai Báo Cách Ly" />
                         <MenuItem fx:id="covidStatisticsMenuItem" mnemonicParsing="false" text="Thống kê" />
