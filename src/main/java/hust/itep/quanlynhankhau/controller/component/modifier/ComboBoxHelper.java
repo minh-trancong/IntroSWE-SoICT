@@ -11,12 +11,17 @@ public class ComboBoxHelper {
     private final static ObservableList<String> GENDERS = FXCollections
             .observableList(Arrays.asList("Nam", "Nữ", "Khác"));
 
+    private final static ObservableList<String> SIMPLE = FXCollections
+            .observableList(Arrays.asList("Có", "Không"));
+
     private final static ObservableList<String> GENDERS_CHOICE = FXCollections
             .observableList(Arrays.asList("Tất cả", "Nam", "Nữ"));
 
     private final static ObservableList<String> STATUS_CHOICE = FXCollections
             .observableList(Arrays.asList("Tất cả", "Tạm vắng", "Tạm trú"));
 
+
+    public static void simple(MFXComboBox comboBox) {comboBox.setItems(SIMPLE);}
     public static void gender(MFXComboBox comboBox) {
         comboBox.setItems(GENDERS);
     }

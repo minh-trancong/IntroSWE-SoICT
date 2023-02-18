@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class TableViewHelper {
 
-    private static <T> void initializeCommonTableView(TableView<T> tableView) {
+    public static <T> void initializeCommonTableView(TableView<T> tableView) {
         int count = tableView.getColumns().size();
 
         tableView.getColumns().forEach(column -> {

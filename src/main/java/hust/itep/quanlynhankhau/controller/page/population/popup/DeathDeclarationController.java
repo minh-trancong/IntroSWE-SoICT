@@ -16,7 +16,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class DeathDeclarationController {
-    private static final String KEY = "/fxml/page/population/death-declaration.fxml";
+    private static final String KEY = "/fxml/page/population/popup/death-declaration.fxml";
     public static String getKey() {
         return KEY;
     }

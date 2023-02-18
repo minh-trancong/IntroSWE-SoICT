@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<MFXScrollPane fx:id="root" fitToHeight="true" fitToWidth="true" stylesheets="@../../../css/base.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<MFXScrollPane fx:id="root" fitToHeight="true" fitToWidth="true" stylesheets="@../../../../css/base.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <BorderPane>
             <top>
-                <Label id="id" text="Khai báo tử vong" BorderPane.alignment="CENTER">
+                <Label id="id" text="Đăng kí tạm vắng" BorderPane.alignment="CENTER">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>
@@ -37,16 +37,16 @@
                         <Insets bottom="20.0" top="20.0" />
                     </padding>
                     <children>
-                        <MFXButton fx:id="submitButton" stylesheets="@../../../css/component/confirmation-button.css" text="Gửi thông tin" />
+                        <MFXButton fx:id="submitButton" stylesheets="@../../../../css/component/confirmation-button.css" text="Gửi thông tin" />
                     </children>
                 </HBox>
             </bottom>
             <stylesheets>
-                <URL value="@../../../css/base.css" />
-                <URL value="@../../../css/page/population/add-population.css" />
-                <URL value="@../../../css/component/text-field.css" />
-                <URL value="@../../../css/component/date-picker.css" />
-                <URL value="@../../../css/component/combo-box.css" />
+                <URL value="@../../../../css/base.css" />
+                <URL value="@../../../../css/page/population/add-population.css" />
+                <URL value="@../../../../css/component/text-field.css" />
+                <URL value="@../../../../css/component/date-picker.css" />
+                <URL value="@../../../../css/component/combo-box.css" />
             </stylesheets>
             <center>
                 <VBox alignment="CENTER" BorderPane.alignment="CENTER">
@@ -61,25 +61,26 @@
                                 <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
                                 <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
                                 <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
-                                <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER" />
                             </rowConstraints>
                             <children>
                                 <VBox spacing="5.0" GridPane.columnSpan="2">
                                     <children>
-                                        <MFXTextField fx:id="nameTextField" floatMode="BORDER" floatingText="Họ và tên người chết" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" />
+                                        <MFXTextField fx:id="nameTextField" allowEdit="false" floatMode="BORDER" floatingText="Họ và tên" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" />
                                     </children>
                                 </VBox>
-                                <VBox GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                <VBox GridPane.rowIndex="3">
                                     <children>
-                                        <MFXTextField fx:id="citizenIdTextField" floatMode="BORDER" floatingText="Chứng minh thư người chết" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                                        <MFXDatePicker fx:id="fromDateTextField" floatMode="BORDER" floatingText="Từ ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                                     </children>
                                 </VBox>
-                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                <VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
                                     <children>
-                                        <MFXDatePicker fx:id="deathDatePicker" floatMode="BORDER" floatingText="Ngày chết" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                                        <MFXDatePicker fx:id="toDateTextField" floatMode="BORDER" floatingText="Đến ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                                     </children>
                                 </VBox>
-                                <VBox GridPane.columnSpan="2" GridPane.rowIndex="3">
+                                <VBox GridPane.columnSpan="2" GridPane.rowIndex="4">
                                     <GridPane.margin>
                                         <Insets />
                                     </GridPane.margin>
@@ -91,6 +92,12 @@
                                         </MFXTextField>
                                     </children>
                                 </VBox>
+                        <VBox GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <children>
+                              <MFXTextField fx:id="locationTextField" floatMode="BORDER" floatingText="Nơi tạm trú" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
+                        <MFXTextField fx:id="citizenIdTextField" allowEdit="false" floatMode="BORDER" floatingText="Chứng minh nhân dân" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="256.0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                             </children>
                         </GridPane>
                     </children>
@@ -102,6 +109,6 @@
         </BorderPane>
     </content>
    <padding>
-      <Insets left="80.0" right="80.0" />
+      <Insets left="40.0" right="40.0" />
    </padding>
 </MFXScrollPane>

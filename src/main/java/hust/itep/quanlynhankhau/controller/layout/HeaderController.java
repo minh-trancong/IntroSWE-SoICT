@@ -1,5 +1,6 @@
 package hust.itep.quanlynhankhau.controller.layout;
 
+import hust.itep.quanlynhankhau.controller.page.covid.DeclareMovementController;
 import hust.itep.quanlynhankhau.controller.page.household.HouseholdController;
 import hust.itep.quanlynhankhau.controller.page.population.*;
 import hust.itep.quanlynhankhau.controller.page.HomeController;
@@ -46,10 +47,19 @@ public class HeaderController {
     private MenuItem householdMenuItem;
 
     @FXML
-    private MenuItem declareMedicalMenuItem;
+    private MenuItem populationStatisticsMenuItem;
+
+    // Covid stuff
+    @FXML
+    private MenuItem declareMovementMenuItem;
 
     @FXML
-    private MenuItem populationStatisticsMenuItem;
+    private MenuItem declareCovidTestMenuItem;
+    @FXML
+    private MenuItem declareQuarantineMenuItem;
+    @FXML
+    private MenuItem covidStatisticsMenuItem;
+
 
     public HeaderController() {
 
@@ -88,8 +98,20 @@ public class HeaderController {
     }
 
     private void initializeCovidMenu() {
-        declareMedicalMenuItem.setOnAction(e -> {
-            System.out.println("Khai báo y tế");
+        declareMovementMenuItem.setOnAction(e -> {
+            PageManager.setPage(DeclareMovementController.getKey(), new DeclareMovementController());
+        });
+
+        declareCovidTestMenuItem.setOnAction(e -> {
+
+        });
+
+        declareQuarantineMenuItem.setOnAction(e -> {
+
+        });
+
+        covidStatisticsMenuItem.setOnAction(e -> {
+
         });
     }
 

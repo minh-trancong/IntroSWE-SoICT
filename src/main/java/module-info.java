@@ -25,12 +25,15 @@ module com.quanlynhankhau.hust.quanlynhankhau {
     exports hust.itep.quanlynhankhau.model;
     opens hust.itep.quanlynhankhau.controller.utility to javafx.fxml;
     opens hust.itep.quanlynhankhau.controller.page.population.popup to javafx.fxml;
+    opens hust.itep.quanlynhankhau.controller.page.covid.popup to javafx.fxml;
     opens hust.itep.quanlynhankhau.controller.component.popup to javafx.fxml;
     opens hust.itep.quanlynhankhau.controller.component.modifier to javafx.fxml;
     opens hust.itep.quanlynhankhau.controller.component.factory to javafx.fxml;
     opens hust.itep.quanlynhankhau.controller.page.household.popup to javafx.fxml;
     exports hust.itep.quanlynhankhau.model.population;
     opens hust.itep.quanlynhankhau.model.population to org.hibernate.orm.core;
+    exports hust.itep.quanlynhankhau.model.covid;
+    opens hust.itep.quanlynhankhau.model.covid to org.hibernate.orm.core;
     exports hust.itep.quanlynhankhau.model.household;
     opens hust.itep.quanlynhankhau.model.household to org.hibernate.orm.core;
 }

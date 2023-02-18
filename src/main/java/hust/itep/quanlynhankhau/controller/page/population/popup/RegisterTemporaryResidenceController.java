@@ -16,7 +16,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class RegisterTemporaryResidenceController {
-    private static final String KEY = "/fxml/page/population/register-temporary-residence.fxml";
+    private static final String KEY = "/fxml/page/population/popup/register-temporary-residence.fxml";
 
     public static String getKey() {
         return KEY;
