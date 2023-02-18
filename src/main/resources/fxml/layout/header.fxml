@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -12,11 +13,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="80.0" maxWidth="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" style="-fx-background-color: #34eb8f;" stylesheets="@../../css/layout/header.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="80.0" maxWidth="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" style="-fx-background-color: #34eb8f;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <Label id="label" fx:id="label" text="Quản Lý Nhân Khẩu" BorderPane.alignment="CENTER">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="23.0" />
          </font>
       </Label>
    </left>
@@ -41,20 +42,16 @@
          <children>
             <Label fx:id="homeLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="homeLabel" text="Trang Chủ">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
             <MenuBar fx:id="menuBar">
               <menus>
-                  <Menu fx:id="populationMenu" mnemonicParsing="false" text="Nhân Khẩu">
+                  <Menu fx:id="populationMenu" mnemonicParsing="false" text="Quản lý nhân khẩu, hộ khẩu">
                     <items>
                         <MenuItem fx:id="populationMenuItem" mnemonicParsing="false" text="Nhân khẩu" />
-                        <MenuItem fx:id="populationStatisticsMenuItem" mnemonicParsing="false" text=" Thống kê" />
-                    </items>
-                  </Menu>
-                  <Menu fx:id="householdMenu" mnemonicParsing="false" text="Hộ Khẩu">
-                    <items>
                         <MenuItem fx:id="householdMenuItem" mnemonicParsing="false" text="Hộ khẩu" />
+                        <MenuItem fx:id="populationStatisticsMenuItem" mnemonicParsing="false" text="Thống kê" />
                     </items>
                   </Menu>
                 <Menu fx:id="covidMenu" mnemonicParsing="false" text="Thông Tin Phòng Tránh Covid">
@@ -73,4 +70,9 @@
    <padding>
       <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
    </padding>
+   <stylesheets>
+      <URL value="@../../css/layout/header.css" />
+      <URL value="@../../css/base.css" />
+      <URL value="@../../css/component/menu.css" />
+   </stylesheets>
 </BorderPane>

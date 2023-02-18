@@ -1,6 +1,8 @@
 package hust.itep.quanlynhankhau.controller.layout;
 
+import hust.itep.quanlynhankhau.controller.page.covid.CovidTestController;
 import hust.itep.quanlynhankhau.controller.page.covid.DeclareMovementController;
+import hust.itep.quanlynhankhau.controller.page.covid.QuarantineInformationController;
 import hust.itep.quanlynhankhau.controller.page.household.HouseholdController;
 import hust.itep.quanlynhankhau.controller.page.population.*;
 import hust.itep.quanlynhankhau.controller.page.HomeController;
@@ -103,11 +105,11 @@ public class HeaderController {
         });
 
         declareCovidTestMenuItem.setOnAction(e -> {
-
+            PageManager.setPage(CovidTestController.getKey(), new CovidTestController());
         });
 
         declareQuarantineMenuItem.setOnAction(e -> {
-
+            PageManager.setPage(QuarantineInformationController.getKey(), new QuarantineInformationController());
         });
 
         covidStatisticsMenuItem.setOnAction(e -> {

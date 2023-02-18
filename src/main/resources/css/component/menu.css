@@ -1,0 +1,24 @@
+.menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing {
+    -fx-background: -fx-primary-color;
+}
+
+.menu-bar .label {
+    -fx-font-size: 14pt;
+}
+
+.menu-item {
+    -fx-padding: 0.0em 0.0em 0.0em 0.0em;
+}
+
+.menu-item .label {
+    -fx-font-size: 14pt;
+}
+
+
+.menu-item:hover {
+    -fx-background: -fx-primary-color;
+}
+
+.menu-item:focused {
+    -fx-background: -fx-primary-color;
+}

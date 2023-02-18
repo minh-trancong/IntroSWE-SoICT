@@ -5,8 +5,10 @@ import hust.itep.quanlynhankhau.controller.component.modifier.TableViewHelper;
 import hust.itep.quanlynhankhau.controller.component.popup.InformativeBox;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
+import hust.itep.quanlynhankhau.model.covid.CovidTest;
 import hust.itep.quanlynhankhau.model.covid.MovementDeclaration;
 import hust.itep.quanlynhankhau.model.population.Population;
+import hust.itep.quanlynhankhau.service.dao.CovidTestDao;
 import hust.itep.quanlynhankhau.service.dao.MovementDeclarationDao;
 import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -22,13 +24,12 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class AddMovementDeclarationController {
-    private static final String KEY = "/fxml/page/covid/popup/add-movement-declaration.fxml";
+public class AddCovidTestController {
+    private static final String KEY = "/fxml/page/covid/popup/add-covid-test.fxml";
 
     public static String getKey() {
         return KEY;
     }
-
 
     @FXML
     TableView<Population> populationTable;
@@ -41,31 +42,23 @@ public class AddMovementDeclarationController {
 
     @FXML
     MFXTextField nameTextField;
-
     @FXML
     MFXTextField citizenIdTextField;
 
     @FXML
-    MFXComboBox covidComboBox;
+    MFXTextField locationTextField;
 
     @FXML
-    MFXTextField departureTextField;
+    MFXTextField methodTextField;
 
     @FXML
-    MFXDatePicker departureDatePicker;
-    @FXML
-    MFXTextField destinationTextField;
-    @FXML
-    MFXTextField symptomsTextField;
-    @FXML
-    MFXTextField vehicleTextField;
-    @FXML
-    MFXTextField licensePlateTextField;
-    @FXML
-    MFXTextField passengerNumberTextField;
-    @FXML
-    MFXTextField historyTextField;
+    MFXDatePicker datePicker;
 
+    @FXML
+    MFXComboBox resultComboBox;
+
+    @FXML
+    MFXComboBox quarantineComboBox;
 
 
     ObservableList<Population> populations;
@@ -75,12 +68,13 @@ public class AddMovementDeclarationController {
     @FXML
     public void initialize() {
         initializeComboBox();
-        initializeTable();
         initializeButton();
+        initializeTable();
     }
 
     private void initializeComboBox() {
-        ComboBoxHelper.simple(covidComboBox);
+        ComboBoxHelper.covid(resultComboBox);
+        ComboBoxHelper.simple(quarantineComboBox);
     }
 
     private void initializeButton() {
@@ -97,56 +91,38 @@ public class AddMovementDeclarationController {
         submitButton.setOnAction(e -> {
             ArrayList<MFXTextField> textFields = new ArrayList<>();
             textFields.add(nameTextField);
-            textFields.add(departureTextField);
-            textFields.add(departureDatePicker);
-            textFields.add(destinationTextField);
-            textFields.add(symptomsTextField);
-            textFields.add(vehicleTextField);
-            textFields.add(licensePlateTextField);
-            textFields.add(passengerNumberTextField);
-            textFields.add(historyTextField);
+            textFields.add(locationTextField);
+            textFields.add(methodTextField);
+            textFields.add(datePicker);
+            textFields.add(resultComboBox);
+            textFields.add(quarantineComboBox);
 
             for (MFXTextField textField : textFields) {
                 if (textField.getText().isBlank()) {
                     InformativeBox.display("Thất bại", textField.getFloatingText() + " không được để trống");
-                return;
+                    return;
                 }
             }
 
-
-            try {
-                Integer passengerNum = Integer.valueOf(passengerNumberTextField.getText());
-            } catch (Exception ex) {
-                InformativeBox.display("Thất bại", passengerNumberTextField.getFloatingText() + " phải chứa số nguyên");
+            if (datePicker.getValue().isAfter(LocalDate.now())) {
+                InformativeBox.display("Thất bại", datePicker.getFloatingText() + " không được sau ngày hiện tại");
                 return;
             }
 
-            if (departureDatePicker.getValue().isAfter(LocalDate.now())) {
-                InformativeBox.display("Thất bại", departureDatePicker.getFloatingText() + " không được sau ngày hiện tại");
-                return;
-            }
+            CovidTestDao covidTestDao = new CovidTestDao();
+            CovidTest covidTest = new CovidTest();
+            covidTest.setPopulation(population);
+            covidTest.setTestDate(Date.valueOf(datePicker.getValue()));
+            covidTest.setLocation(locationTextField.getText());
+            covidTest.setResult(resultComboBox.getText() == "Dương tính" ? true : false);
+            covidTest.setQuarantine(quarantineComboBox.getText() == "Có" ? true : false);
+            covidTest.setMethod(methodTextField.getText());
 
-            Population persistPopulation = new PopulationDao().get(Population.class, population.getId());
-
-            MovementDeclaration movementDeclaration = new MovementDeclaration();
-            movementDeclaration.setPopulation(persistPopulation);
-            movementDeclaration.setDepartureLocation(departureTextField.getText());
-            movementDeclaration.setNumberOfPassengers(Integer.valueOf(passengerNumberTextField.getText()));
-            movementDeclaration.setHasCovid(covidComboBox.getText().equals("Có") ? true : false);
-            movementDeclaration.setDestination(destinationTextField.getText());
-            movementDeclaration.setDepartureDate(Date.valueOf(departureDatePicker.getValue()));
-            movementDeclaration.setLicensePlate(licensePlateTextField.getText());
-            movementDeclaration.setSymptoms(symptomsTextField.getText());
-            movementDeclaration.setVehicleType(vehicleTextField.getText());
-            movementDeclaration.setDeclarationDate(Date.valueOf(LocalDate.now()));
-            movementDeclaration.setHistory(historyTextField.getText());
-
-            MovementDeclarationDao movementDeclarationDao = new MovementDeclarationDao();
-            movementDeclarationDao.save(movementDeclaration);
-
+            covidTestDao.save(covidTest);
             PageManager.refreshCurrentPage();
             PopupManager.refreshCurrentStage();
         });
+
     }
 
     private void initializeTable() {
