@@ -2,6 +2,7 @@ package hust.itep.quanlynhankhau.controller.page.covid;
 
 import hust.itep.quanlynhankhau.controller.component.factory.StageFactory;
 import hust.itep.quanlynhankhau.controller.component.modifier.TableViewHelper;
+import hust.itep.quanlynhankhau.controller.page.covid.popup.ViewCovidTestController;
 import hust.itep.quanlynhankhau.controller.page.covid.popup.ViewMovementDeclarationController;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.covid.CovidInfo;
@@ -78,7 +79,7 @@ public class CovidStatisticsController {
             CovidInfo covidInfo = new CovidInfo(
                     quarantineInformation.getId(),
                     quarantineInformation.getPopulation().getName(),
-                    "Khai báo cách ly",
+                    "KHAI BÁO CÁCH LY",
                     quarantineInformation.getStartTime()
             );
             covidInfos.add(covidInfo);
@@ -130,6 +131,16 @@ public class CovidStatisticsController {
 //                                    StageFactory.buildStage("Thông tin khai báo dịch tễ"));
 //                            break;
                         case "TEST COVID":
+                            CovidTest selectedCovidTest = new CovidTest();
+                            for (CovidTest covidTest : covidTests){
+                                if (Objects.equals(covidTest.getId(), row.getItem().getId())){
+                                    selectedCovidTest = covidTest;
+                                    break;
+                                }
+                            }
+                            PopupManager.setPopup(ViewCovidTestController.getKey(),
+                                    new ViewCovidTestController(selectedCovidTest),
+                                    StageFactory.buildStage("THÔNG TIN TEST COVID"));
                             break;
                     }
 

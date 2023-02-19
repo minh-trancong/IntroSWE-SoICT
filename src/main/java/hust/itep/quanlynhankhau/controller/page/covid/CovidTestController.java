@@ -5,8 +5,11 @@ import hust.itep.quanlynhankhau.controller.component.factory.StageFactory;
 import hust.itep.quanlynhankhau.controller.component.modifier.TableViewHelper;
 import hust.itep.quanlynhankhau.controller.component.popup.ConfirmBox;
 import hust.itep.quanlynhankhau.controller.page.covid.popup.AddCovidTestController;
+import hust.itep.quanlynhankhau.controller.page.covid.popup.ViewCovidTestController;
+import hust.itep.quanlynhankhau.controller.page.covid.popup.ViewMovementDeclarationController;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
 import hust.itep.quanlynhankhau.controller.utility.PopupManager;
+import hust.itep.quanlynhankhau.model.covid.CovidInfo;
 import hust.itep.quanlynhankhau.model.covid.CovidTest;
 import hust.itep.quanlynhankhau.model.covid.MovementDeclaration;
 import hust.itep.quanlynhankhau.service.dao.CovidTestDao;
@@ -18,11 +21,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -160,7 +161,7 @@ public class CovidTestController {
         TableColumn<CovidTest, Date> testDateColumn = new TableColumn<>("Ngày test");
         testDateColumn.setCellValueFactory(new PropertyValueFactory<>("testDate"));
 
-        TableColumn<CovidTest, String> methodColumn = new TableColumn<>("Cách test");
+        TableColumn<CovidTest, String> methodColumn = new TableColumn<>("Phương thức test");
         methodColumn.setCellValueFactory(new PropertyValueFactory<>("method"));
 
         TableColumn<CovidTest, String> resultColumn = new TableColumn<>("Kết quả");
@@ -172,7 +173,7 @@ public class CovidTestController {
             return null;
         });
 
-        TableColumn<CovidTest, String> quarantineColumn = new TableColumn<>("Cách ly");
+        TableColumn<CovidTest, String> quarantineColumn = new TableColumn<>("Tình trạng cách ly");
         quarantineColumn.setCellValueFactory(e -> {
             if (e.getValue() != null) {
                 String ret = e.getValue().getQuarantine() ? "Có" : "Không";
@@ -196,6 +197,18 @@ public class CovidTestController {
         declarationTable.setItems(covidTests);
 
         TableViewHelper.initializeCommonTableView(declarationTable);
+        declarationTable.setRowFactory(e -> {
+            TableRow<CovidTest> row = new TableRow<>();
+
+            row.addEventHandler(MouseEvent.MOUSE_CLICKED, ex -> {
+                if (ex.getClickCount() == 2 && !row.isEmpty()) {
+                    PopupManager.setPopup(ViewCovidTestController.getKey(),
+                            new ViewCovidTestController(row.getItem()),
+                            StageFactory.buildStage("KHAI BÁO TEST COVID"));
+                }
+            });
+            return row;
+        });
     }
 
 }
