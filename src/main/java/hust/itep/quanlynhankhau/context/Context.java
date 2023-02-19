@@ -12,8 +12,8 @@ public class Context {
 
     private static Stage mainStage;
 
-    public static void setCurrentAccount() {
-        account = account;
+    public static void setCurrentAccount(Account account) {
+        Context.account = account;
     }
 
     public static Account getAccount() {

@@ -1,5 +1,6 @@
 package hust.itep.quanlynhankhau.controller.layout;
 
+import hust.itep.quanlynhankhau.context.Context;
 import hust.itep.quanlynhankhau.controller.page.covid.CovidStatisticsController;
 import hust.itep.quanlynhankhau.controller.page.covid.CovidTestController;
 import hust.itep.quanlynhankhau.controller.page.covid.DeclareMovementController;
@@ -9,6 +10,7 @@ import hust.itep.quanlynhankhau.controller.page.population.*;
 import hust.itep.quanlynhankhau.controller.page.HomeController;
 import hust.itep.quanlynhankhau.controller.page.LoginController;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
+import hust.itep.quanlynhankhau.model.Account;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -70,8 +72,14 @@ public class HeaderController {
     }
 
     private void initializeMenuBar() {
+        Account account = Context.getAccount();
+        if (account.getRole().equals("all")) {
 
-
+        } else if (account.getRole().equals("population")) {
+            menuBar.getMenus().remove(covidMenu);
+        } else if (account.getRole().equals("covid")) {
+            menuBar.getMenus().remove(populationMenu);
+        }
     }
     private void initializeLogoutButton() {
         logoutButton.setOnMouseClicked(e -> {

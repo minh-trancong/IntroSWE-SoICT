@@ -1,5 +1,6 @@
 package hust.itep.quanlynhankhau.controller.page;
 
+import hust.itep.quanlynhankhau.context.Context;
 import hust.itep.quanlynhankhau.controller.layout.HeaderController;
 import hust.itep.quanlynhankhau.controller.layout.FooterController;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
@@ -47,6 +48,8 @@ public class LoginController {
                 return;
             }
 
+            Context.setCurrentAccount(account);
+
             PageManager.setPage(HomeController.getKey(), new HomeController());
             PageManager.setHeader(HeaderController.getKey(), new HeaderController());
             PageManager.setFooter(FooterController.getKey(), new FooterController());
@@ -56,7 +59,6 @@ public class LoginController {
             PageManager.setHeaderConcurrent(HeaderController.getKey(), new HeaderController());
             PageManager.setFooterConcurrent(FooterController.getKey(), new FooterController());
              */
-
         });
     }
 }
