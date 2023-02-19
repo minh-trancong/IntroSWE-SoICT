@@ -23,6 +23,9 @@ public class ComboBoxHelper {
     private final static ObservableList<String> COVID_TEST = FXCollections
             .observableList(Arrays.asList("Dương tính", "Âm tính"));
 
+    private final static ObservableList<String> TAG_CHOICE = FXCollections
+            .observableList(Arrays.asList("TẤT CẢ", "TEST COVID", "KHAI BÁO DỊCH TỄ", "KHAI BÁO CÁCH LY"));
+
 
     public static void simple(MFXComboBox comboBox) {comboBox.setItems(SIMPLE);}
     public static void gender(MFXComboBox comboBox) {
@@ -38,4 +41,5 @@ public class ComboBoxHelper {
     public static void status(MFXComboBox comboBox) {
         comboBox.setItems(STATUS_CHOICE);
     }
+    public static void tagChoice(MFXComboBox comboBox){ comboBox.setItems(TAG_CHOICE);}
 }

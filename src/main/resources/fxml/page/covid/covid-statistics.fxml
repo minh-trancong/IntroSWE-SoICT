@@ -23,16 +23,16 @@
     <center>
         <VBox>
             <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="40.0">
-<!--                <children>-->
-<!--                    <Label text="Thời gian">-->
-<!--                        <font>-->
-<!--                            <Font size="20.0" />-->
-<!--                        </font>-->
-<!--                    </Label>-->
-<!--                    <MFXDatePicker fx:id="fromDate" allowEdit="false" floatMode="BORDER" floatingText="Từ ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />-->
-<!--                    <MFXDatePicker fx:id="toDate" allowEdit="false" floatMode="BORDER" floatingText="Đến ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />-->
-<!--                </children>-->
-                <MFXComboBox fx:id="statusComboBox" floatMode="BORDER" floatingText="TAG COVID" prefWidth="0.7"/>
+                <MFXComboBox fx:id="tagComboBox" floatMode="BORDER" floatingText="TAG COVID" prefWidth="0.7"/>
+                <children>
+                    <Label text="Thời gian">
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </Label>
+                    <MFXDatePicker fx:id="fromDate" allowEdit="false" floatMode="BORDER" floatingText="Từ ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                    <MFXDatePicker fx:id="toDate" allowEdit="false" floatMode="BORDER" floatingText="Đến ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                </children>
             </HBox>
             <BorderPane.margin>
                 <Insets />
