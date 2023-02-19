@@ -18,6 +18,7 @@ import hust.itep.quanlynhankhau.service.dao.MovementDeclarationDao;
 import hust.itep.quanlynhankhau.service.dao.QuarantineInformationDao;
 import hust.itep.quanlynhankhau.service.dao.population.TemporaryAbsenceDao;
 import hust.itep.quanlynhankhau.service.dao.population.TemporaryResidenceDao;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import javafx.beans.property.SimpleStringProperty;
@@ -25,14 +26,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -60,6 +64,10 @@ public class CovidStatisticsController {
     MFXDatePicker fromDate;
     @FXML
     MFXDatePicker toDate;
+    @FXML
+    MFXButton reset;
+    @FXML
+    MFXButton weekStatisticsButton;
     Predicate<CovidInfo> fromDatePredicate = p -> true;
     Predicate<CovidInfo> toDatePredicate = p -> true;
     Predicate<CovidInfo> tagPredicate = p -> true;
@@ -69,6 +77,7 @@ public class CovidStatisticsController {
         initializeTable();
         initializeComboBox();
         initializeDatePickers();
+        resetPrecidate();
     }
 
     private void initializeTable() {
@@ -206,6 +215,29 @@ public class CovidStatisticsController {
                 toDatePredicate = p -> p.getDate().compareTo(Date.from(toDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant())) <= 0;
                 covidInfoFilteredList.setPredicate(tagPredicate.and(toDatePredicate));
             }
+        });
+
+        // Initialize the button for statistics by week
+        weekStatisticsButton.setOnAction(event -> {
+            LocalDate currentDate = LocalDate.now();
+            LocalDate weekStartDate = currentDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+            LocalDate weekEndDate = currentDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+            fromDatePredicate = p -> p.getDate().compareTo(Date.from(weekStartDate.atStartOfDay(ZoneId.systemDefault()).toInstant())) >= 0;
+            toDatePredicate = p -> p.getDate().compareTo(Date.from(weekEndDate.atStartOfDay(ZoneId.systemDefault()).toInstant())) <= 0;
+            fromDate.setText(weekStartDate.toString());
+            toDate.setText(weekEndDate.toString());
+            covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate));
+        });
+        covidStatisticsTable.setItems(covidInfoFilteredList);
+    }
+
+    private void resetPrecidate(){
+        reset.setOnAction(e -> {
+            fromDatePredicate = toDatePredicate = tagPredicate = p -> true;
+            tagComboBox.setText("TẤT CẢ");
+            fromDate.setText("");
+            toDate.setText("");
+            covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate));
         });
         covidStatisticsTable.setItems(covidInfoFilteredList);
     }
