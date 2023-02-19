@@ -32,6 +32,7 @@
 <!--                    <MFXDatePicker fx:id="fromDate" allowEdit="false" floatMode="BORDER" floatingText="Từ ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />-->
 <!--                    <MFXDatePicker fx:id="toDate" allowEdit="false" floatMode="BORDER" floatingText="Đến ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />-->
 <!--                </children>-->
+                <MFXComboBox fx:id="statusComboBox" floatMode="BORDER" floatingText="TAG COVID" prefWidth="0.7"/>
             </HBox>
             <BorderPane.margin>
                 <Insets />

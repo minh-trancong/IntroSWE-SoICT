@@ -9,9 +9,15 @@ import hust.itep.quanlynhankhau.model.covid.CovidInfo;
 import hust.itep.quanlynhankhau.model.covid.CovidTest;
 import hust.itep.quanlynhankhau.model.covid.MovementDeclaration;
 import hust.itep.quanlynhankhau.model.covid.QuarantineInformation;
+import hust.itep.quanlynhankhau.model.population.Population;
+import hust.itep.quanlynhankhau.model.population.TemporaryAbsence;
+import hust.itep.quanlynhankhau.model.population.TemporaryResidence;
 import hust.itep.quanlynhankhau.service.dao.CovidTestDao;
 import hust.itep.quanlynhankhau.service.dao.MovementDeclarationDao;
 import hust.itep.quanlynhankhau.service.dao.QuarantineInformationDao;
+import hust.itep.quanlynhankhau.service.dao.population.TemporaryAbsenceDao;
+import hust.itep.quanlynhankhau.service.dao.population.TemporaryResidenceDao;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,9 +29,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class CovidStatisticsController {
     private static final String KEY = "/fxml/page/covid/covid-statistics.fxml";
@@ -44,46 +52,12 @@ public class CovidStatisticsController {
     @FXML
     TableView<CovidInfo> covidStatisticsTable;
     ArrayList<CovidInfo> covidInfos;
-
+    @FXML
+    MFXComboBox statusComboBox;
+    Predicate<Population> statusPredicate = p -> true;
     private void initializeTable() {
-        covidTests = new FilteredList<>(
-                FXCollections.observableArrayList(new CovidTestDao().getAll(CovidTest.class))
-        );
-        movementDeclarations =
-                new FilteredList<>(FXCollections.observableArrayList(new MovementDeclarationDao().getAll(MovementDeclaration.class)));
-        quarantineInformations =
-                new FilteredList<>(FXCollections.observableArrayList(
-                        new QuarantineInformationDao().getAll(QuarantineInformation.class)));
-        covidInfos = new ArrayList<>();
-        for (CovidTest covidTest : covidTests) {
-            CovidInfo covidInfo = new CovidInfo(
-                    covidTest.getId(),
-                    covidTest.getPopulation().getName(),
-                    "TEST COVID",
-                    covidTest.getTestDate()
-            );
-            covidInfos.add(covidInfo);
-        }
-
-        for (MovementDeclaration movementDeclaration : movementDeclarations){
-            CovidInfo covidInfo = new CovidInfo(
-                    movementDeclaration.getId(),
-                    movementDeclaration.getPopulation().getName(),
-                    "KHAI BÁO DỊCH TỄ",
-                    movementDeclaration.getDeclarationDate()
-            );
-            covidInfos.add(covidInfo);
-        }
-
-        for (QuarantineInformation quarantineInformation : quarantineInformations){
-            CovidInfo covidInfo = new CovidInfo(
-                    quarantineInformation.getId(),
-                    quarantineInformation.getPopulation().getName(),
-                    "KHAI BÁO CÁCH LY",
-                    quarantineInformation.getStartTime()
-            );
-            covidInfos.add(covidInfo);
-        }
+        initializeCovidInfo();
+        FilteredList<CovidInfo> covidInfoFilteredList = new FilteredList<>(FXCollections.observableArrayList(covidInfos));
 
         TableColumn<CovidInfo, Long> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -149,6 +123,54 @@ public class CovidStatisticsController {
 
             return row;
         });
+        statusComboBox.getItems().addAll("TẤT CẢ", "TEST COVID", "KHAI BÁO DỊCH TỄ", "KHAI BÁO CÁCH LY");
+        statusComboBox.textProperty().addListener(observable -> {
+            if (statusComboBox.getText().equals("TẤT CẢ")){
+                covidInfoFilteredList.setPredicate(p -> true);
+            } else covidInfoFilteredList.setPredicate(i -> i.getTag().equals(statusComboBox.getText()));
+            covidStatisticsTable.setItems(FXCollections.observableArrayList(covidInfoFilteredList));
+        });
+    }
+
+    private void initializeCovidInfo(){
+        covidTests = new FilteredList<>(
+                FXCollections.observableArrayList(new CovidTestDao().getAll(CovidTest.class))
+        );
+        movementDeclarations =
+                new FilteredList<>(FXCollections.observableArrayList(new MovementDeclarationDao().getAll(MovementDeclaration.class)));
+        quarantineInformations =
+                new FilteredList<>(FXCollections.observableArrayList(
+                        new QuarantineInformationDao().getAll(QuarantineInformation.class)));
+        this.covidInfos = new ArrayList<>();
+        for (CovidTest covidTest : covidTests) {
+            CovidInfo covidInfo = new CovidInfo(
+                    covidTest.getId(),
+                    covidTest.getPopulation().getName(),
+                    "TEST COVID",
+                    covidTest.getTestDate()
+            );
+            this.covidInfos.add(covidInfo);
+        }
+
+        for (MovementDeclaration movementDeclaration : movementDeclarations){
+            CovidInfo covidInfo = new CovidInfo(
+                    movementDeclaration.getId(),
+                    movementDeclaration.getPopulation().getName(),
+                    "KHAI BÁO DỊCH TỄ",
+                    movementDeclaration.getDeclarationDate()
+            );
+            this.covidInfos.add(covidInfo);
+        }
+
+        for (QuarantineInformation quarantineInformation : quarantineInformations){
+            CovidInfo covidInfo = new CovidInfo(
+                    quarantineInformation.getId(),
+                    quarantineInformation.getPopulation().getName(),
+                    "KHAI BÁO CÁCH LY",
+                    quarantineInformation.getStartTime()
+            );
+            this.covidInfos.add(covidInfo);
+        }
     }
 }
 
