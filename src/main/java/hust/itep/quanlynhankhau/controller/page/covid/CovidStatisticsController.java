@@ -28,10 +28,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -78,6 +75,13 @@ public class CovidStatisticsController {
     Predicate<CovidInfo> tagPredicate = p -> true;
     Predicate<CovidInfo> namePredicate = p->true;
 
+    @FXML
+    Label countTESTCOVID;
+    @FXML
+    Label countQuanrantine;
+    @FXML
+    Label countMovement;
+
     public void initialize() {
         initializeCovidInfo();
         initializeTable();
@@ -85,6 +89,7 @@ public class CovidStatisticsController {
         initializeDatePickers();
         resetPrecidate();
         setSearchByName();
+        updateNumber();
     }
 
     private void initializeTable() {
@@ -194,6 +199,7 @@ public class CovidStatisticsController {
             tagPredicate = p -> selectedTag.equals("TẤT CẢ") || p.getTag().equals(selectedTag);
             covidInfoFilteredList.setPredicate(fromDatePredicate.and(toDatePredicate).and(tagPredicate));
             covidStatisticsTable.setItems(covidInfoFilteredList);
+            updateNumber();
         });
     }
 
@@ -209,6 +215,7 @@ public class CovidStatisticsController {
                 fromDatePredicate = p -> p.getDate().compareTo(Date.from(fromDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant())) >= 0;
                 covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate));
             }
+            updateNumber();
         });
 
         toDate.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -222,6 +229,7 @@ public class CovidStatisticsController {
                 toDatePredicate = p -> p.getDate().compareTo(Date.from(toDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant())) <= 0;
                 covidInfoFilteredList.setPredicate(tagPredicate.and(toDatePredicate));
             }
+            updateNumber();
         });
 
         // Initialize the button for statistics by week
@@ -234,6 +242,7 @@ public class CovidStatisticsController {
             fromDate.setText(weekStartDate.toString());
             toDate.setText(weekEndDate.toString());
             covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate).and(namePredicate));
+            updateNumber();
         });
         covidStatisticsTable.setItems(covidInfoFilteredList);
     }
@@ -246,6 +255,7 @@ public class CovidStatisticsController {
             toDate.setText("");
             searchByName.setText("");
             covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate).and(namePredicate));
+            updateNumber();
         });
         covidStatisticsTable.setItems(covidInfoFilteredList);
     }
@@ -268,10 +278,25 @@ public class CovidStatisticsController {
                     return p.getName().toLowerCase().contains(keywords);
                 };
                 covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate).and(namePredicate));
+                updateNumber();
             }
         });
         covidStatisticsTable.setItems(covidInfoFilteredList);
     }
+    private int countByTag_CovidInfo(FilteredList<CovidInfo> covidInfosFL, String tag){
+        int count = 0;
+        for (CovidInfo covidInfo : covidInfosFL) {
+            if (covidInfo.getTag().equalsIgnoreCase(tag)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    private void updateNumber(){
+        countTESTCOVID.setText("" + countByTag_CovidInfo(covidInfoFilteredList, "TEST COVID"));
+        countQuanrantine.setText("" + countByTag_CovidInfo(covidInfoFilteredList, "KHAI BÁO CÁCH LY"));
+        countMovement.setText("" + countByTag_CovidInfo(covidInfoFilteredList, "KHAI BÁO DỊCH TỄ"));
 
+    }
 }
 

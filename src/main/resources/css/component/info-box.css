@@ -1,0 +1,8 @@
+.hbox {
+    -fx-spacing: 10; /* sets the spacing between the child nodes to 10 */
+}
+
+.label {
+    -fx-text-fill: #333; /* sets the text color to dark gray */
+    -fx-font-family: "SF Pro Text";
+}

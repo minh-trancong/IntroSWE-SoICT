@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
-<?import javafx.scene.control.Button?>
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="THỐNG KÊ COVID" BorderPane.alignment="CENTER">
             <font>
@@ -35,8 +32,8 @@
                             <Font size="20.0" />
                         </font>
                     </Label>
-                    <MFXDatePicker fx:id="fromDate" allowEdit="false" floatMode="BORDER" floatingText="Từ ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                    <MFXDatePicker fx:id="toDate" allowEdit="false" floatMode="BORDER" floatingText="Đến ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                    <MFXDatePicker fx:id="fromDate" stylesheets="@../../../css/component/date-picker.css" allowEdit="false" floatMode="BORDER" floatingText="Từ ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                    <MFXDatePicker fx:id="toDate" stylesheets="@../../../css/component/date-picker.css" allowEdit="false" floatMode="BORDER" floatingText="Đến ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                     <MFXButton fx:id="weekStatisticsButton" stylesheets="@../../../css/component/confirmation-button.css" text="Thống kê theo tuần" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
                     <MFXButton fx:id="reset" text="Xem tất cả" stylesheets="@../../../css/component/confirmation-button.css" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
                     <MFXTextField fx:id="searchByName" floatingText="Lọc theo tên" prefWidth="3"/>
@@ -52,6 +49,102 @@
                     </columnResizePolicy>
                 </TableView>
             </VBox>
+
+            <HBox stylesheets="@../../../css/component/info-box.css">
+                <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #f2e8b8; -fx-background-radius: 10;">
+                    <children>
+                        <ImageView fitHeight="60.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../img/test-tube-regular-240.png" />
+                            </image>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                        </ImageView>
+                        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                            <children>
+                                <Label id="label" text="Số lượng TEST COVID">
+                                    <font>
+                                        <Font name="System Bold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="countTESTCOVID" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="100">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <padding>
+                                <Insets bottom="10" right="20" top="10" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #f2e8b8; -fx-background-radius: 10;">
+                    <children>
+                        <ImageView fitHeight="60.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../img/capsule-solid-240.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                            <children>
+                                <Label id="label" text="Số lượng khai báo cách ly">
+                                    <font>
+                                        <Font name="System Bold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="countQuanrantine" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="100">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <padding>
+                                <Insets bottom="10" right="20" top="10" />
+                            </padding>
+                        </VBox>
+                    </children>
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+                </HBox>
+                <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #f2e8b8; -fx-background-radius: 10;">
+                    <children>
+                        <ImageView fitHeight="60.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../img/bus-school-solid-240.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                            <children>
+                                <Label id="label" text="Số lượng khai báo dịch tễ">
+                                    <font>
+                                        <Font name="System Bold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="countMovement" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="100">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <padding>
+                                <Insets bottom="10" right="20" top="10" />
+                            </padding>
+                        </VBox>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="40.0" />
+                    </HBox.margin>
+                </HBox>
+            </HBox>
             <BorderPane.margin>
                     <Insets />
                 </BorderPane.margin>
