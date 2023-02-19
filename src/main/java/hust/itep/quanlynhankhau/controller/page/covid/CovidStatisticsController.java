@@ -21,16 +21,19 @@ import hust.itep.quanlynhankhau.service.dao.population.TemporaryResidenceDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -68,9 +71,12 @@ public class CovidStatisticsController {
     MFXButton reset;
     @FXML
     MFXButton weekStatisticsButton;
+    @FXML
+    MFXTextField searchByName;
     Predicate<CovidInfo> fromDatePredicate = p -> true;
     Predicate<CovidInfo> toDatePredicate = p -> true;
     Predicate<CovidInfo> tagPredicate = p -> true;
+    Predicate<CovidInfo> namePredicate = p->true;
 
     public void initialize() {
         initializeCovidInfo();
@@ -78,6 +84,7 @@ public class CovidStatisticsController {
         initializeComboBox();
         initializeDatePickers();
         resetPrecidate();
+        setSearchByName();
     }
 
     private void initializeTable() {
@@ -135,7 +142,7 @@ public class CovidStatisticsController {
             });
             return row;
         });
-        covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate));
+        covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate).and(namePredicate));
         covidStatisticsTable.setItems(FXCollections.observableArrayList(covidInfoFilteredList));
     }
 
@@ -197,7 +204,7 @@ public class CovidStatisticsController {
             if (fromDateValue != null && toDateValue != null) {
                 fromDatePredicate = p -> p.getDate().compareTo(Date.from(fromDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant())) >= 0;
                 toDatePredicate = p -> p.getDate().compareTo(Date.from(toDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant())) <= 0;
-                covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate));
+                covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate).and(namePredicate));
             } else if (fromDateValue != null) {
                 fromDatePredicate = p -> p.getDate().compareTo(Date.from(fromDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant())) >= 0;
                 covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate));
@@ -210,7 +217,7 @@ public class CovidStatisticsController {
             if (fromDateValue != null && toDateValue != null) {
                 fromDatePredicate = p -> p.getDate().compareTo(Date.from(fromDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant())) >= 0;
                 toDatePredicate = p -> p.getDate().compareTo(Date.from(toDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant())) <= 0;
-                covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate));
+                covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate).and(namePredicate));
             } else if (toDateValue != null) {
                 toDatePredicate = p -> p.getDate().compareTo(Date.from(toDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant())) <= 0;
                 covidInfoFilteredList.setPredicate(tagPredicate.and(toDatePredicate));
@@ -226,18 +233,42 @@ public class CovidStatisticsController {
             toDatePredicate = p -> p.getDate().compareTo(Date.from(weekEndDate.atStartOfDay(ZoneId.systemDefault()).toInstant())) <= 0;
             fromDate.setText(weekStartDate.toString());
             toDate.setText(weekEndDate.toString());
-            covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate));
+            covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate).and(namePredicate));
         });
         covidStatisticsTable.setItems(covidInfoFilteredList);
     }
 
     private void resetPrecidate(){
         reset.setOnAction(e -> {
-            fromDatePredicate = toDatePredicate = tagPredicate = p -> true;
+            fromDatePredicate = toDatePredicate = tagPredicate = namePredicate = p -> true;
             tagComboBox.setText("TẤT CẢ");
             fromDate.setText("");
             toDate.setText("");
-            covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate));
+            searchByName.setText("");
+            covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate).and(namePredicate));
+        });
+        covidStatisticsTable.setItems(covidInfoFilteredList);
+    }
+
+    private void setSearchByName(){
+        searchByName.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                // Get the search keywords
+                String keywords = searchByName.getText().toLowerCase();
+
+                // Set a new predicate for the filtered data
+                namePredicate = p -> {
+                    // If the keywords are empty, show all data
+                    if (keywords.isEmpty()) {
+                        return true;
+                    }
+
+                    // Otherwise, check if the name contains the keywords
+                    return p.getName().toLowerCase().contains(keywords);
+                };
+                covidInfoFilteredList.setPredicate(tagPredicate.and(fromDatePredicate).and(toDatePredicate).and(namePredicate));
+            }
         });
         covidStatisticsTable.setItems(covidInfoFilteredList);
     }

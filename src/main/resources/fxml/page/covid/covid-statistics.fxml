@@ -24,6 +24,9 @@
     </top>
     <center>
         <VBox>
+            <padding>
+                <Insets top="10" bottom="10"/>
+            </padding>
             <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="40.0">
                 <MFXComboBox fx:id="tagComboBox" floatMode="BORDER" floatingText="TAG COVID" prefWidth="0.7"/>
                 <children>
@@ -36,16 +39,23 @@
                     <MFXDatePicker fx:id="toDate" allowEdit="false" floatMode="BORDER" floatingText="Đến ngày" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                     <MFXButton fx:id="weekStatisticsButton" stylesheets="@../../../css/component/confirmation-button.css" text="Thống kê theo tuần" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
                     <MFXButton fx:id="reset" text="Xem tất cả" stylesheets="@../../../css/component/confirmation-button.css" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
+                    <MFXTextField fx:id="searchByName" floatingText="Lọc theo tên" prefWidth="3"/>
                 </children>
             </HBox>
-            <TableView fx:id="covidStatisticsTable">
-                <columnResizePolicy>
-                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                </columnResizePolicy>
-            </TableView>
+            <VBox>
+                <padding>
+                    <Insets top="10" bottom="10"/>
+                </padding>
+                <TableView fx:id="covidStatisticsTable">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
             <BorderPane.margin>
-                <Insets />
-            </BorderPane.margin>
+                    <Insets />
+                </BorderPane.margin>
+
             <padding>
                 <Insets left="30.0" right="30.0" top="10.0" />
             </padding>
