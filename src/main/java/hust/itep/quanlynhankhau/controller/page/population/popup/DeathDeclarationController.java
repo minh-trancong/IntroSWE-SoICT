@@ -7,6 +7,7 @@ import hust.itep.quanlynhankhau.controller.utility.PopupManager;
 import hust.itep.quanlynhankhau.model.population.DeathDeclaration;
 import hust.itep.quanlynhankhau.model.population.Population;
 import hust.itep.quanlynhankhau.service.dao.population.DeathDeclarationDao;
+import hust.itep.quanlynhankhau.service.dao.population.PopulationDao;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -77,6 +78,11 @@ public class DeathDeclarationController {
 
             DeathDeclarationDao deathDeclarationDao = new DeathDeclarationDao();
             deathDeclarationDao.save(deathDeclaration);
+
+            population.setCurrentAddress("Đã tử vong vì " + deathDeclaration.getReason());
+
+            PopulationDao populationDao = new PopulationDao();
+            populationDao.update(population);
 
             PopupManager.closeCurrentStage();
             PageManager.refreshCurrentPage();

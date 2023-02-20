@@ -89,7 +89,8 @@ public class PopulationController {
 
             Population population = populationTableView.getSelectionModel().getSelectedItem();
 
-            if (population.getRelationshipToHead().equals("Là chủ hộ")) {
+
+            if (population.getRelationshipToHead() != null && population.getRelationshipToHead().equals("Là chủ hộ")) {
                 InformativeBox.display("Thất bại", "Không thể khai tử chủ hộ");
                 return;
             }
