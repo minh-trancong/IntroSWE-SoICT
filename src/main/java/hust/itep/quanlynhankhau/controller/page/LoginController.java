@@ -1,6 +1,7 @@
 package hust.itep.quanlynhankhau.controller.page;
 
 import hust.itep.quanlynhankhau.context.Context;
+import hust.itep.quanlynhankhau.controller.component.popup.InformativeBox;
 import hust.itep.quanlynhankhau.controller.layout.HeaderController;
 import hust.itep.quanlynhankhau.controller.layout.FooterController;
 import hust.itep.quanlynhankhau.controller.utility.PageManager;
@@ -41,10 +42,12 @@ public class LoginController {
             Account account = accountDao.getByUsername(username);
 
             if (account == null) {
+                InformativeBox.display("Thất bại", "Sai tên đăng nhập");
                 return;
             }
 
             if (!password.equals(account.getPassword())) {
+                InformativeBox.display("Thất bại", "Sai mật khẩu");
                 return;
             }
 
