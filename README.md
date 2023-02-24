@@ -107,3 +107,12 @@ git pull origin main
 ```
 
 - Tạo pull request 
+
+
+
+---
+
+# Cách sử dụng
+
+- Vào XAMPP, tại bảng account, tạo tài khoản với tên tài khoản và mật khẩu tùy chọn, role là "all", "population" hoặc "covid".
+- Sau đó chạy file "IntroSWE-SoICT.jar" và đăng nhập theo tài khoản vừa tạo để sử dụng.
